@@ -1,3 +1,11 @@
+# 1.0.0-alpha.1 (2022-05-22)
+
+
+### Bug Fixes
+
+* lfs ([5675daf](https://github.com/qlik-oss/react-native-helium/commit/5675daf36d83df5ae94df7fbb5593f4d63a0efcc))
+* package.json ([23469db](https://github.com/qlik-oss/react-native-helium/commit/23469dbd7181a3b7fcf9db26115f05d28e3389cb))
+
 # 1.0.0 (2022-05-22)
 
 
