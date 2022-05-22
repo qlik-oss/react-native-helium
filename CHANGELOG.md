@@ -1,3 +1,10 @@
+## [1.0.2-alpha.1](https://github.com/qlik-oss/react-native-helium/compare/v1.0.1...v1.0.2-alpha.1) (2022-05-22)
+
+
+### Bug Fixes
+
+* pacakge.json ([016828b](https://github.com/qlik-oss/react-native-helium/commit/016828bd3f6a4d6ee213db818a5b1f46ef463fa3))
+
 ## [1.0.1](https://github.com/qlik-oss/react-native-helium/compare/v1.0.0...v1.0.1) (2022-05-22)
 
 
