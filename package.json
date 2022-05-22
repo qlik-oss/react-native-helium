@@ -1,13 +1,8 @@
 {
   "name": "@qlik-oss/react-native-helium",
-  "private": false,
   "version": "1.0.1",
   "description": "Skia base JSI renderer for Picasso and Nebula",
   "main": "src/index",
-  "module": "lib/module/index",
-  "types": "lib/typescript/index.d.ts",
-  "react-native": "src/index",
-  "source": "src/index",
   "files": [
     "src",
     "lib",
@@ -37,7 +32,7 @@
   "license": "MIT",
   "homepage": "https://github.com/qlik-oss/react-native-helium",
   "publishConfig": {
-    "registry": "https://npm.pkg.github.com"
+    "registry": "https://registry.npmjs.org"
   },
   "devDependencies": {
     "@react-native-community/eslint-config": "3.0.2",
