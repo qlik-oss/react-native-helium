@@ -1,3 +1,10 @@
+# [1.0.0-alpha.2](https://github.com/qlik-oss/react-native-helium/compare/v1.0.0-alpha.1...v1.0.0-alpha.2) (2022-05-22)
+
+
+### Bug Fixes
+
+* change registry ([56e7f7e](https://github.com/qlik-oss/react-native-helium/commit/56e7f7ea3c7881cac4d04973ecc549df48ad2a0b))
+
 # 1.0.0-alpha.1 (2022-05-22)
 
 
