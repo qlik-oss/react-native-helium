@@ -30,13 +30,13 @@
     "ci:install": "yarn install --frozen-lockfile"
   },
   "repository": {
-    "url": "git@github.com:qlik-oss/react-native-helium"
+    "url": "git@github.com:qlik-oss/react-native-helium.git"
   },
   "author": "Qlik",
   "license": "MIT",
   "homepage": "https://github.com/qlik-oss/react-native-helium",
   "publishConfig": {
-    "registry": "https://npm.pkg.github.com"
+    "registry": "https://registry.npmjs.org"
   },
   "devDependencies": {
     "@react-native-community/eslint-config": "3.0.2",
