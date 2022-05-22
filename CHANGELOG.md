@@ -1,3 +1,10 @@
+# [1.0.0-alpha.3](https://github.com/qlik-oss/react-native-helium/compare/v1.0.0-alpha.2...v1.0.0-alpha.3) (2022-05-22)
+
+
+### Bug Fixes
+
+* change scope ([1702c8f](https://github.com/qlik-oss/react-native-helium/commit/1702c8fa98f10fdf196ac7948b5159ba921a266a))
+
 # [1.0.0-alpha.2](https://github.com/qlik-oss/react-native-helium/compare/v1.0.0-alpha.1...v1.0.0-alpha.2) (2022-05-22)
 
 
