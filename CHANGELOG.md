@@ -1,3 +1,32 @@
+# [1.0.0-alpha.4](https://github.com/qlik-oss/react-native-helium/compare/v1.0.0-alpha.3...v1.0.0-alpha.4) (2022-05-22)
+
+
+### Bug Fixes
+
+* revert registry ([6383826](https://github.com/qlik-oss/react-native-helium/commit/6383826cffe8977b92d536ea2a49dfdac51fdfa1))
+
+# [1.0.0-alpha.3](https://github.com/qlik-oss/react-native-helium/compare/v1.0.0-alpha.2...v1.0.0-alpha.3) (2022-05-22)
+
+
+### Bug Fixes
+
+* change scope ([1702c8f](https://github.com/qlik-oss/react-native-helium/commit/1702c8fa98f10fdf196ac7948b5159ba921a266a))
+
+# [1.0.0-alpha.2](https://github.com/qlik-oss/react-native-helium/compare/v1.0.0-alpha.1...v1.0.0-alpha.2) (2022-05-22)
+
+
+### Bug Fixes
+
+* change registry ([56e7f7e](https://github.com/qlik-oss/react-native-helium/commit/56e7f7ea3c7881cac4d04973ecc549df48ad2a0b))
+
+# 1.0.0-alpha.1 (2022-05-22)
+
+
+### Bug Fixes
+
+* lfs ([5675daf](https://github.com/qlik-oss/react-native-helium/commit/5675daf36d83df5ae94df7fbb5593f4d63a0efcc))
+* package.json ([23469db](https://github.com/qlik-oss/react-native-helium/commit/23469dbd7181a3b7fcf9db26115f05d28e3389cb))
+
 # 1.0.0 (2022-05-22)
 
 

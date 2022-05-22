@@ -1,6 +1,7 @@
 {
-  "name": "@qlik/react-native-helium",
-  "version": "1.0.0",
+  "name": "@qlik-oss/react-native-helium",
+  "private": false,
+  "version": "1.0.0-alpha.4",
   "description": "Skia base JSI renderer for Picasso and Nebula",
   "main": "src/index",
   "module": "lib/module/index",
@@ -30,7 +31,7 @@
     "ci:install": "yarn install --frozen-lockfile"
   },
   "repository": {
-    "url": "git@github.com:qlik-oss/react-native-helium"
+    "url": "git@github.com:qlik-oss/react-native-helium.git"
   },
   "author": "Qlik",
   "license": "MIT",
