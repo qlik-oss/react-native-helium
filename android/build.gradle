@@ -1,0 +1,157 @@
+import java.nio.file.Paths
+
+buildscript {
+  // Buildscript is evaluated before everything else so we can't use getExtOrDefault
+  def kotlin_version = rootProject.ext.has('kotlinVersion') ? rootProject.ext.get('kotlinVersion') : project.properties['ReactNativeHelium_kotlinVersion']
+
+  repositories {
+    google()
+    jcenter()
+  }
+
+  dependencies {
+    classpath "com.android.tools.build:gradle:7.2.0"
+    // noinspection DifferentKotlinGradleVersion
+    classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+  }
+}
+
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+
+def getExtOrDefault(name) {
+  return rootProject.ext.has(name) ? rootProject.ext.get(name) : project.properties['ReactNativeHelium_' + name]
+}
+
+def getExtOrIntegerDefault(name) {
+  return rootProject.ext.has(name) ? rootProject.ext.get(name) : (project.properties['ReactNativeHelium_' + name]).toInteger()
+}
+
+def findNodeModulePath(baseDir) {
+  if (rootProject.hasProperty("heliumNodeModules")) {
+    println "Using node modules $rootProject.ext.heliumNodeModules"
+    return rootProject.ext.heliumNodeModules
+  }
+  def basePath = baseDir.toPath().normalize()
+  // Node's module resolution algorithm searches up to the root directory,
+  // after which the base path will be null
+  while (basePath) {
+    def candidatePath = Paths.get(basePath.toString(), "node_modules")
+    if (candidatePath.toFile().exists()) {
+      return candidatePath.toString()
+    }
+    basePath = basePath.getParent()
+  }
+  return null
+}
+
+def nodeModules = findNodeModulePath(projectDir);
+logger.warn("node_modules/ found at: ${nodeModules}");
+
+def prebuiltDir = "$nodeModules/react-native/ReactAndroid/src/main/jni/prebuilt/lib"
+logger.warn("prebuiltDir/ found at: ${prebuiltDir}");
+
+
+android {
+  compileSdkVersion getExtOrIntegerDefault('compileSdkVersion')
+  buildToolsVersion getExtOrDefault('buildToolsVersion')
+
+  configurations {
+    extractHeaders
+    extractJNI
+  }
+
+  defaultConfig {
+    minSdkVersion 16
+    targetSdkVersion getExtOrIntegerDefault('targetSdkVersion')
+    versionCode 1
+    versionName "1.0"
+
+    externalNativeBuild {
+      cmake {
+        cppFlags "-O2 -frtti -fexceptions -Wall -fstack-protector-all"
+        arguments "-DNODE_MODULES_DIR=${findNodeModulePath(projectDir)}"
+        abiFilters 'arm64-v8a'
+      }
+    }
+  }
+
+  externalNativeBuild {
+    cmake {
+      path "CMakeLists.txt"
+    }
+  }
+
+//  packagingOptions {
+//    // Exclude all Libraries that are already present in the user's app (through React Native or by him installing REA)
+//    excludes = ["**/libc++_shared.so", "**/libfbjni.so", "**/libjsi.so", "**/libreactnativejni.so", "**/libfolly_json.so", "**/libjscexecutor.so", "**/libhermes.so"]
+//    exclude "META-INF/**"
+//  }
+
+  buildTypes {
+    release {
+      minifyEnabled false
+    }
+  }
+  lintOptions {
+    disable 'GradleCompatible'
+  }
+  compileOptions {
+    sourceCompatibility JavaVersion.VERSION_11
+    targetCompatibility JavaVersion.VERSION_11
+  }
+}
+
+repositories {
+  mavenCentral()
+  jcenter()
+  google()
+}
+
+def kotlin_version = getExtOrDefault('kotlinVersion')
+
+dependencies {
+  // noinspection GradleDynamicVersion
+  api 'com.facebook.react:react-native:+'
+  implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+  // If headers are required.
+  extractHeaders 'com.facebook.fbjni:fbjni:0.2.2:headers'
+  // If the `.so` files are required for linking.
+  extractJNI 'com.facebook.fbjni:fbjni:0.3.0'
+
+  def rnAAR = fileTree("${rootDir}/../node_modules/react-native/android").matching({ it.include "**/**/*.aar" }).singleFile
+  extractJNI(files(rnAAR))
+}
+
+task extractAARHeaders {
+  doLast {
+    configurations.extractHeaders.files.each {
+      def file = it.absoluteFile
+      copy {
+        from zipTree(file)
+        into "$buildDir/$file.name"
+        include "**/*.h"
+      }
+    }
+  }
+}
+
+task extractJNIFiles {
+  doLast {
+    configurations.extractJNI.files.each {
+      def file = it.absoluteFile
+      copy {
+        from zipTree(file)
+        into "$buildDir/$file.name"
+        include "jni/**/*"
+      }
+    }
+  }
+}
+
+tasks.whenTaskAdded { task ->
+  if (task.name.contains('externalNativeBuild')) {
+    task.dependsOn(extractAARHeaders)
+    task.dependsOn(extractJNIFiles)
+  }
+}

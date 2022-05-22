@@ -1,0 +1,92 @@
+# 1.0.0 (2022-05-22)
+
+
+### Bug Fixes
+
+* accurate rendering ([957ff5e](https://github.com/qlik-oss/react-native-helium/commit/957ff5ece3a8a65d0b9ad199d7e690eae5212347))
+* add actions ([cc88590](https://github.com/qlik-oss/react-native-helium/commit/cc88590282b9179ee19505be07da446a5b2e8061))
+* add github actions ([ef79f47](https://github.com/qlik-oss/react-native-helium/commit/ef79f4773be8fe4fa160afb462aecd9e717206e3))
+* add github folder ([796935c](https://github.com/qlik-oss/react-native-helium/commit/796935c1453e3ec7a5260c4145215dcf67d992ff))
+* add missing script ([6e3a9da](https://github.com/qlik-oss/react-native-helium/commit/6e3a9daa7c2efa2194bf64534d12716ad65b23f4))
+* broken folder structure ([eaf127a](https://github.com/qlik-oss/react-native-helium/commit/eaf127af9ab0410b658b169fbc2ba6f999ba9a98))
+* clean up memory issues ([e536814](https://github.com/qlik-oss/react-native-helium/commit/e536814e29ebfef39a5a5b2a4e6bf32a70640254))
+* clear ([ec91906](https://github.com/qlik-oss/react-native-helium/commit/ec919061eb6ff390314ea06965711c1b0be65faf))
+* conversions ([574e7b1](https://github.com/qlik-oss/react-native-helium/commit/574e7b15d38dad56e23ec9023f7b41c0085e7796))
+* metal renderer ([b9f7056](https://github.com/qlik-oss/react-native-helium/commit/b9f705657d6ea55b7b41a572a45e30341052cc2d))
+* no need to add sublayer ([2d11931](https://github.com/qlik-oss/react-native-helium/commit/2d11931ef34aca3a85f88568d1cb61d67574934c))
+* npm token ([492619c](https://github.com/qlik-oss/react-native-helium/commit/492619cb3a3f07d710b59b7671abea9888e18ed9))
+* npm token ([e77ef0f](https://github.com/qlik-oss/react-native-helium/commit/e77ef0f9fdd789e7949b6bcee13b797c264a1c4e))
+* package.json ([e5bb89f](https://github.com/qlik-oss/react-native-helium/commit/e5bb89fac0fae8070566556112d991d48fcc8cf7))
+* resize ([5b54ad2](https://github.com/qlik-oss/react-native-helium/commit/5b54ad2dd91a8662d0f4d5eeb92953e0996a7200))
+* run endLasso on JS thread ([7d80ce7](https://github.com/qlik-oss/react-native-helium/commit/7d80ce74c35ca51f77743e8a541708ae465f0c86))
+* update main branch ([1f70e30](https://github.com/qlik-oss/react-native-helium/commit/1f70e30059461ad5826eced401e20bd7b1e73206))
+* update yarn.lock ([c4b5cb0](https://github.com/qlik-oss/react-native-helium/commit/c4b5cb07a0d6e6f0555b9bc9b77b368e2b8b082e))
+
+
+### Features
+
+* draw rects ([18f21ec](https://github.com/qlik-oss/react-native-helium/commit/18f21ec9b7a20c7e26ab3ab2d037f607aa65d0b5))
+* ios jsi wireup ([d3333ac](https://github.com/qlik-oss/react-native-helium/commit/d3333ac632622a3b49cd855235d6f6eb80e790c2))
+* ios render take1 ([c5ca182](https://github.com/qlik-oss/react-native-helium/commit/c5ca18284c1eff51afbaecc4a1e5797aa2ac6b8c))
+
+# 1.0.0-alpha.1 (2022-05-22)
+
+
+### Bug Fixes
+
+* accurate rendering ([957ff5e](https://github.com/qlik-oss/react-native-helium/commit/957ff5ece3a8a65d0b9ad199d7e690eae5212347))
+* add actions ([cc88590](https://github.com/qlik-oss/react-native-helium/commit/cc88590282b9179ee19505be07da446a5b2e8061))
+* add github actions ([ef79f47](https://github.com/qlik-oss/react-native-helium/commit/ef79f4773be8fe4fa160afb462aecd9e717206e3))
+* add github folder ([796935c](https://github.com/qlik-oss/react-native-helium/commit/796935c1453e3ec7a5260c4145215dcf67d992ff))
+* add missing script ([6e3a9da](https://github.com/qlik-oss/react-native-helium/commit/6e3a9daa7c2efa2194bf64534d12716ad65b23f4))
+* broken folder structure ([eaf127a](https://github.com/qlik-oss/react-native-helium/commit/eaf127af9ab0410b658b169fbc2ba6f999ba9a98))
+* clean up memory issues ([e536814](https://github.com/qlik-oss/react-native-helium/commit/e536814e29ebfef39a5a5b2a4e6bf32a70640254))
+* clear ([ec91906](https://github.com/qlik-oss/react-native-helium/commit/ec919061eb6ff390314ea06965711c1b0be65faf))
+* conversions ([574e7b1](https://github.com/qlik-oss/react-native-helium/commit/574e7b15d38dad56e23ec9023f7b41c0085e7796))
+* metal renderer ([b9f7056](https://github.com/qlik-oss/react-native-helium/commit/b9f705657d6ea55b7b41a572a45e30341052cc2d))
+* no need to add sublayer ([2d11931](https://github.com/qlik-oss/react-native-helium/commit/2d11931ef34aca3a85f88568d1cb61d67574934c))
+* npm token ([492619c](https://github.com/qlik-oss/react-native-helium/commit/492619cb3a3f07d710b59b7671abea9888e18ed9))
+* npm token ([e77ef0f](https://github.com/qlik-oss/react-native-helium/commit/e77ef0f9fdd789e7949b6bcee13b797c264a1c4e))
+* package.json ([e5bb89f](https://github.com/qlik-oss/react-native-helium/commit/e5bb89fac0fae8070566556112d991d48fcc8cf7))
+* resize ([5b54ad2](https://github.com/qlik-oss/react-native-helium/commit/5b54ad2dd91a8662d0f4d5eeb92953e0996a7200))
+* run endLasso on JS thread ([7d80ce7](https://github.com/qlik-oss/react-native-helium/commit/7d80ce74c35ca51f77743e8a541708ae465f0c86))
+* update main branch ([1f70e30](https://github.com/qlik-oss/react-native-helium/commit/1f70e30059461ad5826eced401e20bd7b1e73206))
+* update yarn.lock ([c4b5cb0](https://github.com/qlik-oss/react-native-helium/commit/c4b5cb07a0d6e6f0555b9bc9b77b368e2b8b082e))
+
+
+### Features
+
+* draw rects ([18f21ec](https://github.com/qlik-oss/react-native-helium/commit/18f21ec9b7a20c7e26ab3ab2d037f607aa65d0b5))
+* ios jsi wireup ([d3333ac](https://github.com/qlik-oss/react-native-helium/commit/d3333ac632622a3b49cd855235d6f6eb80e790c2))
+* ios render take1 ([c5ca182](https://github.com/qlik-oss/react-native-helium/commit/c5ca18284c1eff51afbaecc4a1e5797aa2ac6b8c))
+
+# 1.0.0-alpha.1 (2022-05-22)
+
+
+### Bug Fixes
+
+* accurate rendering ([957ff5e](https://github.com/qlik-oss/react-native-helium/commit/957ff5ece3a8a65d0b9ad199d7e690eae5212347))
+* add actions ([cc88590](https://github.com/qlik-oss/react-native-helium/commit/cc88590282b9179ee19505be07da446a5b2e8061))
+* add github actions ([ef79f47](https://github.com/qlik-oss/react-native-helium/commit/ef79f4773be8fe4fa160afb462aecd9e717206e3))
+* add github folder ([796935c](https://github.com/qlik-oss/react-native-helium/commit/796935c1453e3ec7a5260c4145215dcf67d992ff))
+* add missing script ([6e3a9da](https://github.com/qlik-oss/react-native-helium/commit/6e3a9daa7c2efa2194bf64534d12716ad65b23f4))
+* broken folder structure ([eaf127a](https://github.com/qlik-oss/react-native-helium/commit/eaf127af9ab0410b658b169fbc2ba6f999ba9a98))
+* clean up memory issues ([e536814](https://github.com/qlik-oss/react-native-helium/commit/e536814e29ebfef39a5a5b2a4e6bf32a70640254))
+* clear ([ec91906](https://github.com/qlik-oss/react-native-helium/commit/ec919061eb6ff390314ea06965711c1b0be65faf))
+* conversions ([574e7b1](https://github.com/qlik-oss/react-native-helium/commit/574e7b15d38dad56e23ec9023f7b41c0085e7796))
+* metal renderer ([b9f7056](https://github.com/qlik-oss/react-native-helium/commit/b9f705657d6ea55b7b41a572a45e30341052cc2d))
+* no need to add sublayer ([2d11931](https://github.com/qlik-oss/react-native-helium/commit/2d11931ef34aca3a85f88568d1cb61d67574934c))
+* npm token ([492619c](https://github.com/qlik-oss/react-native-helium/commit/492619cb3a3f07d710b59b7671abea9888e18ed9))
+* npm token ([e77ef0f](https://github.com/qlik-oss/react-native-helium/commit/e77ef0f9fdd789e7949b6bcee13b797c264a1c4e))
+* package.json ([e5bb89f](https://github.com/qlik-oss/react-native-helium/commit/e5bb89fac0fae8070566556112d991d48fcc8cf7))
+* resize ([5b54ad2](https://github.com/qlik-oss/react-native-helium/commit/5b54ad2dd91a8662d0f4d5eeb92953e0996a7200))
+* run endLasso on JS thread ([7d80ce7](https://github.com/qlik-oss/react-native-helium/commit/7d80ce74c35ca51f77743e8a541708ae465f0c86))
+* update main branch ([1f70e30](https://github.com/qlik-oss/react-native-helium/commit/1f70e30059461ad5826eced401e20bd7b1e73206))
+* update yarn.lock ([c4b5cb0](https://github.com/qlik-oss/react-native-helium/commit/c4b5cb07a0d6e6f0555b9bc9b77b368e2b8b082e))
+
+
+### Features
+
+* draw rects ([18f21ec](https://github.com/qlik-oss/react-native-helium/commit/18f21ec9b7a20c7e26ab3ab2d037f607aa65d0b5))
+* ios jsi wireup ([d3333ac](https://github.com/qlik-oss/react-native-helium/commit/d3333ac632622a3b49cd855235d6f6eb80e790c2))
+* ios render take1 ([c5ca182](https://github.com/qlik-oss/react-native-helium/commit/c5ca18284c1eff51afbaecc4a1e5797aa2ac6b8c))
