@@ -1,3 +1,10 @@
+## [1.0.2-alpha.5](https://github.com/qlik-oss/react-native-helium/compare/v1.0.2-alpha.4...v1.0.2-alpha.5) (2022-05-23)
+
+
+### Bug Fixes
+
+* add gitconfig ([7b3ae1f](https://github.com/qlik-oss/react-native-helium/commit/7b3ae1fd3b8bc284a2235aa972056f76d3f65adf))
+
 ## [1.0.2-alpha.4](https://github.com/qlik-oss/react-native-helium/compare/v1.0.2-alpha.3...v1.0.2-alpha.4) (2022-05-23)
 
 
