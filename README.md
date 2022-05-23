@@ -10,7 +10,7 @@ Skia base JSI renderer for Picasso and Nebula
 2. cd skia
 3. python tools/git-sync-deps
 4. generate the build command by choosing which platform listed below
-5. ninja -C [whereever your outdir is]
+5. ninja -C [wherever your outdir is]
 
 ### Android
 
