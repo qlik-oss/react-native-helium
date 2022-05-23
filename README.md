@@ -1,6 +1,6 @@
 # @qlik/react-native-helium
 
-<img src="logo/he2.png" height="128"/>
+<img src="logo/he2.png" height="256"/>
 
 Skia base JSI renderer for Picasso and Nebula
 
