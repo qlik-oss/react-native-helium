@@ -1,3 +1,10 @@
+## [1.0.2-alpha.4](https://github.com/qlik-oss/react-native-helium/compare/v1.0.2-alpha.3...v1.0.2-alpha.4) (2022-05-23)
+
+
+### Bug Fixes
+
+* android build.gradle dependency order ([6c701ac](https://github.com/qlik-oss/react-native-helium/commit/6c701ac69ec134fa52d6fc8b912f9c01bb534849))
+
 ## [1.0.2-alpha.3](https://github.com/qlik-oss/react-native-helium/compare/v1.0.2-alpha.2...v1.0.2-alpha.3) (2022-05-23)
 
 
