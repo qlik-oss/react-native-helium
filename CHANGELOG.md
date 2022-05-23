@@ -1,3 +1,10 @@
+## [1.0.2-alpha.6](https://github.com/qlik-oss/react-native-helium/compare/v1.0.2-alpha.5...v1.0.2-alpha.6) (2022-05-23)
+
+
+### Bug Fixes
+
+* unlfs ([1ae703a](https://github.com/qlik-oss/react-native-helium/commit/1ae703a81680e8471efec151022256f71cc3aa3c))
+
 ## [1.0.2-alpha.5](https://github.com/qlik-oss/react-native-helium/compare/v1.0.2-alpha.4...v1.0.2-alpha.5) (2022-05-23)
 
 
