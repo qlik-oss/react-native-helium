@@ -1,5 +1,5 @@
 {
-  "name": "@qlik-oss/react-native-helium",
+  "name": "@qlik/react-native-helium",
   "version": "1.0.2-alpha.1",
   "description": "Skia base JSI renderer for Picasso and Nebula",
   "main": "src/index",
