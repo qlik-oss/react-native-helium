@@ -1,3 +1,10 @@
+## [1.0.2-alpha.3](https://github.com/qlik-oss/react-native-helium/compare/v1.0.2-alpha.2...v1.0.2-alpha.3) (2022-05-23)
+
+
+### Bug Fixes
+
+* access to public ([0e58639](https://github.com/qlik-oss/react-native-helium/commit/0e58639266bfe1e823c3dd1e0aba64c1a9622380))
+
 ## [1.0.2-alpha.2](https://github.com/qlik-oss/react-native-helium/compare/v1.0.2-alpha.1...v1.0.2-alpha.2) (2022-05-23)
 
 
