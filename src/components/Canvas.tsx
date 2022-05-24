@@ -20,7 +20,7 @@ export const CanvasView = requireNativeComponent<CanvasViewProps>(
 export interface CanvasProps extends ViewProps {
   onCanvas?: (canvas: CanvasApi) => void;
   onResized?: () => void;
-  onBeganSelections?: () => void;
+  onBeganSelections?: (params: any) => void;
   onLongPressBegan?: (params: any) => void;
   onLongPressEnded?: () => void;
 }
@@ -36,7 +36,7 @@ export default class Canvas extends React.Component<CanvasProps, CanvasState> {
   canvas: CanvasApi;
   onCanvasCallback?: (canvas: CanvasApi) => void;
   onResized?: () => void;
-  onBeganSelections?: () => void;
+  onBeganSelections?: (params: any) => void;
   onLongPressBegan?: (params: any) => void;
   onLongPressEnded?: () => void;
 
@@ -64,8 +64,8 @@ export default class Canvas extends React.Component<CanvasProps, CanvasState> {
         }}
         onLongPressBegan={(params: any) => this.onLongPressBegan?.(params)}
         onLongPressEnded={() => this.onLongPressEnded?.()}
-        onBeganSelections={() => {
-          this.onBeganSelections?.();
+        onBeganSelections={(params: any) => {
+          this.onBeganSelections?.(params);
         }}/>
       </View>);
   }

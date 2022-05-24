@@ -58,7 +58,12 @@
 - (void) handleTap: (UITapGestureRecognizer *)recognizer {
   CGPoint point = [recognizer locationInView:self];
   renderer->beginSelections(point.x, point.y);
-  self.onBeganSelections(@{});
+  CGRect frameRect = self.frame;
+  CGRect rect = [self convertRect:frameRect toView:[UIApplication sharedApplication].keyWindow.rootViewController.view];
+  self.onBeganSelections(@{@"x": @(rect.origin.x),
+                           @"y": @(rect.origin.y),
+                           @"width":@(rect.size.width),
+                           @"height": @(rect.size.height)});
 }
 
 - (void) handleLongPress:(UILongPressGestureRecognizer*)recognizer {
