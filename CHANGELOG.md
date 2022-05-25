@@ -1,3 +1,10 @@
+## [1.0.2-alpha.9](https://github.com/qlik-oss/react-native-helium/compare/v1.0.2-alpha.8...v1.0.2-alpha.9) (2022-05-25)
+
+
+### Bug Fixes
+
+* text measurement returning bounding height and not font height ([576b540](https://github.com/qlik-oss/react-native-helium/commit/576b540c268f4ca658091ad3a33569d40ca143cb))
+
 ## [1.0.2-alpha.8](https://github.com/qlik-oss/react-native-helium/compare/v1.0.2-alpha.7...v1.0.2-alpha.8) (2022-05-25)
 
 
