@@ -1,3 +1,11 @@
+## [1.0.2-alpha.7](https://github.com/qlik-oss/react-native-helium/compare/v1.0.2-alpha.6...v1.0.2-alpha.7) (2022-05-25)
+
+
+### Bug Fixes
+
+* change selection behaviour ([18b5d2d](https://github.com/qlik-oss/react-native-helium/commit/18b5d2da688535f414435a3a7b0dfbe2f5594bf2))
+* line breaks ([f959f83](https://github.com/qlik-oss/react-native-helium/commit/f959f8323acd05b6de717f6ed5565c08c3a8ab45))
+
 ## [1.0.2-alpha.6](https://github.com/qlik-oss/react-native-helium/compare/v1.0.2-alpha.5...v1.0.2-alpha.6) (2022-05-23)
 
 
