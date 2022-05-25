@@ -1,3 +1,10 @@
+## [1.0.2-alpha.8](https://github.com/qlik-oss/react-native-helium/compare/v1.0.2-alpha.7...v1.0.2-alpha.8) (2022-05-25)
+
+
+### Bug Fixes
+
+* measure text returns floating point ([54ce581](https://github.com/qlik-oss/react-native-helium/commit/54ce581a17f29abb453aa12a1d9cfb9369d5b7c9))
+
 ## [1.0.2-alpha.7](https://github.com/qlik-oss/react-native-helium/compare/v1.0.2-alpha.6...v1.0.2-alpha.7) (2022-05-25)
 
 
