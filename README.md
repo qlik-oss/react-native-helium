@@ -81,7 +81,8 @@ extra_cflags=["-DSKIA_C_DLL", "-DHAVE_ARC4RANDOM_BUF", "-target", "arm64-apple-i
 
 ### Build framework
 ```sh
-xcodebuild -create-xcframework -library ios64/libskia.a -headers iosheaders -library iosSim/libskia.a -headers iosheaders -output framework/skia.xcframework
+xcodebuild -create-xcframework -library iosSim/libskia.a -library ios64/libskia.a -output framework/skia.xcframework
+xcodebuild -create-xcframework -library iosSim/libsvg.a -library ios64/libsvg.a -output framework/skiasvg.xcframework
 ```
 where iosheaders has a copy of the skia/include folder
 ## License

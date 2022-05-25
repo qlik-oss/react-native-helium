@@ -14,20 +14,23 @@ using namespace facebook;
 
 class Text : public Shape{
 protected:
-    SkPoint position;
-    SkFont font;
-    SkMatrix transform;
-    SkFontMetrics fontMetrics{};
-    std::string text;
-    SkTextUtils::Align textAlign = SkTextUtils::kLeft_Align;
+  SkPoint position;
+  SkFont font;
+  SkMatrix transform;
+  SkFontMetrics fontMetrics{};
+  std::string text;
+  SkTextUtils::Align textAlign = SkTextUtils::kLeft_Align;
+  std::vector<std::string> lines;
 public:
-    Text(jsi::Runtime& rt, const jsi::Object& object);
-    virtual ~Text() = default;
-    void draw(SkCanvas* canvas) override;
-
+  Text(jsi::Runtime& rt, const jsi::Object& object);
+  virtual ~Text() = default;
+  void draw(SkCanvas* canvas) override;
+  
 protected:
-    void calcBaseline(const std::string& baseline);
-    void calcAnchor(const std::string& anchor);
+  void calcBaseline(const std::string& baseline);
+  void calcAnchor(const std::string& anchor);
+  void splitText();
+  
 };
 
 

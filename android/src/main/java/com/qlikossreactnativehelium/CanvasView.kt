@@ -1,13 +1,12 @@
 package com.qlikossreactnativehelium
 
 import android.content.Context
+import android.content.res.Resources
 import android.graphics.PointF
+import android.graphics.Rect
 import android.graphics.SurfaceTexture
 import android.util.Log
-import android.view.GestureDetector
-import android.view.MotionEvent
-import android.view.Surface
-import android.view.TextureView
+import android.view.*
 import com.facebook.react.bridge.Arguments
 import com.facebook.react.bridge.ReactContext
 import com.facebook.react.uimanager.events.RCTEventEmitter
@@ -99,6 +98,10 @@ class CanvasView : TextureView, TextureView.SurfaceTextureListener {
 
   fun setLasso(newVal: Boolean) {
     lasso = newVal
+  }
+
+  fun pxToDp(ctx: Context, px: Float): Float {
+    return px / ctx.resources.displayMetrics.density
   }
 
   external fun surfaceAvailable(id: String, surface: Surface, width: Int, height: Int)

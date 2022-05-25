@@ -22,9 +22,15 @@ Pod::Spec.new do |s|
 
   s.frameworks = 'GLKit', 'MetalKit'
 
-  s.vendored_frameworks = ["skialib/skia.xcframework"]
+  s.vendored_frameworks = ["skialib/skia.xcframework", "skialib/skiasvg.xcframework", "skialib/skshaper.xcframework"]
 
   s.source_files = "ios/**/*.{h,m,mm,cpp,hpp}", "cpp/**/*.{h,m,mm,cpp,hpp}"
+
+  s.subspec 'skialib' do |ss|
+    ss.header_mappings_dir = 'skialib'
+    ss.source_files = "skialib/**/*.{h}"
+  end
+
 
   s.dependency "React"
   s.dependency "React-callinvoker"
