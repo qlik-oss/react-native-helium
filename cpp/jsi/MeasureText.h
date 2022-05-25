@@ -13,7 +13,7 @@ using namespace facebook;
 class MeasureText {
 public:
     MeasureText() = default;
-    SkISize measure(jsi::Runtime& rt,  jsi::Object& object);
+    SkSize measure(jsi::Runtime& rt,  jsi::Object& object);
 protected:
 
 };

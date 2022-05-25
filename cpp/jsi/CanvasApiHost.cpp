@@ -42,8 +42,8 @@ Value CanvasApiHost::get(Runtime &runtime, const PropNameID &name) {
         viewSize = renderView->size();
       }
       jsi::Object result(runtime);
-      result.setProperty(runtime, "width", jsi::Value(Helium::toDB(viewSize.width())));
-      result.setProperty(runtime, "height", jsi::Value(Helium::toDB(viewSize.height())));
+      result.setProperty(runtime, "width", (Helium::toDB(viewSize.width())));
+      result.setProperty(runtime, "height",(Helium::toDB(viewSize.height())));
       return Value(runtime, result);
     }
     return Value::undefined();
@@ -54,8 +54,8 @@ Value CanvasApiHost::get(Runtime &runtime, const PropNameID &name) {
     jsi::Object result(runtime);
     MeasureText mt;
     auto size = mt.measure(runtime, measureObject);
-    result.setProperty(runtime, "width", Value(size.width()));
-    result.setProperty(runtime, "height", Value(size.height()));
+    result.setProperty(runtime, "width", (size.width()));
+    result.setProperty(runtime, "height", (size.height()));
     return Value(runtime, result);
   };
 

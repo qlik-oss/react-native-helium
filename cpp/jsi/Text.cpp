@@ -27,7 +27,6 @@
  x:36.5
  y:124.1081560283688
  */
-
 Text::Text(jsi::Runtime &rt, const jsi::Object &object) {
   text = object.getProperty(rt, "text").toString(rt).utf8(rt);
   SkScalar fontSize = static_cast<SkScalar>(Helium::toPx(object.getProperty(rt, "fontSize").asNumber()));
@@ -38,7 +37,6 @@ Text::Text(jsi::Runtime &rt, const jsi::Object &object) {
   position.fX = (Helium::toPx(object.getProperty(rt, "x").asNumber()));
   position.fY = (Helium::toPx(object.getProperty(rt, "y").asNumber()));
   font = SkFont(typeFace, fontSize);
-  
   font.getMetrics(&fontMetrics);
   
   calcBaseline(baseline);
@@ -56,13 +54,18 @@ Text::Text(jsi::Runtime &rt, const jsi::Object &object) {
 }
 
 void Text::calcBaseline(const std::string& baseline) {
+  SkRect bounds;
+  font.measureText(text.c_str(), text.length(), SkTextEncoding::kUTF8, &bounds);
+  
   float emHeight = fontMetrics.fDescent - fontMetrics.fAscent;
+  
   if(baseline == "central") {
     position.fY = position.fY - fontMetrics.fAscent - (emHeight * 0.5f);
   }
   if(baseline == "text-before-edge") {
     position.fY = position.fY - fontMetrics.fAscent;
   }
+  
   if(baseline == "undefined") {
     position.fY = position.fY  + (emHeight);
   }
