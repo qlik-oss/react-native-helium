@@ -87,7 +87,7 @@ void Text::draw(SkCanvas *canvas) {
   SkScalar dy = 0;
   for(auto&& line: lines) {
     SkTextUtils::DrawString(canvas, line.c_str(), 0, dy, font, *brush, textAlign );
-    dy += emHeight;
+    dy += emHeight + fontMetrics.fDescent;
   };
   
   canvas->restore();
