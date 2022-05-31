@@ -48,7 +48,7 @@ Text::Text(jsi::Runtime &rt, const jsi::Object &object) {
     TransformFactory txFactory;
     transform = txFactory.parse(rt, object);
   }
-  transform.preTranslate(position.fX, position.fY);
+  transform = SkMatrix::Translate(position.fX, position.fY);
   
   splitText();
 }
@@ -56,19 +56,21 @@ Text::Text(jsi::Runtime &rt, const jsi::Object &object) {
 void Text::calcBaseline(const std::string& baseline) {
   SkRect bounds;
   font.measureText(text.c_str(), text.length(), SkTextEncoding::kUTF8, &bounds);
-  
+  position.fX -= bounds.left();
+ 
+  SkString s;
+  SkTypeface* tf = font.getTypeface();
+  tf->getFamilyName(&s);
+
   float emHeight = fontMetrics.fDescent - fontMetrics.fAscent;
   
   if(baseline == "central") {
     position.fY = position.fY - fontMetrics.fAscent - (emHeight * 0.5f);
   }
   if(baseline == "text-before-edge") {
-    position.fY = position.fY - fontMetrics.fAscent;
+    position.fY = position.fY - fontMetrics.fTop - fontMetrics.fDescent;
   }
   
-  if(baseline == "undefined") {
-    position.fY = position.fY  + (emHeight);
-  }
 }
 
 void Text::splitText() {
@@ -85,6 +87,10 @@ void Text::draw(SkCanvas *canvas) {
   canvas->concat(transform);
   float emHeight = fontMetrics.fDescent - fontMetrics.fAscent;
   SkScalar dy = 0;
+  SkRect bounds;
+  
+  font.measureText(text.c_str(), text.length(), SkTextEncoding::kUTF8, &bounds);
+//  canvas->drawRect(bounds, *brush);
   for(auto&& line: lines) {
     SkTextUtils::DrawString(canvas, line.c_str(), 0, dy, font, *brush, textAlign );
     dy += emHeight + fontMetrics.fDescent;

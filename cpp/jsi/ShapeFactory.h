@@ -11,6 +11,7 @@
 #include "Text.h"
 #include "Rectangle.h"
 #include "ObjectPool.h"
+#include "Path.h"
 using namespace facebook;
 
 class ShapeFactory {
@@ -25,6 +26,7 @@ protected:
   ObjectPool<Circle> circlePool;
   ObjectPool<Text> textPool;
   ObjectPool<Rectangle> rectanglePool;
+  ObjectPool<Path> pathPool;
 };
 
 

@@ -13,7 +13,11 @@ using namespace facebook;
 class TransformFactory {
 public:
     TransformFactory() = default;
+  TransformFactory(const SkMatrix& from);
     SkMatrix parse(jsi::Runtime& rt, const jsi::Object& object);
+  
+protected:
+  SkMatrix matrix;
 };
 
 
