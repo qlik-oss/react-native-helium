@@ -1,3 +1,10 @@
+# [1.1.0-alpha.1](https://github.com/qlik-oss/react-native-helium/compare/v1.0.2-alpha.9...v1.1.0-alpha.1) (2022-05-31)
+
+
+### Features
+
+* parse svg pahts ([cbe978e](https://github.com/qlik-oss/react-native-helium/commit/cbe978e739a727e075f87df64714b7f8e4fa437c))
+
 ## [1.0.2-alpha.9](https://github.com/qlik-oss/react-native-helium/compare/v1.0.2-alpha.8...v1.0.2-alpha.9) (2022-05-25)
 
 
