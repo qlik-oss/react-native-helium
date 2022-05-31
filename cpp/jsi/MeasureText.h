@@ -7,13 +7,15 @@
 
 #include <jsi/jsi.h>
 #include <include/core/SkSize.h>
+#include <include/core/SkFont.h>
+
 
 using namespace facebook;
 
 class MeasureText {
 public:
     MeasureText() = default;
-    SkSize measure(jsi::Runtime& rt,  jsi::Object& object);
+    std::tuple<SkSize, SkFontMetrics> measure(jsi::Runtime& rt,  jsi::Object& object);
 protected:
 
 };

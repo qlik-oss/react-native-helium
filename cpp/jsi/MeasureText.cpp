@@ -6,7 +6,8 @@
 #include "Helium.h"
 #include <include/core/SkFont.h>
 
-SkSize MeasureText::measure(jsi::Runtime& rt, jsi::Object& object) {
+std::tuple<SkSize, SkFontMetrics> MeasureText::measure(jsi::Runtime& rt, jsi::Object& object) {
+   
   std::string text("");
   auto fontFamily = object.getProperty(rt, "fontFamily").asString(rt).utf8(rt);
   auto fontSize = Helium::toPx(object.getProperty(rt, "fontSize").asNumber());
@@ -21,5 +22,5 @@ SkSize MeasureText::measure(jsi::Runtime& rt, jsi::Object& object) {
   auto height = metrics.fDescent - metrics.fAscent;
   SkRect bounds;
   font.measureText(text.c_str(), text.length(), SkTextEncoding::kUTF8, &bounds);
-  return SkSize::Make(Helium::toDB(bounds.width()), Helium::toDB(height));
+  return std::make_tuple(SkSize::Make(Helium::toDB(bounds.width()), Helium::toDB(height)), metrics);
 }
