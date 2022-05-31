@@ -1,3 +1,10 @@
+# [1.1.0-alpha.2](https://github.com/qlik-oss/react-native-helium/compare/v1.1.0-alpha.1...v1.1.0-alpha.2) (2022-05-31)
+
+
+### Bug Fixes
+
+* added ascend/descen for fonts ([cf0202a](https://github.com/qlik-oss/react-native-helium/commit/cf0202ae7294bf59da859a7619cfeee739712019))
+
 # [1.1.0-alpha.1](https://github.com/qlik-oss/react-native-helium/compare/v1.0.2-alpha.9...v1.1.0-alpha.1) (2022-05-31)
 
 
