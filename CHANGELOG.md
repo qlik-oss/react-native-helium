@@ -1,3 +1,10 @@
+# [1.1.0-alpha.3](https://github.com/qlik-oss/react-native-helium/compare/v1.1.0-alpha.2...v1.1.0-alpha.3) (2022-06-01)
+
+
+### Bug Fixes
+
+* revert back to box bounds ([b8faac9](https://github.com/qlik-oss/react-native-helium/commit/b8faac9194a7585cbd5feb36479e6f5a1e2e7a55))
+
 # [1.1.0-alpha.2](https://github.com/qlik-oss/react-native-helium/compare/v1.1.0-alpha.1...v1.1.0-alpha.2) (2022-05-31)
 
 
