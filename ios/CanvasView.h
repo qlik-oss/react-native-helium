@@ -21,6 +21,7 @@ class MetalRenderer;
 @property (nonatomic, copy) RCTDirectEventBlock onLongPressEnded;
 @property (nonatomic, copy) RCTDirectEventBlock onBeganSelections;
 @property (nonatomic) BOOL lasso;
+@property (nonatomic) UIPanGestureRecognizer* panGesture;
 
 -(instancetype)initWithMetal:(id<MTLDevice>)devce commandQueue:(id<MTLCommandQueue>)commandQueue;
 -(std::shared_ptr<MetalRenderer>)getRenderer;

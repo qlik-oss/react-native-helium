@@ -68,7 +68,10 @@ void Text::calcBaseline(const std::string& baseline) {
     position.fY = position.fY - fontMetrics.fAscent - (emHeight * 0.5f);
   }
   if(baseline == "text-before-edge") {
-    position.fY = position.fY - fontMetrics.fTop - fontMetrics.fDescent;
+    position.fY = position.fY - bounds.top();
+  }
+  if(baseline == "bottom") {
+    position.fY = position.fY - (bounds.height() + bounds.top());
   }
   
 }

@@ -51,8 +51,9 @@
   UILongPressGestureRecognizer* longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPress:)];
   [self addGestureRecognizer:longPress];
   
-  UIPanGestureRecognizer* pan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePan:)];
-  [self addGestureRecognizer:pan];
+  _panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePan:)];
+  [self addGestureRecognizer:_panGesture];
+  _panGesture.enabled = NO;
 }
 
 - (void) handleTap: (UITapGestureRecognizer *)recognizer {
@@ -129,6 +130,7 @@
 
 -(void)setLasso:(BOOL)lasso {
   _lasso = lasso;
+  _panGesture.enabled = _lasso;
 }
 
 

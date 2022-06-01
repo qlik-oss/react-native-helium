@@ -54,10 +54,12 @@ Value CanvasApiHost::get(Runtime &runtime, const PropNameID &name) {
     jsi::Object result(runtime);
     MeasureText mt;
     auto t = mt.measure(runtime, measureObject);
-    auto size = std::get<0>(t);
+    auto rect = std::get<0>(t);
     auto metrics = std::get<1>(t);
-    result.setProperty(runtime, "width", (size.width()));
-    result.setProperty(runtime, "height", (size.height()));
+    result.setProperty(runtime, "width", (rect.width()));
+    result.setProperty(runtime, "height", (rect.height()));
+    result.setProperty(runtime, "top", (rect.top()));
+    result.setProperty(runtime, "left", (rect.left()));
     result.setProperty(runtime, "fontBoundingBoxAscent", Helium::toDB(metrics.fAscent));
     result.setProperty(runtime, "fontBoundingBoxDescent", Helium::toDB(metrics.fDescent));
     return Value(runtime, result);
