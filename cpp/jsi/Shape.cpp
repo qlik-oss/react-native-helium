@@ -105,27 +105,31 @@ void Shape::initStrokePaint(jsi::Runtime &rt, const jsi::Object &object) {
 
 void Shape::initDataPath(jsi::Runtime &rt, const jsi::Object &object) {
   try {
-    auto data = object.getProperty(rt, "data").asObject(rt);
-    auto select = data.getProperty(rt, "select").asObject(rt);
-    auto source = select.getProperty(rt, "source").asObject(rt);
-    auto field = source.getProperty(rt, "field");
-    auto value = select.getProperty(rt, "value");
+    if(object.hasProperty(rt, "data")) {
+      auto data = object.getProperty(rt, "data").asObject(rt);
+      auto select = data.getProperty(rt, "select").asObject(rt);
+      auto source = select.getProperty(rt, "source").asObject(rt);
+      auto field = source.getProperty(rt, "field");
+      auto value = select.getProperty(rt, "value");
 
-    std::stringstream pathStream;
-    if(field.isString()) {
-      pathStream << field.asString(rt).utf8(rt);
-    } else {
-      pathStream << field.asNumber();
-    }
+      std::stringstream pathStream;
+      if (field.isString()) {
+        pathStream << field.asString(rt).utf8(rt);
+      } else {
+        pathStream << field.asNumber();
+      }
 
-    pathStream << "/";
-    if( value.isString()) {
-      pathStream << value.asString(rt).utf8(rt);
+      pathStream << "/";
+      if (value.isString()) {
+        pathStream << value.asString(rt).utf8(rt);
+      } else {
+        pathStream << value.asNumber();
+      }
+      dataPath = pathStream.str();
+      dataShape = std::make_shared<DataShape>(rt, std::move(data));
     } else {
-      pathStream << value.asNumber();
+      dataPath = "";
     }
-    dataPath = pathStream.str();
-    dataShape = std::make_shared<DataShape>(rt, std::move(data));
 
   } catch (const std::exception& e) {
 

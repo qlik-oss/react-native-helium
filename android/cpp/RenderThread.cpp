@@ -30,13 +30,23 @@ RenderThread::RenderThread() {
     });
 }
 
-RenderThread::~RenderThread() {
+void RenderThread::stop() {
+  {
     std::unique_lock<std::mutex> l(lock);
     quit = true;
-    cv.notify_all();
-    lock.unlock();
-
-    if(threader.joinable()) {
-        threader.join();
+  }
+  push([]{});
+//  if(!quit) {
+//    quit = true;
+//    cv.notify_all();
+//    lock.unlock();
+//
+    if (threader.joinable()) {
+      threader.join();
     }
+//  }
+}
+
+RenderThread::~RenderThread() {
+    stop();
 }

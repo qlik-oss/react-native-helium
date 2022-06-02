@@ -58,10 +58,6 @@ void Text::calcBaseline(const std::string& baseline) {
   font.measureText(text.c_str(), text.length(), SkTextEncoding::kUTF8, &bounds);
   position.fX -= bounds.left();
  
-  SkString s;
-  SkTypeface* tf = font.getTypeface();
-  tf->getFamilyName(&s);
-
   float emHeight = fontMetrics.fDescent - fontMetrics.fAscent;
   
   if(baseline == "central") {
@@ -93,7 +89,6 @@ void Text::draw(SkCanvas *canvas) {
   SkRect bounds;
   
   font.measureText(text.c_str(), text.length(), SkTextEncoding::kUTF8, &bounds);
-//  canvas->drawRect(bounds, *brush);
   for(auto&& line: lines) {
     SkTextUtils::DrawString(canvas, line.c_str(), 0, dy, font, *brush, textAlign );
     dy += emHeight + fontMetrics.fDescent;

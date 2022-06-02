@@ -23,6 +23,7 @@ export interface CanvasProps extends ViewProps {
   onBeganSelections?: (params: any) => void;
   onLongPressBegan?: (params: any) => void;
   onLongPressEnded?: () => void;
+  lasso: boolean;
 }
 
 export interface CanvasState {

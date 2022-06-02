@@ -46,6 +46,8 @@ public:
     std::shared_ptr<CanvasEGLContext> ctx() {
         return context;
     }
+    
+    void stop() ;
 
 protected:
     std::thread threader;

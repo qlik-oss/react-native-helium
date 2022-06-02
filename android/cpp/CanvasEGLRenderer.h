@@ -27,9 +27,6 @@ using namespace facebook;
 
 class CanvasEGLRenderer {
 protected:
-  std::shared_ptr<RenderThread> renderThread;
-  EGLSurface cglSurface = EGL_NO_SURFACE;
-  std::function<void()> removal;
 
 public:
   CanvasEGLRenderer();
@@ -81,10 +78,6 @@ public:
     renderThread = rt;
   }
 
-  void markForRemoval(std::function<void()> f) {
-    removal = f;
-    removeMe();
-  }
 
 
 protected:
@@ -96,9 +89,9 @@ protected:
 
   bool onDemandEGL();
 
-  void removeMe();
-
 protected:
+  std::shared_ptr<RenderThread> renderThread;
+  EGLSurface cglSurface = EGL_NO_SURFACE;
   ShapeFactory shapeFactory;
   GrBackendRenderTarget skRenderTarget;
   sk_sp<SkSurface> skSurface;

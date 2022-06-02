@@ -281,14 +281,6 @@ void CanvasEGLRenderer::surfaceSizeChanged(int width, int height) {
   });
 }
 
-void CanvasEGLRenderer::removeMe() {
-  renderThread->push([this] {
-    if (removal) {
-      removal();
-    }
-  });
-}
-
 std::shared_ptr<SkiaRenderView>
 CanvasEGLRenderer::createVirtualRender(const std::string &vid, const SkRect &bounds,
                                        const SkMatrix &matrix) {
