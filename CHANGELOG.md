@@ -1,3 +1,10 @@
+# [1.1.0-alpha.5](https://github.com/qlik-oss/react-native-helium/compare/v1.1.0-alpha.4...v1.1.0-alpha.5) (2022-06-02)
+
+
+### Bug Fixes
+
+* crash on android ([694e0c0](https://github.com/qlik-oss/react-native-helium/commit/694e0c0c8dbd5b73958ea4a9f969c420a7a8ef48))
+
 # [1.1.0-alpha.4](https://github.com/qlik-oss/react-native-helium/compare/v1.1.0-alpha.3...v1.1.0-alpha.4) (2022-06-02)
 
 
