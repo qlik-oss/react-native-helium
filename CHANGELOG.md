@@ -1,3 +1,10 @@
+# [1.1.0-alpha.6](https://github.com/qlik-oss/react-native-helium/compare/v1.1.0-alpha.5...v1.1.0-alpha.6) (2022-06-02)
+
+
+### Bug Fixes
+
+* use property as per canvas2d ([bedf2c7](https://github.com/qlik-oss/react-native-helium/commit/bedf2c761d5e3b0b529bb43b6e58b331cbe719d9))
+
 # [1.1.0-alpha.5](https://github.com/qlik-oss/react-native-helium/compare/v1.1.0-alpha.4...v1.1.0-alpha.5) (2022-06-02)
 
 
