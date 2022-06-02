@@ -6,7 +6,7 @@
 #include <set>
 #include <vector>
 #include <memory>
-#include "Quadtree.hpp"
+#include "QuadTree.h"
 #include "Shape.h"
 #include "SelectionsEngine.h"
 #include "SelectionBrush.hpp"

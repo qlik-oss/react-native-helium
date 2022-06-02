@@ -58,8 +58,7 @@ Value CanvasApiHost::get(Runtime &runtime, const PropNameID &name) {
     auto metrics = std::get<1>(t);
     result.setProperty(runtime, "width", (rect.width()));
     result.setProperty(runtime, "height", (rect.height()));
-    result.setProperty(runtime, "top", (rect.top()));
-    result.setProperty(runtime, "left", (rect.left()));
+    result.setProperty(runtime, "actualBoundingBoxAscent", (rect.top()));
     result.setProperty(runtime, "fontBoundingBoxAscent", Helium::toDB(metrics.fAscent));
     result.setProperty(runtime, "fontBoundingBoxDescent", Helium::toDB(metrics.fDescent));
     return Value(runtime, result);
