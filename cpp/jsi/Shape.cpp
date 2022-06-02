@@ -45,16 +45,19 @@ void Shape::initFillPaint(jsi::Runtime &rt, const jsi::Object &object) {
     activeBrush.setStyle(SkPaint::kFill_Style);
 
   try {
-    auto fill = object.getProperty(rt, "fill").asString(rt).utf8(rt);
-
-
-
-    SkColor colorss;
-    auto f = fill.find("rgb");
-    if(f != std::string::npos) {
-      colorss = pareseRGB(fill);
-    } else {
-      SkParse::FindColor(fill.c_str(), &colorss);
+    SkColor colorss = SkColorSetARGB(0, 0, 0, 0);
+    if(object.hasProperty(rt, "fill")) {
+      if(object.getProperty(rt, "fill").isString()) {
+        auto fill = object.getProperty(rt, "fill").asString(rt).utf8(rt);
+        auto f = fill.find("rgb");
+        if (f != std::string::npos) {
+          colorss = pareseRGB(fill);
+        } else {
+          SkParse::FindColor(fill.c_str(), &colorss);
+        }
+      }else {
+        colorss = SkColorSetARGB(1, 255, 0, 0);
+      }
     }
 
     activeBrush.setColor(colorss);
