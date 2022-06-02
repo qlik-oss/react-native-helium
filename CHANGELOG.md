@@ -1,3 +1,10 @@
+# [1.1.0-alpha.4](https://github.com/qlik-oss/react-native-helium/compare/v1.1.0-alpha.3...v1.1.0-alpha.4) (2022-06-02)
+
+
+### Bug Fixes
+
+* one thread per view ([1744a18](https://github.com/qlik-oss/react-native-helium/commit/1744a185aa1b320c9eb5e8adb086ab39b9eca16e))
+
 # [1.1.0-alpha.3](https://github.com/qlik-oss/react-native-helium/compare/v1.1.0-alpha.2...v1.1.0-alpha.3) (2022-06-01)
 
 
