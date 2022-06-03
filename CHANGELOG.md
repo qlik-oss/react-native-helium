@@ -1,3 +1,10 @@
+# [1.1.0-alpha.7](https://github.com/qlik-oss/react-native-helium/compare/v1.1.0-alpha.6...v1.1.0-alpha.7) (2022-06-03)
+
+
+### Bug Fixes
+
+* out of scope iterator ([4b4f00f](https://github.com/qlik-oss/react-native-helium/commit/4b4f00fb30cc858b0f548888264cb5a114d5041b))
+
 # [1.1.0-alpha.6](https://github.com/qlik-oss/react-native-helium/compare/v1.1.0-alpha.5...v1.1.0-alpha.6) (2022-06-02)
 
 
