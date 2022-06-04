@@ -43,7 +43,7 @@
     "@react-native-community/eslint-config": "3.0.2",
     "@types/jest": "27.5.2",
     "@types/react": "17.0.45",
-    "@types/react-native": "0.67.7",
+    "@types/react-native": "0.67.8",
     "eslint": "8.17.0",
     "@semantic-release/changelog": "6.0.1",
     "@semantic-release/git": "10.0.1",
