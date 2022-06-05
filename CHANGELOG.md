@@ -1,3 +1,10 @@
+# [1.1.0-alpha.8](https://github.com/qlik-oss/react-native-helium/compare/v1.1.0-alpha.7...v1.1.0-alpha.8) (2022-06-05)
+
+
+### Bug Fixes
+
+* handle unicode symbols in android ([01bf141](https://github.com/qlik-oss/react-native-helium/commit/01bf141ef886527a8fe0ec38f81a4ef891b9b3ba))
+
 # [1.1.0-alpha.7](https://github.com/qlik-oss/react-native-helium/compare/v1.1.0-alpha.6...v1.1.0-alpha.7) (2022-06-03)
 
 
