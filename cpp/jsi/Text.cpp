@@ -28,16 +28,6 @@
  x:36.5
  y:124.1081560283688
  */
-
-void endianness_swap(uint32_t& val) {
-    uint8_t a, b, c;
-    a = (val & 0xFF000000) >> 24;
-    b = (val & 0x00FF0000) >> 16;
-    c = (val & 0x0000FF00) >> 8;
-    val=(val & 0x000000FF) << 24;
-    val = val + (c << 16) + (b << 8) + (a);
-}
-
 uint32_t getUniChar(unsigned char *b, std::size_t len)
 {
   std::size_t start = len - 2;
