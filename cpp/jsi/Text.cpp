@@ -47,7 +47,7 @@ inline bool isASCII (const std::string& s)
   }
 
   unsigned char c = static_cast<unsigned char>(s[0]);
-  if(c > 127) {
+  if(c >= 0xe0) {
     return false;
   }
   return true;
