@@ -1,3 +1,10 @@
+# [1.1.0-alpha.9](https://github.com/qlik-oss/react-native-helium/compare/v1.1.0-alpha.8...v1.1.0-alpha.9) (2022-06-05)
+
+
+### Bug Fixes
+
+* slightly more robust unicode handling ([99cf3c6](https://github.com/qlik-oss/react-native-helium/commit/99cf3c6d5f43fa6f3eae8f1f13e17c3a4f635b70))
+
 # [1.1.0-alpha.8](https://github.com/qlik-oss/react-native-helium/compare/v1.1.0-alpha.7...v1.1.0-alpha.8) (2022-06-05)
 
 
