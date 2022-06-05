@@ -7,6 +7,7 @@ import android.graphics.Rect
 import android.graphics.SurfaceTexture
 import android.util.Log
 import android.view.*
+import android.widget.TextView
 import com.facebook.react.bridge.Arguments
 import com.facebook.react.bridge.ReactContext
 import com.facebook.react.uimanager.events.RCTEventEmitter
@@ -18,6 +19,7 @@ class CanvasView : TextureView, TextureView.SurfaceTextureListener {
   lateinit var nativeId: String
   private var gestureDetector: GestureDetector
   private var lasso = false
+
 
   private inner class GestureListener : GestureDetector.SimpleOnGestureListener() {
     @Suppress("DEPRECATION")
@@ -72,6 +74,7 @@ class CanvasView : TextureView, TextureView.SurfaceTextureListener {
 
   @Suppress("DEPRECATION")
   override fun onSurfaceTextureAvailable(surface: SurfaceTexture, width: Int, height: Int) {
+
     this.surface = Surface(surface)
     surfaceAvailable(nativeId, this.surface, width, height);
     val reactContext = context as ReactContext

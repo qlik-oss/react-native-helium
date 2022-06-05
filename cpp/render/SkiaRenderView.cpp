@@ -45,8 +45,14 @@ void SkiaRenderView::clear() {
 }
 
 void SkiaRenderView::draw(SkCanvas* canvas) {
+  SkPaint paint;
+  paint.setColor(SK_ColorBLACK);
+  paint.setStyle(SkPaint::kStroke_Style);
+  paint.setStrokeWidth(10);
+
   canvas->save();
   canvas->setMatrix(worldTransform);
+  canvas->drawRect(clipBounds, paint);
 
   canvas->clipRect(clipBounds);
   for(auto&& shape: shapes) {

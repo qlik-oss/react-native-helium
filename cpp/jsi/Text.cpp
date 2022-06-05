@@ -28,14 +28,42 @@
  x:36.5
  y:124.1081560283688
  */
-bool isASCII (const std::string& s)
-{
-  return !std::any_of(s.begin(), s.end(), [](char c) {
-    return static_cast<unsigned char>(c) > 127;
-  });
+
+void endianness_swap(uint32_t& val) {
+    uint8_t a, b, c;
+    a = (val & 0xFF000000) >> 24;
+    b = (val & 0x00FF0000) >> 16;
+    c = (val & 0x0000FF00) >> 8;
+    val=(val & 0x000000FF) << 24;
+    val = val + (c << 16) + (b << 8) + (a);
 }
 
-std::size_t GetFirst(const std::string &text) {
+uint32_t getUniChar(unsigned char *b, std::size_t len)
+{
+  std::size_t start = len - 2;
+  uint32_t val = b[start];
+
+  for(std::size_t i = start + 1; i > 1; i--) {
+    val <<= 8;
+    val |= (b[i]);
+  }
+  return  val;
+}
+
+inline bool isASCII (const std::string& s)
+{
+  if(s.length() == 0) {
+    return true;
+  }
+
+  unsigned char c = static_cast<unsigned char>(s[0]);
+  if(c > 127) {
+    return false;
+  }
+  return true;
+}
+
+std::size_t getFirst(const std::string &text) {
   if (text.empty()) return 0;
   std::size_t length = 1;
   while ((text[length] & 0b11000000) == 0b10000000) {
@@ -50,24 +78,18 @@ Text::Text(jsi::Runtime &rt, const jsi::Object &object) {
   auto fontFamily = object.getProperty(rt, "fontFamily").toString(rt).utf8(rt);
   auto typeFace = SkTypeface::MakeFromName(fontFamily.c_str(), SkFontStyle::Bold());
 
-#ifdef SK_BUILD_FOR_ANDROID
   if(!isASCII(text)) {
     // get first two byte
-    std::size_t len = GetFirst(text);
+    std::size_t len = getFirst(text);
     if(len >= 2) {
       auto sk = SkFontMgr::RefDefault();
       const char *bcp47_locale = "";
-
-      char *b = text.data();
-      char b1 = b[0];
-      char b2 = b[1];
-      SkUnichar unichar = (b2 << 8) + b1;
+      SkUnichar unichar = getUniChar((unsigned char*)text.data(), len);
       auto tp = sk->matchFamilyStyleCharacter(fontFamily.c_str(), SkFontStyle::Normal(),
                                               &bcp47_locale, 1, unichar);
       typeFace.reset(tp);
     }
   }
-#endif
   auto baseline = object.getProperty(rt, "baseline").toString(rt).utf8(rt);
   auto anchor = object.getProperty(rt, "anchor").toString(rt).utf8(rt);
   position.fX = (Helium::toPx(object.getProperty(rt, "x").asNumber()));
