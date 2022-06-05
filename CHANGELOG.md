@@ -1,3 +1,10 @@
+# [1.1.0-alpha.10](https://github.com/qlik-oss/react-native-helium/compare/v1.1.0-alpha.9...v1.1.0-alpha.10) (2022-06-05)
+
+
+### Bug Fixes
+
+* slight optmization ([5c8a5b1](https://github.com/qlik-oss/react-native-helium/commit/5c8a5b19f30630516fd44a30c1b5e3658231e9d9))
+
 # [1.1.0-alpha.9](https://github.com/qlik-oss/react-native-helium/compare/v1.1.0-alpha.8...v1.1.0-alpha.9) (2022-06-05)
 
 
