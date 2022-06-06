@@ -1,3 +1,10 @@
+# [1.1.0-alpha.13](https://github.com/qlik-oss/react-native-helium/compare/v1.1.0-alpha.12...v1.1.0-alpha.13) (2022-06-06)
+
+
+### Bug Fixes
+
+* creating bold font by default ([bcc8269](https://github.com/qlik-oss/react-native-helium/commit/bcc8269e9f9a37e985471e12621107cf131e25a8))
+
 # [1.1.0-alpha.12](https://github.com/qlik-oss/react-native-helium/compare/v1.1.0-alpha.11...v1.1.0-alpha.12) (2022-06-06)
 
 
