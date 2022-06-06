@@ -3,6 +3,7 @@
 //
 
 #include "Text.h"
+#include "UTF8Utils.h"
 #include "Helium.h"
 #include "TransformFactory.h"
 #include <include/core/SkFont.h>
@@ -28,66 +29,29 @@
  x:36.5
  y:124.1081560283688
  */
-uint32_t getUniChar(unsigned char *b, std::size_t len)
-{
-  std::size_t start = len - 2;
-  uint32_t val = b[start];
-
-  for(std::size_t i = start + 1; i > 1; i--) {
-    val <<= 8;
-    val |= (b[i]);
-  }
-  return  val;
-}
-
-inline bool isASCII (const std::string& s)
-{
-  if(s.length() == 0) {
-    return true;
-  }
-
-  unsigned char c = static_cast<unsigned char>(s[0]);
-  if(c >= 0xe0) {
-    return false;
-  }
-  return true;
-}
-
-std::size_t getFirst(const std::string &text) {
-  if (text.empty()) return 0;
-  std::size_t length = 1;
-  while ((text[length] & 0b11000000) == 0b10000000) {
-    ++length;
-  }
-  return length;
-}
 
 Text::Text(jsi::Runtime &rt, const jsi::Object &object) {
   text = object.getProperty(rt, "text").toString(rt).utf8(rt);
   SkScalar fontSize = static_cast<SkScalar>(Helium::toPx(object.getProperty(rt, "fontSize").asNumber()));
   auto fontFamily = object.getProperty(rt, "fontFamily").toString(rt).utf8(rt);
   auto typeFace = SkTypeface::MakeFromName(fontFamily.c_str(), SkFontStyle::Bold());
-
   if(!isASCII(text)) {
-    // get first two byte
-    std::size_t len = getFirst(text);
-    if(len >= 2) {
-      auto sk = SkFontMgr::RefDefault();
-      const char *bcp47_locale = "";
-      SkUnichar unichar = getUniChar((unsigned char*)text.data(), len);
-      auto tp = sk->matchFamilyStyleCharacter(fontFamily.c_str(), SkFontStyle::Normal(),
+    auto data = text.c_str();
+    auto sk = SkFontMgr::RefDefault();
+    const char *bcp47_locale = "";
+    SkUnichar  unichar = nextUTF8(&data, data + text.size() );
+    auto tp = sk->matchFamilyStyleCharacter(fontFamily.c_str(), SkFontStyle::Normal(),
                                               &bcp47_locale, 1, unichar);
-      typeFace.reset(tp);
-    }
+    typeFace.reset(tp);
   }
   auto baseline = object.getProperty(rt, "baseline").toString(rt).utf8(rt);
   auto anchor = object.getProperty(rt, "anchor").toString(rt).utf8(rt);
   position.fX = (Helium::toPx(object.getProperty(rt, "x").asNumber()));
   position.fY = (Helium::toPx(object.getProperty(rt, "y").asNumber()));
   font = SkFont(typeFace, fontSize);
+  font.setSubpixel(true);
+  font.setEdging(SkFont::Edging::kSubpixelAntiAlias);
   font.getMetrics(&fontMetrics);
-
-
 
   calcBaseline(baseline);
   calcAnchor(anchor);
