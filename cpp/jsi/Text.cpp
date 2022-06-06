@@ -34,13 +34,13 @@ Text::Text(jsi::Runtime &rt, const jsi::Object &object) {
   text = object.getProperty(rt, "text").toString(rt).utf8(rt);
   SkScalar fontSize = static_cast<SkScalar>(Helium::toPx(object.getProperty(rt, "fontSize").asNumber()));
   auto fontFamily = object.getProperty(rt, "fontFamily").toString(rt).utf8(rt);
-  auto typeFace = SkTypeface::MakeFromName(fontFamily.c_str(), SkFontStyle::Bold());
+  auto typeFace = SkTypeface::MakeFromName(fontFamily.c_str(), SkFontStyle::Normal());
+  auto fontManager = SkFontMgr::RefDefault();
   if(!isASCII(text)) {
     auto data = text.c_str();
-    auto sk = SkFontMgr::RefDefault();
     const char *bcp47_locale = "";
     SkUnichar  unichar = nextUTF8(&data, data + text.size() );
-    auto tp = sk->matchFamilyStyleCharacter(fontFamily.c_str(), SkFontStyle::Normal(),
+    auto tp = fontManager->matchFamilyStyleCharacter(fontFamily.c_str(), SkFontStyle::Normal(),
                                               &bcp47_locale, 1, unichar);
     typeFace.reset(tp);
   }
