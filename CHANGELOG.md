@@ -1,3 +1,10 @@
+# [1.1.0-alpha.11](https://github.com/qlik-oss/react-native-helium/compare/v1.1.0-alpha.10...v1.1.0-alpha.11) (2022-06-06)
+
+
+### Bug Fixes
+
+* proper font fallback ([e4a43e9](https://github.com/qlik-oss/react-native-helium/commit/e4a43e968e39003f170c2c3167b692dd3c197939))
+
 # [1.1.0-alpha.10](https://github.com/qlik-oss/react-native-helium/compare/v1.1.0-alpha.9...v1.1.0-alpha.10) (2022-06-05)
 
 
