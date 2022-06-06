@@ -1,9 +1,9 @@
 //
 //  UTF8Utils.hpp
-//  qlik-oss-react-native-helium
 //
-//  Created by Vittorio Cellucci on 2022-06-06.
+// Note this was lifted from SKUTF8.cpp from SKia Project
 //
+
 
 #ifndef UTF8Utils_hpp
 #define UTF8Utils_hpp
