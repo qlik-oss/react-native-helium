@@ -1,3 +1,10 @@
+# [1.1.0-alpha.12](https://github.com/qlik-oss/react-native-helium/compare/v1.1.0-alpha.11...v1.1.0-alpha.12) (2022-06-06)
+
+
+### Bug Fixes
+
+* remove border debug drawing ([cf94ede](https://github.com/qlik-oss/react-native-helium/commit/cf94ede23e21613e81e52e701598df2842880c3f))
+
 # [1.1.0-alpha.11](https://github.com/qlik-oss/react-native-helium/compare/v1.1.0-alpha.10...v1.1.0-alpha.11) (2022-06-06)
 
 
