@@ -55,6 +55,7 @@
   },
   "peerDependencies": {
     "react": "*",
-    "react-native": "*"
+    "react-native": "*",
+    "@qlik/carbon-core": "2.0.0"
   }
 }
