@@ -1,3 +1,10 @@
+# [1.1.0-alpha.14](https://github.com/qlik-oss/react-native-helium/compare/v1.1.0-alpha.13...v1.1.0-alpha.14) (2022-06-10)
+
+
+### Bug Fixes
+
+* take path if provided ([095fa56](https://github.com/qlik-oss/react-native-helium/commit/095fa56fadadd99a8be16dc6e09590a5c9a3bbca))
+
 # [1.1.0-alpha.13](https://github.com/qlik-oss/react-native-helium/compare/v1.1.0-alpha.12...v1.1.0-alpha.13) (2022-06-06)
 
 
