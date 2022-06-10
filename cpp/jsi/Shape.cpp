@@ -110,6 +110,7 @@ void Shape::initDataPath(jsi::Runtime &rt, const jsi::Object &object) {
   try {
     if(object.hasProperty(rt, "data")) {
       auto data = object.getProperty(rt, "data").asObject(rt);
+      
       auto select = data.getProperty(rt, "select").asObject(rt);
       auto source = select.getProperty(rt, "source").asObject(rt);
       auto field = source.getProperty(rt, "field");
@@ -129,6 +130,11 @@ void Shape::initDataPath(jsi::Runtime &rt, const jsi::Object &object) {
         pathStream << value.asNumber();
       }
       dataPath = pathStream.str();
+      if(data.hasProperty(rt, "path")) {
+        if(!data.getProperty(rt, "path").isUndefined()) {
+          dataPath = data.getProperty(rt, "path").asString(rt).utf8(rt);
+        }
+      }
       dataShape = std::make_shared<DataShape>(rt, std::move(data));
     } else {
       dataPath = "";
