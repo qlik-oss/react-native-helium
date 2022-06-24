@@ -1,3 +1,10 @@
+# [1.1.0-alpha.15](https://github.com/qlik-oss/react-native-helium/compare/v1.1.0-alpha.14...v1.1.0-alpha.15) (2022-06-24)
+
+
+### Bug Fixes
+
+* data race in iOS rendering ([9695058](https://github.com/qlik-oss/react-native-helium/commit/969505868c75410e62f9bdbfec25114df15a1dfc))
+
 # [1.1.0-alpha.14](https://github.com/qlik-oss/react-native-helium/compare/v1.1.0-alpha.13...v1.1.0-alpha.14) (2022-06-10)
 
 
