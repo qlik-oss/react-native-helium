@@ -46,16 +46,8 @@ void MetalLayer::resetSize(int width, int height){
 }
 
 void MetalLayer::draw(std::shared_ptr<SkiaRenderView>& renderView) {
-//  SkPictureRecorder recorder;
-//   SkRTreeFactory factory;
-//   SkCanvas* canvas = recorder.beginRecording(layer.drawableSize.width, layer.drawableSize.height, &factory);
-//  renderView->draw(canvas);
-//
-//  auto p = recorder.finishRecordingAsPicture();
-  
-  dispatch_async(dispatch_get_main_queue(), ^{
-    // wrap it in autorelease pool as per documentation
-    // https://developer.apple.com/documentation/quartzcore/cametallayer?language=objc
+  // wrap it in autorelease pool as per documentation
+  // https://developer.apple.com/documentation/quartzcore/cametallayer?language=objc
     @autoreleasepool {
       id<CAMetalDrawable> currentDrawable = [layer nextDrawable];
       if(currentDrawable == nullptr) {
@@ -72,30 +64,6 @@ void MetalLayer::draw(std::shared_ptr<SkiaRenderView>& renderView) {
         return;
       }
       
-     
-//      surface->getCanvas()->clear(SK_AlphaTRANSPARENT);
-//      surface->getCanvas()->drawPicture(p);
-//      surface->flushAndSubmit();
-      
-//      if(!offscreenTarget) {
-//        auto ii = SkImageInfo::Make(SkISize::Make(layer.drawableSize.width, layer.drawableSize.height), kBGRA_8888_SkColorType, kOpaque_SkAlphaType);
-//        offscreenTarget = SkSurface::MakeRenderTarget(skContext.get(), SkBudgeted::kNo, ii);
-//        if(offscreenTarget) {
-//          offscreenTarget->getCanvas()->clear(SK_ColorWHITE);
-//        }
-//      }
-//
-//      if(offscreenTarget) {
-//
-//        SkCanvas* canvas = offscreenTarget->getCanvas();
-////        canvas->clear(SK_AlphaTRANSPARENT);
-//        renderView->draw(canvas);
-//        auto renderCanvas = surface->getCanvas();
-//        renderCanvas->clear(SK_AlphaTRANSPARENT);
-//        offscreenTarget->draw(renderCanvas, 0, 0);
-//        offscreenTarget->flushAndSubmit();
-//        surface->flushAndSubmit();
-//      }
       auto canvas = surface->getCanvas();
       canvas->clear(SK_ColorWHITE);
       renderView->draw(canvas);
@@ -105,6 +73,4 @@ void MetalLayer::draw(std::shared_ptr<SkiaRenderView>& renderView) {
       [commandBuffer presentDrawable:currentDrawable];
       [commandBuffer commit];
     }
-  });
-  
 }
