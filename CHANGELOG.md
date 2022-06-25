@@ -1,3 +1,10 @@
+# [1.1.0-alpha.17](https://github.com/qlik-oss/react-native-helium/compare/v1.1.0-alpha.16...v1.1.0-alpha.17) (2022-06-25)
+
+
+### Bug Fixes
+
+* memory leak ([486fd15](https://github.com/qlik-oss/react-native-helium/commit/486fd15dfd133e15c01cce03487619a6159cad7e))
+
 # [1.1.0-alpha.16](https://github.com/qlik-oss/react-native-helium/compare/v1.1.0-alpha.15...v1.1.0-alpha.16) (2022-06-25)
 
 
