@@ -19,12 +19,12 @@ class CanvasView : TextureView, TextureView.SurfaceTextureListener {
   lateinit var nativeId: String
   private var gestureDetector: GestureDetector
   private var lasso = false
-
+  private var disabledSelections = false;
 
   private inner class GestureListener : GestureDetector.SimpleOnGestureListener() {
     @Suppress("DEPRECATION")
     override fun onSingleTapUp(e: MotionEvent?): Boolean {
-      if (e != null) {
+      if (e != null && !disabledSelections) {
         captureView(nativeId)
         beginSelections(e.x, e.y)
         val reactContext = context as ReactContext
@@ -48,6 +48,9 @@ class CanvasView : TextureView, TextureView.SurfaceTextureListener {
   }
 
   override fun onTouchEvent(event: MotionEvent?): Boolean {
+    if(disabledSelections) {
+      return true;
+    }
     gestureDetector.onTouchEvent(event)
     if (event != null && lasso) {
       when (event.action) {
@@ -101,6 +104,10 @@ class CanvasView : TextureView, TextureView.SurfaceTextureListener {
 
   fun setLasso(newVal: Boolean) {
     lasso = newVal
+  }
+  
+  fun setDisableSelections(newVal: Boolean) {
+    disabledSelections = newVal;
   }
 
   fun pxToDp(ctx: Context, px: Float): Float {

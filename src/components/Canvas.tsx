@@ -7,10 +7,11 @@ export interface CanvasViewProps extends ViewProps {
   style: ViewStyle;
   onReady: () => void;
   onResized: () => void;
-  onBeganSelections?: () => void;
+  onBeganSelections?: (params: any) => void;
   onLongPressBegan?: (params: any) => void;
   onLongPressEnded?: () => void;
   lasso: boolean;
+  disableSelections?: boolean;
 };
 
 export const CanvasView = requireNativeComponent<CanvasViewProps>(
@@ -24,6 +25,7 @@ export interface CanvasProps extends ViewProps {
   onLongPressBegan?: (params: any) => void;
   onLongPressEnded?: () => void;
   lasso: boolean;
+  disableSelections?: boolean;
 }
 
 export interface CanvasState {
@@ -57,6 +59,7 @@ export default class Canvas extends React.Component<CanvasProps, CanvasState> {
     return (<View style={{flex: 1, overflow: 'hidden'}}>
         <CanvasView nativeID={this.generatedId} style={{flex:1}}
         lasso={this.props.lasso}
+        disableSelections={this.props.disableSelections}
         onReady={() => {
             this.onCanvasCallback?.(this.canvas);
         }}

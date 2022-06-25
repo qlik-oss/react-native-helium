@@ -1,6 +1,5 @@
 package com.qlikossreactnativehelium
 
-import com.facebook.react.bridge.ReadableMap
 import com.facebook.react.common.MapBuilder
 import com.facebook.react.uimanager.BaseViewManager
 import com.facebook.react.uimanager.LayoutShadowNode
@@ -47,8 +46,13 @@ class CanvasViewManager : BaseViewManager<CanvasView, LayoutShadowNode>() {
   }
 
   @ReactProp(name = "lasso")
-  fun setTheme(view: CanvasView, enabled: Boolean ) {
+  fun setLasso(view: CanvasView, enabled: Boolean ) {
    view.setLasso(enabled);
+  }
+
+  @ReactProp(name = "disableSelections")
+  fun setDisableSelections(view: CanvasView, enabled: Boolean ) {
+    view.setDisableSelections(enabled);
   }
 
   override fun getExportedCustomDirectEventTypeConstants(): Map<String, Any>? {

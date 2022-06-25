@@ -25,6 +25,7 @@
   self = [super init];
   ready = NO;
   _lasso = NO;
+  _disableSelections = NO;
   if(self) {
     renderer = std::make_shared<MetalRenderer>((__bridge void*)self.layer, (__bridge void*)devce, (__bridge void*)commandQueue);
     self.layer.delegate = self;
@@ -54,9 +55,13 @@
   _panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePan:)];
   [self addGestureRecognizer:_panGesture];
   _panGesture.enabled = NO;
+  
 }
 
 - (void) handleTap: (UITapGestureRecognizer *)recognizer {
+  if(_disableSelections) {
+    return;
+  }
   CGPoint point = [recognizer locationInView:self];
   renderer->beginSelections(point.x, point.y);
   CGRect frameRect = self.frame;
@@ -82,7 +87,7 @@
 }
 
 -(void) handlePan: (UIPanGestureRecognizer*)recognizer {
-  if(_lasso) {
+  if(_lasso && !_disableSelections) {
     CGPoint point = [recognizer locationInView:self];
     switch(recognizer.state) {
       case UIGestureRecognizerStateBegan: {
