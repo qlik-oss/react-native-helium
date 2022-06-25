@@ -36,15 +36,9 @@ void RenderThread::stop() {
     quit = true;
   }
   push([]{});
-//  if(!quit) {
-//    quit = true;
-//    cv.notify_all();
-//    lock.unlock();
-//
     if (threader.joinable()) {
       threader.join();
     }
-//  }
 }
 
 RenderThread::~RenderThread() {
