@@ -1,3 +1,10 @@
+# [1.1.0-alpha.16](https://github.com/qlik-oss/react-native-helium/compare/v1.1.0-alpha.15...v1.1.0-alpha.16) (2022-06-25)
+
+
+### Bug Fixes
+
+* add disableSelection Prop ([2f31a87](https://github.com/qlik-oss/react-native-helium/commit/2f31a87ff5be1b944d3bedee813a6f5775c47ae7))
+
 # [1.1.0-alpha.15](https://github.com/qlik-oss/react-native-helium/compare/v1.1.0-alpha.14...v1.1.0-alpha.15) (2022-06-24)
 
 
