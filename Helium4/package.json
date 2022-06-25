@@ -16,7 +16,7 @@
     "picasso-plugin-q": "1.6.0",
     "picasso.js": "1.6.0",
     "react": "17.0.2",
-    "react-native": "0.68.2"
+    "react-native": "0.69.0"
   },
   "devDependencies": {
     "@babel/core": "7.18.5",
