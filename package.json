@@ -42,7 +42,7 @@
   "devDependencies": {
     "@react-native-community/eslint-config": "3.0.3",
     "@types/jest": "27.5.2",
-    "@types/react": "17.0.47",
+    "@types/react": "18.0.14",
     "@types/react-native": "0.69.1",
     "eslint": "8.18.0",
     "@semantic-release/changelog": "6.0.1",
