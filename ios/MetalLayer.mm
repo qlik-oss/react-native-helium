@@ -68,6 +68,9 @@ void MetalLayer::draw(std::shared_ptr<SkiaRenderView>& renderView) {
       }
       
       auto canvas = surface->getCanvas();
+      if(canvas == nullptr) {
+        return;
+      }
       canvas->clear(SK_ColorWHITE);
       renderView->draw(canvas);
       surface->flushAndSubmit();

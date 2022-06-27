@@ -88,24 +88,26 @@
 
 -(void) handlePan: (UIPanGestureRecognizer*)recognizer {
   if(_lasso && !_disableSelections) {
-    CGPoint point = [recognizer locationInView:self];
-    switch(recognizer.state) {
-      case UIGestureRecognizerStateBegan: {
-        renderer->startLasso(point.x, point.y);
-        break;
+    @autoreleasepool {
+      CGPoint point = [recognizer locationInView:self];
+      switch(recognizer.state) {
+        case UIGestureRecognizerStateBegan: {
+          renderer->startLasso(point.x, point.y);
+          break;
+        }
+        case UIGestureRecognizerStateChanged: {
+          renderer->updateLasso(point.x, point.y);
+          break;
+        }
+        case UIGestureRecognizerStateEnded:{
+          renderer->endLasso(point.x, point.y);
+          break;
+        }
+        default:
+          break;
       }
-      case UIGestureRecognizerStateChanged: {
-        renderer->updateLasso(point.x, point.y);
-        break;
-      }
-      case UIGestureRecognizerStateEnded:{
-        renderer->endLasso(point.x, point.y);
-        break;
-      }
-      default:
-        break;
+      renderer->draw();
     }
-    renderer->draw();
   }
 }
 
