@@ -1,3 +1,10 @@
+# [1.1.0-alpha.19](https://github.com/qlik-oss/react-native-helium/compare/v1.1.0-alpha.18...v1.1.0-alpha.19) (2022-06-27)
+
+
+### Bug Fixes
+
+* datarace on deletion ([f3c710a](https://github.com/qlik-oss/react-native-helium/commit/f3c710a3a6fe3fa79fd323c0234a82a458570f10))
+
 # [1.1.0-alpha.18](https://github.com/qlik-oss/react-native-helium/compare/v1.1.0-alpha.17...v1.1.0-alpha.18) (2022-06-27)
 
 
