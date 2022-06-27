@@ -59,11 +59,11 @@
 }
 
 - (void) handleTap: (UITapGestureRecognizer *)recognizer {
-  if(_disableSelections) {
-    return;
-  }
+  
   CGPoint point = [recognizer locationInView:self];
-  renderer->beginSelections(point.x, point.y);
+  if(!_disableSelections) {
+    renderer->beginSelections(point.x, point.y);
+  }
   CGRect frameRect = self.frame;
   CGRect rect = [self convertRect:frameRect toView:[UIApplication sharedApplication].keyWindow.rootViewController.view];
   self.onBeganSelections(@{@"x": @(rect.origin.x),

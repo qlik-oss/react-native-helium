@@ -49,6 +49,9 @@ void MetalLayer::draw(std::shared_ptr<SkiaRenderView>& renderView) {
   // wrap it in autorelease pool as per documentation
   // https://developer.apple.com/documentation/quartzcore/cametallayer?language=objc
     @autoreleasepool {
+      if(skContext == nullptr) {
+        return;
+      }
       id<CAMetalDrawable> currentDrawable = [layer nextDrawable];
       if(currentDrawable == nullptr) {
         return;
@@ -60,7 +63,7 @@ void MetalLayer::draw(std::shared_ptr<SkiaRenderView>& renderView) {
       
       auto surface = SkSurface::MakeFromBackendRenderTarget(skContext.get(), renderTarget, kTopLeft_GrSurfaceOrigin, kBGRA_8888_SkColorType, nullptr, nullptr);
       
-      if(surface == nullptr) {
+      if(surface == nullptr || surface->getCanvas() == nullptr) {
         return;
       }
       

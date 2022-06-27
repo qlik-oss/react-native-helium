@@ -24,9 +24,11 @@ class CanvasView : TextureView, TextureView.SurfaceTextureListener {
   private inner class GestureListener : GestureDetector.SimpleOnGestureListener() {
     @Suppress("DEPRECATION")
     override fun onSingleTapUp(e: MotionEvent?): Boolean {
-      if (e != null && !disabledSelections) {
-        captureView(nativeId)
-        beginSelections(e.x, e.y)
+      if (e != null) {
+        if(!disabledSelections) {
+          captureView(nativeId)
+          beginSelections(e.x, e.y)
+        }
         val reactContext = context as ReactContext
         val event = Arguments.createMap()
         reactContext.getJSModule(RCTEventEmitter::class.java).receiveEvent(id, "onBeganSelections", event);
@@ -48,11 +50,8 @@ class CanvasView : TextureView, TextureView.SurfaceTextureListener {
   }
 
   override fun onTouchEvent(event: MotionEvent?): Boolean {
-    if(disabledSelections) {
-      return true;
-    }
     gestureDetector.onTouchEvent(event)
-    if (event != null && lasso) {
+    if (event != null && lasso && !disabledSelections) {
       when (event.action) {
         MotionEvent.ACTION_DOWN -> {
           Log.d("MotionEVENT", "Started")

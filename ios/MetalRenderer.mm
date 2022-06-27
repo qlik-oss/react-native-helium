@@ -22,7 +22,9 @@ void MetalRenderer::setNativeId(const std::string &nid) {
 }
 
 void MetalRenderer::draw() {
-  metallayer->draw(renderView);
+  @autoreleasepool {
+    metallayer->draw(renderView);
+  }
 }
 
 void MetalRenderer::setBounds(const SkRect &bounds) {
