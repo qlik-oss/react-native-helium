@@ -1,3 +1,10 @@
+# [1.1.0-alpha.18](https://github.com/qlik-oss/react-native-helium/compare/v1.1.0-alpha.17...v1.1.0-alpha.18) (2022-06-27)
+
+
+### Bug Fixes
+
+* disabled selections ([7682d3b](https://github.com/qlik-oss/react-native-helium/commit/7682d3b19d288063d146bbefbbb38f68e7ba1b7e))
+
 # [1.1.0-alpha.17](https://github.com/qlik-oss/react-native-helium/compare/v1.1.0-alpha.16...v1.1.0-alpha.17) (2022-06-25)
 
 
