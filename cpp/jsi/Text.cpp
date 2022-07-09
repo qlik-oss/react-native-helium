@@ -36,14 +36,8 @@ Text::Text(jsi::Runtime &rt, const jsi::Object &object) {
   auto fontFamily = object.getProperty(rt, "fontFamily").toString(rt).utf8(rt);
   auto typeFace = SkTypeface::MakeFromName(fontFamily.c_str(), SkFontStyle::Normal());
   auto fontManager = SkFontMgr::RefDefault();
-  if(!isASCII(text)) {
-    auto data = text.c_str();
-    const char *bcp47_locale = "";
-    SkUnichar  unichar = nextUTF8(&data, data + text.size() );
-    auto tp = fontManager->matchFamilyStyleCharacter(fontFamily.c_str(), SkFontStyle::Normal(),
-                                              &bcp47_locale, 1, unichar);
-    typeFace.reset(tp);
-  }
+  scanForUTF8(text, fontManager, typeFace, fontFamily);
+  
   auto baseline = object.getProperty(rt, "baseline").toString(rt).utf8(rt);
   auto anchor = object.getProperty(rt, "anchor").toString(rt).utf8(rt);
   position.fX = (Helium::toPx(object.getProperty(rt, "x").asNumber()));

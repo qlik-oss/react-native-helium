@@ -10,20 +10,27 @@
 
 #include <stdio.h>
 #include <string>
+#include <include/core/SkFont.h>
+#include <include/core/SkFontMgr.h>
 
-inline bool isASCII (const std::string& s)
+struct AsciiResult {
+  bool ascii = true;
+  bool last = false;
+};
+
+inline AsciiResult isASCII (const std::string& s)
 {
   if(s.length() == 0) {
-    return true;
+    return {true, false};
   }
 
   unsigned char c = static_cast<unsigned char>(s[0]);
-  if(c > 127) {
-    return false;
+  unsigned char d = static_cast<unsigned char>(s[s.length() - 1]);
+  if(c > 127 || d > 127) {
+    return {false, d > 127};
   }
-  return true;
+  return {true, false};
 }
-
 
 static constexpr inline int32_t left_shift(int32_t value, int32_t shift) {
   return (int32_t) ((uint32_t) value << shift);
@@ -86,6 +93,23 @@ static SkUnichar nextUTF8(const char** ptr, const char* end) {
   }
   *ptr = (char*)p + 1;
   return c;
+}
+
+inline void scanForUTF8(const std::string& s, sk_sp<SkFontMgr>& fontManager, sk_sp<SkTypeface>& typeFace, const std::string& fontFamily) {
+  auto result = isASCII(s);
+  if(!result.ascii) {
+    auto data = s.c_str();
+    auto end = data + s.length();
+    const char *bcp47_locale = "";
+    SkUnichar  unichar = nextUTF8(&data, end );
+    if(result.last) {
+      do {
+        unichar = nextUTF8(&data, end);
+      } while((data != end));
+    }
+    auto tp = fontManager->matchFamilyStyleCharacter(fontFamily.c_str(), SkFontStyle::Normal(), &bcp47_locale, 1, unichar);
+    typeFace.reset(tp);
+  }
 }
 
 #endif /* UTF8Utils_hpp */
