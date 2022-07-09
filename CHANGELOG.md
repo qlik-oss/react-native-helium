@@ -1,3 +1,10 @@
+# [1.1.0-alpha.20](https://github.com/qlik-oss/react-native-helium/compare/v1.1.0-alpha.19...v1.1.0-alpha.20) (2022-07-09)
+
+
+### Bug Fixes
+
+* scan for utf8 ([07c19ee](https://github.com/qlik-oss/react-native-helium/commit/07c19ee1849f6b4bf711860168a4a79ecef39739))
+
 # [1.1.0-alpha.19](https://github.com/qlik-oss/react-native-helium/compare/v1.1.0-alpha.18...v1.1.0-alpha.19) (2022-06-27)
 
 
