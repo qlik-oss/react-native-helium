@@ -44,7 +44,7 @@
     "@types/jest": "27.5.2",
     "@types/react": "17.0.47",
     "@types/react-native": "0.69.3",
-    "eslint": "8.19.0",
+    "eslint": "8.20.0",
     "@semantic-release/changelog": "6.0.1",
     "@semantic-release/git": "10.0.1",
     "eslint-config-prettier": "8.5.0",
