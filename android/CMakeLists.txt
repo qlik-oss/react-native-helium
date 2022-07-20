@@ -22,6 +22,7 @@ file (GLOB LIBRN_DIR "${build_DIR}/react-native-0*/jni/${ANDROID_ABI}")
 message(STATUS "here i am!!!!!!!!!!! ${LIBRN_DIR}")
 
 find_library(SKIA_LIB skia PATHS "${SKIA_DIR}/arm64" NO_DEFAULT_PATH)
+find_library(SHAPER_LIB skshaper PATHS "${SKIA_DIR}/arm64" NO_DEFAULT_PATH)
 
 find_library( # Defines the name of the path variable that stores the
         # location of the NDK library.
@@ -102,6 +103,7 @@ target_link_libraries(
         ${JSI_LIB}
         ${TURBOMODULES_LIB}
         ${SKIA_LIB}
+        ${SHAPER_LIB}
         -ljnigraphics
         -lGLESv2
         -lEGL
