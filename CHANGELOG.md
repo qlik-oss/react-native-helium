@@ -1,3 +1,10 @@
+# [1.1.0-alpha.21](https://github.com/qlik-oss/react-native-helium/compare/v1.1.0-alpha.20...v1.1.0-alpha.21) (2022-07-20)
+
+
+### Bug Fixes
+
+* add skshaper to cmakelist.txt ([7d47a50](https://github.com/qlik-oss/react-native-helium/commit/7d47a5002c925db5dd10f2fdb901fd2c4e48a168))
+
 # [1.1.0-alpha.20](https://github.com/qlik-oss/react-native-helium/compare/v1.1.0-alpha.19...v1.1.0-alpha.20) (2022-07-09)
 
 
