@@ -127,7 +127,8 @@ void Text::buildText()
     
     while(!fontRunner->atEnd()) {
       auto p = fontRunner->peek();
-      textBlobBuilder->advance(fontRunner->current());
+      auto c = fontRunner->current();
+      textBlobBuilder->advance(c);
       textBlobBuilder->peeked(p.bytes);
       fShaper->shape(fontRunner->current(), p.bytes, *fontRunner, *bidi, *script, *language, 2000, textBlobBuilder.get() );
       fontRunner->next();

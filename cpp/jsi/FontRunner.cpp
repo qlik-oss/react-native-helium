@@ -21,8 +21,23 @@ FontRunner::FontRunner(const char* utf8, size_t utf8Bytes,
 , fLanguage(lang)
 {
   iterator = fCurrent;
-  fCurrentFont = &fFont;
+  fCurrentFont = fFont;
   fPeekFont = &fFont;
+  
+  const char* c = fBegin;
+  SkUnichar u = nextUTF8(&c, fEnd);
+  if(!fPeekFont->unicharToGlyph(u)) {
+    const char *bcp47_locale = "";
+    sk_sp<SkTypeface> currentTypeFace(originalTypeface);
+    auto candidate = fFallbackMgr->matchFamilyStyleCharacter(fontFamily.c_str(),
+                                                             SkFontStyle::Normal(),
+                                                             &bcp47_locale, 1, u);
+    if (candidate) {
+      currentTypeFace.reset(candidate);
+      fFallbackFont.setTypeface(currentTypeFace);
+      fPeekFont = &fFallbackFont;
+    }
+  }
 }
 
 FontRunner::FontRunner(const char* utf8, size_t utf8Bytes,
@@ -42,17 +57,35 @@ void FontRunner::consume() {
   sk_sp<SkTypeface> currentTypeFace(originalTypeface);
 
   SkUnichar u = nextUTF8(&iterator, fEnd);
-  if(fFont.unicharToGlyph(u)) {
-    fCurrentFont = &fFont;
-  } else if(fFallbackFont.unicharToGlyph(u)) {
-    fCurrentFont = &fFallbackFont;
-    fPeekFont = fCurrentFont;
-  }
+  if(!fCurrentFont.unicharToGlyph(u)) {
+    if(fFont.unicharToGlyph(u)) {
+      fCurrentFont = fFont;
+    } else if(fFallbackFont.unicharToGlyph(u)) {
+      fCurrentFont = fFallbackFont;
+    }
+    else {
+      auto candidate = fFallbackMgr->matchFamilyStyleCharacter(fontFamily.c_str(),
+                                                               SkFontStyle::Normal(),
+                                                               &bcp47_locale, 1, u);
+      if (candidate) {
+        currentTypeFace.reset(candidate);
+        fFallbackFont.setTypeface(currentTypeFace);
+        fCurrentFont = fFallbackFont;
+        fPeekFont = &fFallbackFont;
+      }
+    }
+  } 
+
   while(iterator < fEnd) {
     const char* prev = iterator;
     SkUnichar u = nextUTF8(&iterator, fEnd);
     // is it a unicode char && does the current font not support it??
-    if(fCurrentFont->unicharToGlyph(u) == 0 ) {
+    if(fCurrentFont.unicharToGlyph(u) == 0 ) {
+      if(fFont.unicharToGlyph(u)) {
+        fPeekFont = &fFont;
+        iterator = prev;
+        return;
+      }
       if(fFallbackFont.unicharToGlyph(u) == 0) {
         auto candidate = fFallbackMgr->matchFamilyStyleCharacter(fontFamily.c_str(),
                                                                  SkFontStyle::Normal(),
@@ -60,23 +93,14 @@ void FontRunner::consume() {
         if (candidate) {
           currentTypeFace.reset(candidate);
           fFallbackFont.setTypeface(currentTypeFace);
-          fPeekFont = &fFallbackFont;
-          iterator = prev;
+         
         }
+        fPeekFont = &fFallbackFont;
+        iterator = prev;
       }
       return;
     }
-    
-    if(iterator != fEnd) {
-      if (fFont.getTypeface() != originalTypeface.get()) {
-        fFont.setTypeface(originalTypeface);
-        iterator = prev;
-        return;
-      }
-    } 
   }
-  
-  
 }
 
 FontRunner::Peek FontRunner::peek() {

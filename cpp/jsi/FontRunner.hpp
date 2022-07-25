@@ -43,11 +43,17 @@ public:
   }
   
   const SkFont& currentFont() const override {
-    return *fCurrentFont;
+    return fCurrentFont;
   }
   
   const char* current() const {
     return fCurrent;
+  }
+  
+  const char* nextUTF8Char() {
+    auto it = fCurrent;
+    nextUTF8(&it, fEnd);
+    return it;
   }
   
   size_t bytes() const {
@@ -74,7 +80,7 @@ protected:
   SkFont fOriginalFont;
   SkFont fFallbackFont;
   sk_sp<SkTypeface> originalTypeface;
-  SkFont* fCurrentFont;
+  SkFont fCurrentFont;
   SkFont* fPeekFont;
   char const * const fRequestName;
   SkFontStyle const fRequestStyle;

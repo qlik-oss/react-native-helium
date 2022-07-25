@@ -10,7 +10,6 @@
 
 
 std::tuple<SkRect, SkFontMetrics> MeasureText::measure(jsi::Runtime& rt, jsi::Object& object) {
-   
   std::string text("");
   auto fontFamily = object.getProperty(rt, "fontFamily").asString(rt).utf8(rt);
   auto fontSize = Helium::toPx(object.getProperty(rt, "fontSize").asNumber());
@@ -19,12 +18,62 @@ std::tuple<SkRect, SkFontMetrics> MeasureText::measure(jsi::Runtime& rt, jsi::Ob
   }
   auto fontManager = SkFontMgr::RefDefault();
   auto typeFace = SkTypeface::MakeFromName(fontFamily.c_str(), SkFontStyle::Normal());
-  scanForUTF8(text, fontManager, typeFace, fontFamily);
+  auto fallBackTypFace = SkTypeface::MakeFromName(fontFamily.c_str(), SkFontStyle::Normal());
   SkFont font(typeFace, fontSize);
+  SkFont fallBackFont = font;
+  SkFont currentFont = font;
   SkFontMetrics metrics;
-  font.getMetrics(&metrics);
+  const char* begin = text.c_str();
+  const char* end = text.c_str() + text.length();
+  const char* it = begin;
+  SkScalar runningWidth = 0;
+  const char* bcp47_locale = "";
+  const char* c = begin;
+  SkUnichar u = nextUTF8(&c, end);
+  if(!currentFont.unicharToGlyph(u)) {
+    auto candidate = fontManager->matchFamilyStyleCharacter(fontFamily.c_str(),
+                                                            SkFontStyle::Normal(),
+                                                            &bcp47_locale, 1, u);
+    if (candidate) {
+      fallBackTypFace.reset(candidate);
+      fallBackFont.setTypeface(fallBackTypFace);
+      fallBackFont.setSize(fontSize);
+
+    }
+    currentFont = fallBackFont;
+  }
+  while (it != end) {
+    const char* prev = it;
+    SkUnichar u = nextUTF8(&it, end);
+    if(!currentFont.unicharToGlyph(u)) {
+      size_t bytes = prev - begin;
+      auto w = currentFont.measureText(begin, bytes, SkTextEncoding::kUTF8);
+      runningWidth += w;
+      begin += bytes;
+      if(font.unicharToGlyph(u)) {
+        currentFont = font;
+      }
+      else if(!fallBackFont.unicharToGlyph(u)) {
+        auto candidate = fontManager->matchFamilyStyleCharacter(fontFamily.c_str(),
+                                                                SkFontStyle::Normal(),
+                                                                &bcp47_locale, 1, u);
+        if (candidate) {
+          fallBackTypFace.reset(candidate);
+          fallBackFont.setTypeface(fallBackTypFace);
+          fallBackFont.setSize(fontSize);
+        }
+        
+        currentFont = fallBackFont;
+      }
+    }
+  }
+  auto bytes = it - begin;
   SkRect bounds;
-  font.measureText(text.c_str(), text.length(), SkTextEncoding::kUTF8, &bounds);
-  SkRect returnBounds = SkRect::MakeXYWH(Helium::toDB(bounds.left()), Helium::toDB(bounds.top()), Helium::toDB(bounds.width()), Helium::toDB(bounds.height()));
+  auto w = currentFont.measureText(begin, bytes, SkTextEncoding::kUTF8, &bounds);
+  runningWidth += w;
+  currentFont.getMetrics(&metrics);
+  auto width = runningWidth;
+  auto height = bounds.height();
+  SkRect returnBounds = SkRect::MakeXYWH(Helium::toDB(0), Helium::toDB(0), Helium::toDB(width), Helium::toDB(height));
   return std::make_tuple(returnBounds, metrics);
 }
