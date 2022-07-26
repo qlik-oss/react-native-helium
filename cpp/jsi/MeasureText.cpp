@@ -22,7 +22,7 @@ std::tuple<SkRect, SkFontMetrics> MeasureText::measure(jsi::Runtime& rt, jsi::Ob
   SkFont font(typeFace, fontSize);
   font.setSubpixel(true);
   SkFont fallBackFont = font;
-  SkFont currentFont = font;
+  SkFont* currentFont = &font;
   SkFontMetrics metrics;
   const char* begin = text.c_str();
   const char* end = text.c_str() + text.length();
@@ -31,7 +31,7 @@ std::tuple<SkRect, SkFontMetrics> MeasureText::measure(jsi::Runtime& rt, jsi::Ob
   const char* bcp47_locale = "";
   const char* c = begin;
   SkUnichar u = nextUTF8(&c, end);
-  if(!currentFont.unicharToGlyph(u)) {
+  if(!currentFont->unicharToGlyph(u)) {
     auto candidate = fontManager->matchFamilyStyleCharacter(fontFamily.c_str(),
                                                             SkFontStyle::Normal(),
                                                             &bcp47_locale, 1, u);
@@ -41,26 +41,27 @@ std::tuple<SkRect, SkFontMetrics> MeasureText::measure(jsi::Runtime& rt, jsi::Ob
       fallBackFont.setSize(fontSize);
 
     }
-    currentFont = fallBackFont;
+    currentFont = &fallBackFont;
   }
   while (it != end) {
     const char* prev = it;
     SkUnichar u = nextUTF8(&it, end);
-    if(!currentFont.unicharToGlyph(u)) {
-      size_t bytes = prev - begin;
-      auto w = currentFont.measureText(begin, bytes, SkTextEncoding::kUTF8);
-      runningWidth += w;
-#ifdef ANDROID_HELIUM
-      begin = prev;
-#else
-      if(it == end) {
-        it = prev;
+    if(font.unicharToGlyph(u)) {
+      if(&font != currentFont) {
+        size_t bytes = prev - begin;
+        auto w = currentFont->measureText(begin, bytes, SkTextEncoding::kUTF8);
+        runningWidth += w;
+        begin = it;
+        currentFont = &font;
       }
-      begin = it;
-      it = prev;
-#endif
+    }
+    else if(!currentFont->unicharToGlyph(u)) {
+      size_t bytes = prev - begin;
+      auto w = currentFont->measureText(begin, bytes, SkTextEncoding::kUTF8);
+      runningWidth += w;
+      begin = prev;
       if(font.unicharToGlyph(u)) {
-        currentFont = font;
+        currentFont = &font;
       }
       else if(!fallBackFont.unicharToGlyph(u)) {
         auto candidate = fontManager->matchFamilyStyleCharacter(fontFamily.c_str(),
@@ -72,15 +73,15 @@ std::tuple<SkRect, SkFontMetrics> MeasureText::measure(jsi::Runtime& rt, jsi::Ob
           fallBackFont.setSize(fontSize);
         }
         
-        currentFont = fallBackFont;
+        currentFont = &fallBackFont;
       }
     }
   }
   auto bytes = it - begin;
   SkRect bounds;
-  auto w = currentFont.measureText(begin, bytes, SkTextEncoding::kUTF8, &bounds, nullptr);
+  auto w = currentFont->measureText(begin, bytes, SkTextEncoding::kUTF8, &bounds, nullptr);
   runningWidth += w;
-  currentFont.getMetrics(&metrics);
+  currentFont->getMetrics(&metrics);
   auto width = runningWidth;
   auto height = bounds.height();
   SkRect returnBounds = SkRect::MakeXYWH(Helium::toDB(0), Helium::toDB(0), Helium::toDB(width), Helium::toDB(height));
