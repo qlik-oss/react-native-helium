@@ -20,6 +20,7 @@ std::tuple<SkRect, SkFontMetrics> MeasureText::measure(jsi::Runtime& rt, jsi::Ob
   auto typeFace = SkTypeface::MakeFromName(fontFamily.c_str(), SkFontStyle::Normal());
   auto fallBackTypFace = SkTypeface::MakeFromName(fontFamily.c_str(), SkFontStyle::Normal());
   SkFont font(typeFace, fontSize);
+  font.setSubpixel(true);
   SkFont fallBackFont = font;
   SkFont currentFont = font;
   SkFontMetrics metrics;
@@ -49,7 +50,15 @@ std::tuple<SkRect, SkFontMetrics> MeasureText::measure(jsi::Runtime& rt, jsi::Ob
       size_t bytes = prev - begin;
       auto w = currentFont.measureText(begin, bytes, SkTextEncoding::kUTF8);
       runningWidth += w;
-      begin += bytes;
+#ifdef ANDROID_HELIUM
+      begin = prev;
+#else
+      if(it == end) {
+        it = prev;
+      }
+      begin = it;
+      it = prev;
+#endif
       if(font.unicharToGlyph(u)) {
         currentFont = font;
       }
@@ -69,7 +78,7 @@ std::tuple<SkRect, SkFontMetrics> MeasureText::measure(jsi::Runtime& rt, jsi::Ob
   }
   auto bytes = it - begin;
   SkRect bounds;
-  auto w = currentFont.measureText(begin, bytes, SkTextEncoding::kUTF8, &bounds);
+  auto w = currentFont.measureText(begin, bytes, SkTextEncoding::kUTF8, &bounds, nullptr);
   runningWidth += w;
   currentFont.getMetrics(&metrics);
   auto width = runningWidth;
