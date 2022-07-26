@@ -1,3 +1,10 @@
+# [1.1.0-alpha.24](https://github.com/qlik-oss/react-native-helium/compare/v1.1.0-alpha.23...v1.1.0-alpha.24) (2022-07-26)
+
+
+### Bug Fixes
+
+* match measuretext with both iOS and Android ([b950276](https://github.com/qlik-oss/react-native-helium/commit/b950276158940ff7699c314ec67146de26352685))
+
 # [1.1.0-alpha.23](https://github.com/qlik-oss/react-native-helium/compare/v1.1.0-alpha.22...v1.1.0-alpha.23) (2022-07-26)
 
 
