@@ -1,3 +1,10 @@
+# [1.1.0-alpha.23](https://github.com/qlik-oss/react-native-helium/compare/v1.1.0-alpha.22...v1.1.0-alpha.23) (2022-07-26)
+
+
+### Bug Fixes
+
+* font parsing ([aef8e14](https://github.com/qlik-oss/react-native-helium/commit/aef8e144ebad50b7642a582d36a65c90420a1e89))
+
 # [1.1.0-alpha.22](https://github.com/qlik-oss/react-native-helium/compare/v1.1.0-alpha.21...v1.1.0-alpha.22) (2022-07-25)
 
 
