@@ -41,7 +41,6 @@ void MetalLayer::resetSize(int width, int height){
   dispatch_async(dispatch_get_main_queue(), ^{
     layer.frame = CGRectMake(0, 0, Helium::toDB(width), Helium::toDB(height));
     layer.drawableSize = CGSizeMake(width, height);
-    offscreenTarget = nullptr;
   });
 }
 

@@ -10,16 +10,9 @@
 
 using namespace facebook::jsi;
 
-class CanvasApiHost : public HostObject {
+class CanvasApiHost {
 public:
-    Value get(Runtime &runtime, const PropNameID &name) override;
-    void set(Runtime &runtime, const PropNameID &name, const Value& value) override;
-
-    static void install(Runtime& runtime) {
-        std::shared_ptr<CanvasApiHost> binding = std::make_shared<CanvasApiHost>();
-        auto object = Object::createFromHostObject(runtime, binding);
-        runtime.global().setProperty(runtime, "HeliumCanvasApi", object);
-    }
+  static void install(Runtime& runtime);
 };
 
 
