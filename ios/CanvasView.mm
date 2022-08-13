@@ -39,6 +39,9 @@
     metalLayer.framebufferOnly = NO;
     metalLayer.masksToBounds = YES;
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleMemoryWarning:) name: UIApplicationDidReceiveMemoryWarningNotification object:nil];
+
+    
     [self buildGestures];
   }
   return self;
@@ -52,9 +55,10 @@
   UILongPressGestureRecognizer* longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPress:)];
   [self addGestureRecognizer:longPress];
   
-  _panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePan:)];
-  [self addGestureRecognizer:_panGesture];
-  _panGesture.enabled = NO;
+  UIPanGestureRecognizer* pg = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePan:)];
+  [self addGestureRecognizer:pg];
+  pg.enabled = NO;
+  _panGesture = pg;
   
 }
 
@@ -138,6 +142,14 @@
 -(void)setLasso:(BOOL)lasso {
   _lasso = lasso;
   _panGesture.enabled = _lasso;
+}
+
+
+- (void) handleMemoryWarning:(NSNotification *) notification {
+  if(renderer) {
+    renderer->purge();
+  }
+
 }
 
 

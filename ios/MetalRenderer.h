@@ -41,6 +41,7 @@ public:
   void endLasso(float x, float y);
   void updateLasso(float x, float y);
   void syncBrush();
+  void purge();
 
 protected:
   bool tearingDown = false;

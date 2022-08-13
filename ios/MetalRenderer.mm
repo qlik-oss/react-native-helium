@@ -24,7 +24,11 @@ void MetalRenderer::setNativeId(const std::string &nid) {
 void MetalRenderer::draw() {
   std::lock_guard<std::mutex> lg(drawMutex);
   if(!tearingDown) {
-    metallayer->draw(renderView);
+    dispatch_async(dispatch_get_main_queue(), ^{
+      if(!tearingDown) {
+        metallayer->draw(renderView);
+      }
+    });
   }
 }
 
@@ -143,5 +147,11 @@ void MetalRenderer::syncBrush() {
       renderView->syncBrush();
       draw();
     });
+  }
+}
+
+void MetalRenderer::purge() {
+  if(metallayer) {
+    metallayer->purge();
   }
 }

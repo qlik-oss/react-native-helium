@@ -26,6 +26,7 @@ public:
   void resetSize(int width, int height);
   void draw(std::shared_ptr<SkiaRenderView>& renderView);
   void clearScreen();
+  void purge();
 private:
   CAMetalLayer* layer;
   bool needsResize = false;
