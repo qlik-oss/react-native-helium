@@ -73,9 +73,13 @@ void MetalLayer::draw(std::shared_ptr<SkiaRenderView>& renderView) {
       canvas->clear(SK_ColorWHITE);
       renderView->draw(canvas);
       surface->flushAndSubmit();
+      surface = nullptr;
+      canvas = nullptr;
       
       id<MTLCommandBuffer> commandBuffer([commandQueue commandBuffer]);
       [commandBuffer presentDrawable:currentDrawable];
       [commandBuffer commit];
+    
+      textureInfo.fTexture.reset();
     }
 }
