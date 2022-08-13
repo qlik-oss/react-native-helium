@@ -1,3 +1,10 @@
+# [1.1.0-alpha.27](https://github.com/qlik-oss/react-native-helium/compare/v1.1.0-alpha.26...v1.1.0-alpha.27) (2022-08-13)
+
+
+### Bug Fixes
+
+* handle memory warnings ([9c55fe9](https://github.com/qlik-oss/react-native-helium/commit/9c55fe920cb690264e36fff26e08a89e6637fcd8))
+
 # [1.1.0-alpha.26](https://github.com/qlik-oss/react-native-helium/compare/v1.1.0-alpha.25...v1.1.0-alpha.26) (2022-08-13)
 
 
