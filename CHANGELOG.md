@@ -1,3 +1,10 @@
+# [1.1.0-alpha.28](https://github.com/qlik-oss/react-native-helium/compare/v1.1.0-alpha.27...v1.1.0-alpha.28) (2022-08-18)
+
+
+### Bug Fixes
+
+* resolve async draw ([4ba3bad](https://github.com/qlik-oss/react-native-helium/commit/4ba3bad40ea7858409ea62459247adfaabdc8a7e))
+
 # [1.1.0-alpha.27](https://github.com/qlik-oss/react-native-helium/compare/v1.1.0-alpha.26...v1.1.0-alpha.27) (2022-08-13)
 
 
