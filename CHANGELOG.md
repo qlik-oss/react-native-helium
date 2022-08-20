@@ -1,3 +1,10 @@
+# [1.1.0-alpha.29](https://github.com/qlik-oss/react-native-helium/compare/v1.1.0-alpha.28...v1.1.0-alpha.29) (2022-08-20)
+
+
+### Bug Fixes
+
+* android long press event ([e2e8c13](https://github.com/qlik-oss/react-native-helium/commit/e2e8c1331ddb92a8c501e69cffecf41646c38250))
+
 # [1.1.0-alpha.28](https://github.com/qlik-oss/react-native-helium/compare/v1.1.0-alpha.27...v1.1.0-alpha.28) (2022-08-18)
 
 
