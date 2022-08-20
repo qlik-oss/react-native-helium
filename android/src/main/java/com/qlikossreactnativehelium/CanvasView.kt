@@ -37,7 +37,16 @@ class CanvasView : TextureView, TextureView.SurfaceTextureListener {
     }
 
     override fun onLongPress(e: MotionEvent?) {
-      Log.d("MotionEVENT", "LOOOOOOOOOOOOOOOOOOOOOONNNNNNGGGGGGG");
+      if(e != null) {
+      
+        val reactContext = context as ReactContext
+        val event = Arguments.createMap()
+        val x =  pxToDp(context, e.x)
+        val y = pxToDp(context, e.y)
+        event.putDouble("x", x.toDouble())
+        event.putDouble("y", y.toDouble())
+        reactContext.getJSModule(RCTEventEmitter::class.java).receiveEvent(id, "onLongPressBegan", event);
+      }
     }
   }
 

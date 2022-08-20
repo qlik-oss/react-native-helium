@@ -59,7 +59,9 @@ class CanvasViewManager : BaseViewManager<CanvasView, LayoutShadowNode>() {
     return MapBuilder.of(
       "onReady", MapBuilder.of("registrationName", "onReady"),
       "onResized", MapBuilder.of("registrationName", "onResized"),
-      "onBeganSelections", MapBuilder.of("registrationName", "onBeganSelections")
+      "onBeganSelections", MapBuilder.of("registrationName", "onBeganSelections"),
+      "onLongPressBegan", MapBuilder.of("registrationName", "onLongPressBegan"),
+      "onLongPressEnded", MapBuilder.of("registrationName", "onLongPressEnded")
     )
   }
 

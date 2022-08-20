@@ -29,7 +29,6 @@ RCT_EXPORT_MODULE()
 }
 
 -(void)setBridge:(RCTBridge*)bridge {
-//  auto ci = bridge.jsCallInvoker;
   _bridge = bridge;
   _setBridgeOnMainQueue = RCTIsMainQueue();
   [self install];
