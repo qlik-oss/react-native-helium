@@ -1,2 +1,3 @@
 import Canvas from "./components/Canvas";
-export {Canvas}
+import {installHelium} from './Setup';
+export {Canvas, installHelium}

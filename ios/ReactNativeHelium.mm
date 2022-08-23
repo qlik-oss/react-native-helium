@@ -31,7 +31,6 @@ RCT_EXPORT_MODULE()
 -(void)setBridge:(RCTBridge*)bridge {
   _bridge = bridge;
   _setBridgeOnMainQueue = RCTIsMainQueue();
-  [self install];
 }
 
 -(void)install {
@@ -42,5 +41,10 @@ RCT_EXPORT_MODULE()
   if(cxxBridge.runtime) {
     CanvasApiHost::install(*(jsi::Runtime*)cxxBridge.runtime);
   }
+}
+
+RCT_EXPORT_BLOCKING_SYNCHRONOUS_METHOD(installModule) {
+  [self install];
+  return @true;
 }
 @end
