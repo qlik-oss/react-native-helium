@@ -32,10 +32,38 @@
 const std::string WHITESPACE = " \n\r\t\f\v";
 
 // trim from start (in place)
-static inline void ltrim(std::string &s) {
-    s.erase(s.begin(), std::find_if(s.begin(), s.end(), [](unsigned char ch) {
-        return !std::isspace(ch);
-    }));
+int aft_isrtl(int c){
+  if (
+    (c==0x05BE)||(c==0x05C0)||(c==0x05C3)||(c==0x05C6)||
+    ((c>=0x05D0)&&(c<=0x05F4))||
+    (c==0x0608)||(c==0x060B)||(c==0x060D)||
+    ((c>=0x061B)&&(c<=0x064A))||
+    ((c>=0x066D)&&(c<=0x066F))||
+    ((c>=0x0671)&&(c<=0x06D5))||
+    ((c>=0x06E5)&&(c<=0x06E6))||
+    ((c>=0x06EE)&&(c<=0x06EF))||
+    ((c>=0x06FA)&&(c<=0x0710))||
+    ((c>=0x0712)&&(c<=0x072F))||
+    ((c>=0x074D)&&(c<=0x07A5))||
+    ((c>=0x07B1)&&(c<=0x07EA))||
+    ((c>=0x07F4)&&(c<=0x07F5))||
+    ((c>=0x07FA)&&(c<=0x0815))||
+    (c==0x081A)||(c==0x0824)||(c==0x0828)||
+    ((c>=0x0830)&&(c<=0x0858))||
+    ((c>=0x085E)&&(c<=0x08AC))||
+    (c==0x200F)||(c==0xFB1D)||
+    ((c>=0xFB1F)&&(c<=0xFB28))||
+    ((c>=0xFB2A)&&(c<=0xFD3D))||
+    ((c>=0xFD50)&&(c<=0xFDFC))||
+    ((c>=0xFE70)&&(c<=0xFEFC))||
+    ((c>=0x10800)&&(c<=0x1091B))||
+    ((c>=0x10920)&&(c<=0x10A00))||
+    ((c>=0x10A10)&&(c<=0x10A33))||
+    ((c>=0x10A40)&&(c<=0x10B35))||
+    ((c>=0x10B40)&&(c<=0x10C48))||
+    ((c>=0x1EE00)&&(c<=0x1EEBB))
+  ) return 1;
+  return 0;
 }
 
 // trim from end (in place)
@@ -73,6 +101,7 @@ Text::Text(jsi::Runtime &rt, const jsi::Object &object) {
     TransformFactory txFactory;
     transform = txFactory.parse(rt, object);
   }
+  prepareText();
   splitText();
   transform = SkMatrix::Translate(position.fX, position.fY);
   textBlobBuilder.reset( new TextRunHandler(text.c_str(), {0, 0}));
@@ -87,6 +116,24 @@ void Text::splitText() {
     rtrim(line);
     lines.push_back(line);
   }
+}
+
+void Text::prepareText() {
+  SkString temp;
+  const char* begin = text.c_str();
+  const char* end = text.c_str() + text.length();
+  size_t index = 0;
+  while(begin != end) {
+    SkUnichar u = nextUTF8(&begin, end);
+    
+    if(aft_isrtl(u) == 1) {
+      temp.insertUnichar(index, u);
+    } else {
+      temp.appendUnichar(u);
+      index = temp.size();
+    }
+  }
+  text = temp.c_str();
 }
 
 void Text::buildText()
@@ -160,7 +207,6 @@ void Text::calcBaseline(const std::string& baseline) {
 void Text::draw(SkCanvas *canvas) {
   canvas->save();
   canvas->concat(transform);
-//  buildText();
   canvas->drawTextBlob(textBlob, 0, 0, *brush);
   canvas->restore();
 }

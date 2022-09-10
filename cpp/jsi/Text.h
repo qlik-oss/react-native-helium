@@ -48,6 +48,7 @@ protected:
   void calcBaseline(const std::string& baseline);
   void calcAnchor(const std::string& anchor);
   void splitText();
+  void prepareText();
 };
 
 
