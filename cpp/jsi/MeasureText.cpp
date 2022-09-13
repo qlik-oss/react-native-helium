@@ -6,7 +6,8 @@
 #include "Helium.h"
 #include <include/core/SkFont.h>
 #include <include/core/SkFontMgr.h>
-#include "UTF8Utils.h"
+#include <modules/skparagraph/include/ParagraphBuilder.h>
+//#include "UTF8Utils.h"
 
 
 std::tuple<SkRect, SkFontMetrics> MeasureText::measure(jsi::Runtime& rt, jsi::Object& object) {
@@ -16,74 +17,29 @@ std::tuple<SkRect, SkFontMetrics> MeasureText::measure(jsi::Runtime& rt, jsi::Ob
   if(object.hasProperty(rt, "text")) {
     text = object.getProperty(rt, "text").asString(rt).utf8(rt);
   }
-  auto fontManager = SkFontMgr::RefDefault();
+  
   auto typeFace = SkTypeface::MakeFromName(fontFamily.c_str(), SkFontStyle::Normal());
-  auto fallBackTypFace = SkTypeface::MakeFromName(fontFamily.c_str(), SkFontStyle::Normal());
-  SkFont font(typeFace, fontSize);
-  font.setSubpixel(true);
-  SkFont fallBackFont = font;
-  SkFont* currentFont = &font;
-  SkFontMetrics metrics;
-  const char* begin = text.c_str();
-  const char* end = text.c_str() + text.length();
-  const char* it = begin;
-  SkScalar runningWidth = 0;
-  const char* bcp47_locale = "";
-  const char* c = begin;
-  SkUnichar u = nextUTF8(&c, end);
-  if(!currentFont->unicharToGlyph(u)) {
-    auto candidate = fontManager->matchFamilyStyleCharacter(fontFamily.c_str(),
-                                                            SkFontStyle::Normal(),
-                                                            &bcp47_locale, 1, u);
-    if (candidate) {
-      fallBackTypFace.reset(candidate);
-      fallBackFont.setTypeface(fallBackTypFace);
-      fallBackFont.setSize(fontSize);
+  skia::textlayout::ParagraphStyle paragraphStyle;
+  sk_sp<skia::textlayout::FontCollection> fontCollection(new skia::textlayout::FontCollection());
+  fontCollection->setDefaultFontManager(SkFontMgr::RefDefault());
 
-    }
-    currentFont = &fallBackFont;
-  }
-  while (it != end) {
-    const char* prev = it;
-    SkUnichar u = nextUTF8(&it, end);
-    if(font.unicharToGlyph(u)) {
-      if(&font != currentFont) {
-        size_t bytes = prev - begin;
-        auto w = currentFont->measureText(begin, bytes, SkTextEncoding::kUTF8);
-        runningWidth += w;
-        begin = it;
-        currentFont = &font;
-      }
-    }
-    else if(!currentFont->unicharToGlyph(u)) {
-      size_t bytes = prev - begin;
-      auto w = currentFont->measureText(begin, bytes, SkTextEncoding::kUTF8);
-      runningWidth += w;
-      begin = prev;
-      if(font.unicharToGlyph(u)) {
-        currentFont = &font;
-      }
-      else if(!fallBackFont.unicharToGlyph(u)) {
-        auto candidate = fontManager->matchFamilyStyleCharacter(fontFamily.c_str(),
-                                                                SkFontStyle::Normal(),
-                                                                &bcp47_locale, 1, u);
-        if (candidate) {
-          fallBackTypFace.reset(candidate);
-          fallBackFont.setTypeface(fallBackTypFace);
-          fallBackFont.setSize(fontSize);
-        }
-        
-        currentFont = &fallBackFont;
-      }
-    }
-  }
-  auto bytes = it - begin;
-  SkRect bounds;
-  auto w = currentFont->measureText(begin, bytes, SkTextEncoding::kUTF8, &bounds, nullptr);
-  runningWidth += w;
-  currentFont->getMetrics(&metrics);
-  auto width = runningWidth;
-  auto height = bounds.height();
+  skia::textlayout::TextStyle defaultStyle;
+  defaultStyle.setFontSize(fontSize);
+  defaultStyle.setTypeface(typeFace);
+  defaultStyle.setTextBaseline(skia::textlayout::TextBaseline::kAlphabetic);
+  paragraphStyle.setTextStyle(defaultStyle);
+  paragraphStyle.setTextAlign(skia::textlayout::TextAlign::kStart);
+  
+  skia::textlayout::ParagraphBuilder::make(paragraphStyle, fontCollection);
+  auto paragraphBuilder = skia::textlayout::ParagraphBuilder::make(paragraphStyle, fontCollection);
+  paragraphBuilder->addText(text.c_str());
+  auto paragraph = paragraphBuilder->Build();
+  paragraph->layout(10000);
+  SkFontMetrics metrics;
+  defaultStyle.getFontMetrics(&metrics);
+  
+  auto width = paragraph->getLongestLine();
+  auto height = paragraph->getHeight();
   SkRect returnBounds = SkRect::MakeXYWH(Helium::toDB(0), Helium::toDB(0), Helium::toDB(width), Helium::toDB(height));
   return std::make_tuple(returnBounds, metrics);
 }

@@ -12,6 +12,7 @@
 #include <include/utils/SkTextUtils.h>
 #include <include/core/SkFontMgr.h>
 #include <modules/skshaper/include/SkShaper.h>
+#include <modules/skparagraph/include/Paragraph.h>
 #include "TextRunHundler.hpp"
 #include "FontRunner.hpp"
 #include "RunIterators.h"
@@ -25,18 +26,13 @@ protected:
   SkMatrix transform;
   SkFontMetrics fontMetrics{};
   std::string text;
-  SkTextUtils::Align textAlign = SkTextUtils::kLeft_Align;
   std::vector<std::string> lines;
-  std::shared_ptr<TextRunHandler> textBlobBuilder;
-  std::unique_ptr<FontRunner> fontRunner;
-  std::unique_ptr<SkShaper> fShaper;
-  std::unique_ptr<CustomBdiRunIterator> bidi;
-  std::unique_ptr<SkShaper::LanguageRunIterator> language;
-  std::unique_ptr<SkShaper::ScriptRunIterator> script;
   std::string fontFamily;
   sk_sp<SkTypeface> typeFace;
   sk_sp<SkFontMgr> fontManager;
-  sk_sp<SkTextBlob> textBlob;
+  sk_sp<skia::textlayout::FontCollection> fontCollection;
+  std::unique_ptr<skia::textlayout::Paragraph> paragraph;
+  skia::textlayout::ParagraphStyle paragraphStyle;
   
 public:
   Text(jsi::Runtime& rt, const jsi::Object& object);
@@ -44,11 +40,9 @@ public:
   void draw(SkCanvas* canvas) override;
   
 protected:
-  void buildText();
   void calcBaseline(const std::string& baseline);
   void calcAnchor(const std::string& anchor);
   void splitText();
-  void prepareText();
 };
 
 

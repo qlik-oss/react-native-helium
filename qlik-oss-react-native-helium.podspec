@@ -22,7 +22,7 @@ Pod::Spec.new do |s|
 
   s.frameworks = 'GLKit', 'MetalKit'
 
-  s.vendored_frameworks = ["skialib/skia.xcframework", "skialib/skiasvg.xcframework", "skialib/skshaper.xcframework", "skialib/skunicode.a.xcframework", "skialib/harfbuzz.xcframework", "skialib/ICU.xcframework"]
+  s.vendored_frameworks = ["skialib/skia.xcframework", "skialib/skiasvg.xcframework", "skialib/skshaper.xcframework", "skialib/skunicode.a.xcframework", "skialib/harfbuzz.xcframework", "skialib/ICU.xcframework", "skialib/skparagraph.xcframework"]
 
   s.source_files = "ios/**/*.{h,m,mm,cpp,hpp}", "cpp/**/*.{h,m,mm,cpp,hpp}"
 
