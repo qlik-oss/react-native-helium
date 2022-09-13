@@ -15,7 +15,7 @@ Skia base JSI renderer for Picasso and Nebula
 ### Android
 
 ```sh
-bin/gn gen out/arm64 --args='target_os="android" target_cpu="arm64" skia_use_icu=false skia_use_piex=true skia_use_sfntly=false skia_use_system_expat=false skia_use_system_libjpeg_turbo=false skia_use_system_libpng=false skia_use_system_libwebp=false skia_use_system_zlib=false skia_enable_tools=false is_official_build=true skia_enable_skottie=false is_debug=false skia_enable_pdf=false skia_enable_flutter_defines=true paragraph_tests_enabled=false is_component_build=false ndk="/Users/vel/Library/Android/sdk/ndk/21.4.7075529" skia_use_system_freetype2=false skia_use_gl=true cc="clang" cxx="clang++"'
+bin/gn gen out/arm64 --args='target_os="android" target_cpu="arm64" skia_use_icu=false skia_use_piex=true skia_use_sfntly=false skia_use_system_expat=false skia_use_system_libjpeg_turbo=false skia_use_system_libpng=false skia_use_system_libwebp=false skia_use_system_zlib=false skia_enable_tools=false is_official_build=true skia_enable_skottie=false is_debug=false skia_enable_pdf=false skia_enable_flutter_defines=true paragraph_tests_enabled=false is_component_build=false ndk="/Users/who/Library/Android/sdk/ndk/21.4.7075529" skia_use_system_freetype2=false skia_use_gl=true cc="clang" cxx="clang++"'
 ```
 
 ### iOS
@@ -78,6 +78,14 @@ extra_ldflags=["--sysroot='/Applications/Xcode.app/Contents/Developer/Platforms/
 extra_cflags=["-DSKIA_C_DLL", "-DHAVE_ARC4RANDOM_BUF", "-target", "arm64-apple-ios-simulator"]
 '
 ```
+
+
+### Experimental
+
+## building harfbuff
+1. git clone it
+2. copy the ios_cross.txt from here into the 
+3. run meson setup --cross-file ios_cross.txt ios64 -Ddefault_library=static
 
 ### Build framework
 ```sh

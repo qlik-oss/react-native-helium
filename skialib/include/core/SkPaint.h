@@ -251,12 +251,14 @@ public:
 
     /** Retrieves alpha from the color used when stroking and filling.
 
-        @return  alpha ranging from zero, fully transparent, to 255, fully opaque
+        @return  alpha ranging from zero, fully transparent, to one, fully opaque
     */
     float getAlphaf() const { return fColor4f.fA; }
 
     // Helper that scales the alpha by 255.
-    uint8_t getAlpha() const { return sk_float_round2int(this->getAlphaf() * 255); }
+    uint8_t getAlpha() const {
+        return static_cast<uint8_t>(sk_float_round2int(this->getAlphaf() * 255));
+    }
 
     /** Replaces alpha, leaving RGB
         unchanged. An out of range value triggers an assert in the debug

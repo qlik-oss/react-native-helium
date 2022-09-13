@@ -12,6 +12,7 @@
 #include "include/core/SkColor.h"
 #include "include/core/SkImage.h"
 #include "include/core/SkImageInfo.h"
+#include "include/core/SkSurfaceProps.h"
 #include "include/core/SkYUVAPixmaps.h"
 
 #include <optional>
@@ -26,6 +27,13 @@ class SkPaint;
 class SkPicture;
 
 enum class GrImageTexGenPolicy : int;
+
+#if SK_GRAPHITE_ENABLED
+namespace skgpu::graphite {
+enum class Mipmapped : bool;
+class Recorder;
+}
+#endif
 
 class SK_API SkImageGenerator {
 public:
@@ -150,6 +158,13 @@ public:
 
 #endif
 
+#if SK_GRAPHITE_ENABLED
+    sk_sp<SkImage> makeTextureImage(skgpu::graphite::Recorder*,
+                                    const SkImageInfo&,
+                                    const SkIPoint& origin,
+                                    skgpu::graphite::Mipmapped);
+#endif
+
     /**
      *  If the default image decoder system can interpret the specified (encoded) data, then
      *  this returns a new ImageGenerator for it. Otherwise this returns NULL. Either way
@@ -169,7 +184,8 @@ public:
     static std::unique_ptr<SkImageGenerator> MakeFromPicture(const SkISize&, sk_sp<SkPicture>,
                                                              const SkMatrix*, const SkPaint*,
                                                              SkImage::BitDepth,
-                                                             sk_sp<SkColorSpace>);
+                                                             sk_sp<SkColorSpace>,
+                                                             SkSurfaceProps props = {});
 
 protected:
     static constexpr int kNeedNewImageUniqueID = 0;
@@ -193,6 +209,13 @@ protected:
     // GrAHardwareBufferImageGenerator) it should override this function to return the correct
     // origin.
     virtual GrSurfaceOrigin origin() const { return kTopLeft_GrSurfaceOrigin; }
+#endif
+
+#if SK_GRAPHITE_ENABLED
+    virtual sk_sp<SkImage> onMakeTextureImage(skgpu::graphite::Recorder*,
+                                              const SkImageInfo&,
+                                              const SkIPoint& origin,
+                                              skgpu::graphite::Mipmapped);
 #endif
 
 private:
