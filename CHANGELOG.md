@@ -1,3 +1,10 @@
+# [1.1.0-alpha.33](https://github.com/qlik-oss/react-native-helium/compare/v1.1.0-alpha.32...v1.1.0-alpha.33) (2022-09-14)
+
+
+### Bug Fixes
+
+* remove files ([838a24f](https://github.com/qlik-oss/react-native-helium/commit/838a24fb56c61deb5978c6edb7fcf9cab1042fc5))
+
 # [1.1.0-alpha.32](https://github.com/qlik-oss/react-native-helium/compare/v1.1.0-alpha.31...v1.1.0-alpha.32) (2022-09-14)
 
 
