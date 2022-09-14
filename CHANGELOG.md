@@ -1,3 +1,10 @@
+# [1.1.0-alpha.34](https://github.com/qlik-oss/react-native-helium/compare/v1.1.0-alpha.33...v1.1.0-alpha.34) (2022-09-14)
+
+
+### Bug Fixes
+
+* get font metrics ([e187ece](https://github.com/qlik-oss/react-native-helium/commit/e187ecef07ec708204e3fef3609e8968080098c5))
+
 # [1.1.0-alpha.33](https://github.com/qlik-oss/react-native-helium/compare/v1.1.0-alpha.32...v1.1.0-alpha.33) (2022-09-14)
 
 
