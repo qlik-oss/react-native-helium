@@ -1,3 +1,10 @@
+# [1.1.0-alpha.32](https://github.com/qlik-oss/react-native-helium/compare/v1.1.0-alpha.31...v1.1.0-alpha.32) (2022-09-14)
+
+
+### Bug Fixes
+
+* building and using skparagraph ([b9ddac1](https://github.com/qlik-oss/react-native-helium/commit/b9ddac11058f0cbebe8620e10a142c32a2d7e265))
+
 # [1.1.0-alpha.31](https://github.com/qlik-oss/react-native-helium/compare/v1.1.0-alpha.30...v1.1.0-alpha.31) (2022-09-10)
 
 
