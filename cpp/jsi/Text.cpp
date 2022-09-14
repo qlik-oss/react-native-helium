@@ -53,8 +53,7 @@ Text::Text(jsi::Runtime &rt, const jsi::Object &object) {
   paragraphStyle.setTextStyle(defaultStyle);
   paragraphStyle.setTextAlign(skia::textlayout::TextAlign::kStart);
 
-  calcBaseline(baseline);
-  calcAnchor(anchor);
+ 
 
   if(object.hasProperty(rt, "transform")) {
     TransformFactory txFactory;
@@ -65,12 +64,15 @@ Text::Text(jsi::Runtime &rt, const jsi::Object &object) {
   auto paragraphBuilder = skia::textlayout::ParagraphBuilder::make(paragraphStyle, fontCollection);
   paragraphBuilder->addText(text.c_str());
   paragraph = paragraphBuilder->Build();
+
+  defaultStyle.getFontMetrics(&fontMetrics);
+  calcBaseline(baseline);
+  calcAnchor(anchor);
+  
 }
 void Text::calcBaseline(const std::string& baseline) {
   SkRect bounds;
   font.measureText(text.c_str(), text.length(), SkTextEncoding::kUTF8, &bounds);
-  position.fX -= bounds.left();
-
   float emHeight = fontMetrics.fDescent - fontMetrics.fAscent;
 
   if(baseline == "central") {
