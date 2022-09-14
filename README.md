@@ -80,7 +80,7 @@ extra_cflags=["-DSKIA_C_DLL", "-DHAVE_ARC4RANDOM_BUF", "-target", "arm64-apple-i
 ```
 
 
-## building harfbuff
+## building harfbuzz
 1. git clone it
 2. copy the ios_cross.txt from here into the 
 3. run meson setup --cross-file <crossfile>.txt ios64 -Ddefault_library=static -Dtests="disabled"
