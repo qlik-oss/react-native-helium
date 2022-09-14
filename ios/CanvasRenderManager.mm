@@ -29,6 +29,7 @@ RCT_EXPORT_VIEW_PROPERTY(onBeganSelections, RCTDirectEventBlock)
 RCT_EXPORT_VIEW_PROPERTY(onLongPressBegan, RCTDirectEventBlock)
 RCT_EXPORT_VIEW_PROPERTY(onLongPressEnded, RCTDirectEventBlock)
 RCT_EXPORT_VIEW_PROPERTY(lasso, BOOL);
+RCT_EXPORT_VIEW_PROPERTY(disableSelections, BOOL);
 
 RCT_CUSTOM_VIEW_PROPERTY(nativeID, NSString, CanvasView) {
   // Get parameter

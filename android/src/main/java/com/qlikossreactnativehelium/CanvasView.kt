@@ -1,13 +1,13 @@
 package com.qlikossreactnativehelium
 
 import android.content.Context
+import android.content.res.Resources
 import android.graphics.PointF
+import android.graphics.Rect
 import android.graphics.SurfaceTexture
 import android.util.Log
-import android.view.GestureDetector
-import android.view.MotionEvent
-import android.view.Surface
-import android.view.TextureView
+import android.view.*
+import android.widget.TextView
 import com.facebook.react.bridge.Arguments
 import com.facebook.react.bridge.ReactContext
 import com.facebook.react.uimanager.events.RCTEventEmitter
@@ -19,13 +19,16 @@ class CanvasView : TextureView, TextureView.SurfaceTextureListener {
   lateinit var nativeId: String
   private var gestureDetector: GestureDetector
   private var lasso = false
+  private var disabledSelections = false;
 
   private inner class GestureListener : GestureDetector.SimpleOnGestureListener() {
     @Suppress("DEPRECATION")
     override fun onSingleTapUp(e: MotionEvent?): Boolean {
       if (e != null) {
-        captureView(nativeId)
-        beginSelections(e.x, e.y)
+        if(!disabledSelections) {
+          captureView(nativeId)
+          beginSelections(e.x, e.y)
+        }
         val reactContext = context as ReactContext
         val event = Arguments.createMap()
         reactContext.getJSModule(RCTEventEmitter::class.java).receiveEvent(id, "onBeganSelections", event);
@@ -34,7 +37,16 @@ class CanvasView : TextureView, TextureView.SurfaceTextureListener {
     }
 
     override fun onLongPress(e: MotionEvent?) {
-      Log.d("MotionEVENT", "LOOOOOOOOOOOOOOOOOOOOOONNNNNNGGGGGGG");
+      if(e != null) {
+      
+        val reactContext = context as ReactContext
+        val event = Arguments.createMap()
+        val x =  pxToDp(context, e.x)
+        val y = pxToDp(context, e.y)
+        event.putDouble("x", x.toDouble())
+        event.putDouble("y", y.toDouble())
+        reactContext.getJSModule(RCTEventEmitter::class.java).receiveEvent(id, "onLongPressBegan", event);
+      }
     }
   }
 
@@ -48,7 +60,7 @@ class CanvasView : TextureView, TextureView.SurfaceTextureListener {
 
   override fun onTouchEvent(event: MotionEvent?): Boolean {
     gestureDetector.onTouchEvent(event)
-    if (event != null && lasso) {
+    if (event != null && lasso && !disabledSelections) {
       when (event.action) {
         MotionEvent.ACTION_DOWN -> {
           Log.d("MotionEVENT", "Started")
@@ -73,6 +85,7 @@ class CanvasView : TextureView, TextureView.SurfaceTextureListener {
 
   @Suppress("DEPRECATION")
   override fun onSurfaceTextureAvailable(surface: SurfaceTexture, width: Int, height: Int) {
+
     this.surface = Surface(surface)
     surfaceAvailable(nativeId, this.surface, width, height);
     val reactContext = context as ReactContext
@@ -99,6 +112,14 @@ class CanvasView : TextureView, TextureView.SurfaceTextureListener {
 
   fun setLasso(newVal: Boolean) {
     lasso = newVal
+  }
+  
+  fun setDisableSelections(newVal: Boolean) {
+    disabledSelections = newVal;
+  }
+
+  fun pxToDp(ctx: Context, px: Float): Float {
+    return px / ctx.resources.displayMetrics.density
   }
 
   external fun surfaceAvailable(id: String, surface: Surface, width: Int, height: Int)

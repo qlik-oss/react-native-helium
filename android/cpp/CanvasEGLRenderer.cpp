@@ -238,6 +238,16 @@ void CanvasEGLRenderer::surfaceDestroyed(bool releaseWindow) {
         eglDestroySurface(canvasEglContext->glDisplay, cglSurface);
         cglSurface = EGL_NO_SURFACE;
       }
+      if(canvasEglContext->glContext != EGL_NO_CONTEXT) {
+        eglDestroyContext(canvasEglContext->glDisplay, canvasEglContext->glContext);
+        canvasEglContext->glContext = EGL_NO_CONTEXT;
+      }
+      if(canvasEglContext->glDisplay != EGL_NO_DISPLAY) {
+        eglTerminate(canvasEglContext->glDisplay);
+        canvasEglContext->glDisplay = EGL_NO_DISPLAY;
+      }
+      skSurface = nullptr;
+      
     }
   });
 }
@@ -277,14 +287,6 @@ void CanvasEGLRenderer::surfaceSizeChanged(int width, int height) {
       }
 
       resetSkiaSurface(width, height);
-    }
-  });
-}
-
-void CanvasEGLRenderer::removeMe() {
-  renderThread->push([this] {
-    if (removal) {
-      removal();
     }
   });
 }

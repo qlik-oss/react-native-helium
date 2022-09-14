@@ -9,6 +9,7 @@
 #define SkRefCnt_DEFINED
 
 #include "include/core/SkTypes.h"
+#include "include/private/SkTemplates.h"
 
 #include <atomic>       // std::atomic, std::memory_order_*
 #include <cstddef>      // std::nullptr_t
@@ -211,8 +212,17 @@ private:
  *  This can be used for classes inheriting from SkRefCnt, but it also works for other
  *  classes that match the interface, but have different internal choices: e.g. the hosted class
  *  may have its ref/unref be thread-safe, but that is not assumed/imposed by sk_sp.
+ *
+ *  Declared with the trivial_abi attribute where supported so that sk_sp and types containing it
+ *  may be considered as trivially relocatable by the compiler so that destroying-move operations
+ *  i.e. move constructor followed by destructor can be optimized to memcpy.
  */
-template <typename T> class sk_sp {
+#if defined(__clang__) && defined(__has_cpp_attribute) && __has_cpp_attribute(clang::trivial_abi)
+#define SK_SP_TRIVIAL_ABI [[clang::trivial_abi]]
+#else
+#define SK_SP_TRIVIAL_ABI
+#endif
+template <typename T> class SK_SP_TRIVIAL_ABI sk_sp {
 public:
     using element_type = T;
 
@@ -378,5 +388,8 @@ template <typename T> sk_sp<T> sk_ref_sp(T* obj) {
 template <typename T> sk_sp<T> sk_ref_sp(const T* obj) {
     return sk_sp<T>(const_cast<T*>(SkSafeRef(obj)));
 }
+
+template <typename T>
+struct sk_is_trivially_relocatable<sk_sp<T>> : std::true_type {};
 
 #endif

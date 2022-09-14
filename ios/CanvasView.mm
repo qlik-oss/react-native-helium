@@ -25,6 +25,7 @@
   self = [super init];
   ready = NO;
   _lasso = NO;
+  _disableSelections = NO;
   if(self) {
     renderer = std::make_shared<MetalRenderer>((__bridge void*)self.layer, (__bridge void*)devce, (__bridge void*)commandQueue);
     self.layer.delegate = self;
@@ -37,6 +38,9 @@
     metalLayer.magnificationFilter = kCAFilterLinear;
     metalLayer.framebufferOnly = NO;
     metalLayer.masksToBounds = YES;
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleMemoryWarning:) name: UIApplicationDidReceiveMemoryWarningNotification object:nil];
+
     
     [self buildGestures];
   }
@@ -51,14 +55,25 @@
   UILongPressGestureRecognizer* longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPress:)];
   [self addGestureRecognizer:longPress];
   
-  UIPanGestureRecognizer* pan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePan:)];
-  [self addGestureRecognizer:pan];
+  UIPanGestureRecognizer* pg = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePan:)];
+  [self addGestureRecognizer:pg];
+  pg.enabled = NO;
+  _panGesture = pg;
+  
 }
 
 - (void) handleTap: (UITapGestureRecognizer *)recognizer {
+  
   CGPoint point = [recognizer locationInView:self];
-  renderer->beginSelections(point.x, point.y);
-  self.onBeganSelections(@{});
+  if(!_disableSelections) {
+    renderer->beginSelections(point.x, point.y);
+  }
+  CGRect frameRect = self.frame;
+  CGRect rect = [self convertRect:frameRect toView:[UIApplication sharedApplication].keyWindow.rootViewController.view];
+  self.onBeganSelections(@{@"x": @(rect.origin.x),
+                           @"y": @(rect.origin.y),
+                           @"width":@(rect.size.width),
+                           @"height": @(rect.size.height)});
 }
 
 - (void) handleLongPress:(UILongPressGestureRecognizer*)recognizer {
@@ -76,25 +91,27 @@
 }
 
 -(void) handlePan: (UIPanGestureRecognizer*)recognizer {
-  if(_lasso) {
-    CGPoint point = [recognizer locationInView:self];
-    switch(recognizer.state) {
-      case UIGestureRecognizerStateBegan: {
-        renderer->startLasso(point.x, point.y);
-        break;
+  if(_lasso && !_disableSelections) {
+    @autoreleasepool {
+      CGPoint point = [recognizer locationInView:self];
+      switch(recognizer.state) {
+        case UIGestureRecognizerStateBegan: {
+          renderer->startLasso(point.x, point.y);
+          break;
+        }
+        case UIGestureRecognizerStateChanged: {
+          renderer->updateLasso(point.x, point.y);
+          break;
+        }
+        case UIGestureRecognizerStateEnded:{
+          renderer->endLasso(point.x, point.y);
+          break;
+        }
+        default:
+          break;
       }
-      case UIGestureRecognizerStateChanged: {
-        renderer->updateLasso(point.x, point.y);
-        break;
-      }
-      case UIGestureRecognizerStateEnded:{
-        renderer->endLasso(point.x, point.y);
-        break;
-      }
-      default:
-        break;
+      renderer->draw();
     }
-    renderer->draw();
   }
 }
 
@@ -124,6 +141,15 @@
 
 -(void)setLasso:(BOOL)lasso {
   _lasso = lasso;
+  _panGesture.enabled = _lasso;
+}
+
+
+- (void) handleMemoryWarning:(NSNotification *) notification {
+  if(renderer) {
+    renderer->purge();
+  }
+
 }
 
 

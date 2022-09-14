@@ -31,6 +31,10 @@ std::vector<std::shared_ptr<Shape>> ShapeFactory::buildShapes(jsi::Runtime &rt, 
     if(shapeType == "rect") {
       shapes.emplace_back(rectanglePool.create(rt, shape));
     }
+    
+    if(shapeType == "path") {
+      shapes.emplace_back(pathPool.create(rt, shape));
+    }
   }
   return shapes;
 }

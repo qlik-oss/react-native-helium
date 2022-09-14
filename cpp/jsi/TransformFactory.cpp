@@ -19,8 +19,9 @@ inline std::vector<float> split(const std::string& s)
     return tokens;
 }
 
+TransformFactory::TransformFactory(const SkMatrix& from) : matrix(from){}
+
 SkMatrix TransformFactory::parse(jsi::Runtime &rt, const jsi::Object &object) {
-    SkMatrix matrix;
     std::string s = object.getProperty(rt, "transform").toString(rt).utf8(rt);
     std::regex rgx("\\s(?=\\S+\\(.*?\\))");
     std::sregex_token_iterator begin(s.begin(), s.end(), rgx, -1);
@@ -45,6 +46,15 @@ SkMatrix TransformFactory::parse(jsi::Runtime &rt, const jsi::Object &object) {
                    tmp.preConcat(matrix);
                    matrix = tmp;
                }
+           } else if(matches[1] == "translate") {
+             auto values = split(matches[2]);
+             auto T = SkMatrix::Translate(Helium::toPx(values[0]), Helium::toPx(values[1]));
+             matrix = SkMatrix::Concat(matrix, T);
+           } else if(matches[1] == "scale") {
+             auto values = split(matches[2]);
+             auto S = SkMatrix::Scale(Helium::toPx(values[0]),  Helium::toPx(values[0]));
+             matrix = SkMatrix::Concat(matrix, S);
+
            }
         }
     }

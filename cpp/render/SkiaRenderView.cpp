@@ -55,7 +55,7 @@ void SkiaRenderView::draw(SkCanvas* canvas) {
 
   canvas->restore();
 
-  for(auto&& it : virtualRenders) {
+  for(auto it : virtualRenders) {
     it.second->draw(canvas);
   }
 

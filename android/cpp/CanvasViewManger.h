@@ -25,20 +25,13 @@ namespace Helium {
   class CanvasViewManagerT {
   public:
     float scale = 1;
-    int currentThreadIndex = 0;
-
     CanvasViewManagerT() {
-      int maxThreads = std::max<unsigned int>(std::thread::hardware_concurrency(), 2);
-      for (int i = 0; i < maxThreads; i++) {
-        renderThreads.template emplace_back(std::make_shared<RenderThread>());
-      }
     }
 
     void add(const std::string &id, std::shared_ptr<T> view) {
       std::unique_lock<std::mutex> lk(mk);
-
-      view->setRenderThread(renderThreads[currentThreadIndex]);
-      currentThreadIndex += (currentThreadIndex + 1) % renderThreads.size();
+      auto rt = std::make_shared<RenderThread>();
+      view->setRenderThread(rt);
       views[id] = view;
     }
 
@@ -46,14 +39,10 @@ namespace Helium {
       std::unique_lock<std::mutex> lk(mk);
       auto it = views.find(id);
       if (it != views.end()) {
-        auto view = it->second;
-        view->markForRemoval([this, id] {
-          std::unique_lock<std::mutex> lk(mk);
           auto dit = views.find(id);
           if (dit != views.end()) {
             views.erase(dit);
           }
-        });
       }
     }
 
@@ -80,18 +69,22 @@ namespace Helium {
     }
 
     void beginSelections(float x, float y) {
+      std::unique_lock<std::mutex> lk(mk);
       if(capturedView) {
         capturedView->beginSelections(x, y);
       }
     }
 
     void starLasso(float x, float y) {
+      std::unique_lock<std::mutex> lk(mk);
+
       if(capturedView) {
         capturedView->startLasso(x, y);
       }
     }
 
     void updateLasso(float x, float y) {
+      std::unique_lock<std::mutex> lk(mk);
       if(capturedView) {
         capturedView->updateLasso(x, y);
       }
@@ -114,7 +107,6 @@ namespace Helium {
   protected:
     std::mutex mk;
     std::unordered_map<std::string, std::shared_ptr<T>> views;
-    std::vector<std::shared_ptr<RenderThread>> renderThreads;
     std::shared_ptr<facebook::react::CallInvoker> jsCallInvoker;
     std::shared_ptr<T> capturedView;
   };

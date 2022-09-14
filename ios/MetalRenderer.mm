@@ -22,7 +22,12 @@ void MetalRenderer::setNativeId(const std::string &nid) {
 }
 
 void MetalRenderer::draw() {
-  metallayer->draw(renderView);
+  std::lock_guard<std::mutex> lg(drawMutex);
+  if(!tearingDown) {
+    if(!tearingDown) {
+      metallayer->draw(renderView);
+    }
+  }
 }
 
 void MetalRenderer::setBounds(const SkRect &bounds) {
@@ -61,7 +66,11 @@ SkISize MetalRenderer::getSize() {
 }
 
 void MetalRenderer::tearDown(){
-  Helium::TheCanvasViewManager::instance()->remove(nativeId);
+  std::lock_guard<std::mutex> lg(drawMutex);
+  tearingDown = true;
+  dispatch_async(dispatch_get_main_queue(), ^{
+    Helium::TheCanvasViewManager::instance()->remove(nativeId);
+  });
 }
 
 void MetalRenderer::clear(const std::string& vid) {
@@ -124,11 +133,6 @@ void MetalRenderer::startLasso(float x, float y){
 
 void MetalRenderer::endLasso(float x, float y) {
   renderView->endLasso(Helium::toPx(x), Helium::toPx(y));
-  // endLasso does work on the JS thread, wait until
-  // its done before drawing.
-  Helium::TheCanvasViewManager::instance()->runOnJS([this]{
-    draw();
-  });
 }
 
 void MetalRenderer::updateLasso(float x, float y) {
@@ -141,5 +145,11 @@ void MetalRenderer::syncBrush() {
       renderView->syncBrush();
       draw();
     });
+  }
+}
+
+void MetalRenderer::purge() {
+  if(metallayer) {
+    metallayer->purge();
   }
 }

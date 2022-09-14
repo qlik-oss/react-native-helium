@@ -2,6 +2,7 @@ package com.qlikossreactnativehelium
 
 import com.facebook.react.bridge.ReactApplicationContext
 import com.facebook.react.bridge.ReactContextBaseJavaModule
+import com.facebook.react.bridge.ReactMethod
 import com.facebook.react.turbomodule.core.CallInvokerHolderImpl
 
 class ReactNativeHeliumModule(reactContext: ReactApplicationContext) : ReactContextBaseJavaModule(reactContext) {
@@ -18,13 +19,13 @@ class ReactNativeHeliumModule(reactContext: ReactApplicationContext) : ReactCont
         System.loadLibrary("helium")
     }
   }
-
-  override fun initialize() {
-    super.initialize();
+  
+  @ReactMethod(isBlockingSynchronousMethod = true)
+  fun installModule() {
     this.canvasViewService = CanvasViewService(this.reactApplicationContext)
     val holder = this.reactApplicationContext.javaScriptContextHolder.get();
     val scale = this.reactApplicationContext.resources.displayMetrics.density;
-    install(holder, scale)
+    install(holder, scale) 
   }
 
 }

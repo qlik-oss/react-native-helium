@@ -26,8 +26,8 @@ public:
   void resetSize(int width, int height);
   void draw(std::shared_ptr<SkiaRenderView>& renderView);
   void clearScreen();
+  void purge();
 private:
-  sk_sp<SkSurface> offscreenTarget;
   CAMetalLayer* layer;
   bool needsResize = false;
   id<MTLCommandQueue> commandQueue;

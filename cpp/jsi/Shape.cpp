@@ -45,16 +45,19 @@ void Shape::initFillPaint(jsi::Runtime &rt, const jsi::Object &object) {
     activeBrush.setStyle(SkPaint::kFill_Style);
 
   try {
-    auto fill = object.getProperty(rt, "fill").asString(rt).utf8(rt);
-
-
-
-    SkColor colorss;
-    auto f = fill.find("rgb");
-    if(f != std::string::npos) {
-      colorss = pareseRGB(fill);
-    } else {
-      SkParse::FindColor(fill.c_str(), &colorss);
+    SkColor colorss = SkColorSetARGB(0, 0, 0, 0);
+    if(object.hasProperty(rt, "fill")) {
+      if(object.getProperty(rt, "fill").isString()) {
+        auto fill = object.getProperty(rt, "fill").asString(rt).utf8(rt);
+        auto f = fill.find("rgb");
+        if (f != std::string::npos) {
+          colorss = pareseRGB(fill);
+        } else {
+          SkParse::FindColor(fill.c_str(), &colorss);
+        }
+      }else {
+        colorss = SkColorSetARGB(1, 255, 0, 0);
+      }
     }
 
     activeBrush.setColor(colorss);
@@ -105,27 +108,37 @@ void Shape::initStrokePaint(jsi::Runtime &rt, const jsi::Object &object) {
 
 void Shape::initDataPath(jsi::Runtime &rt, const jsi::Object &object) {
   try {
-    auto data = object.getProperty(rt, "data").asObject(rt);
-    auto select = data.getProperty(rt, "select").asObject(rt);
-    auto source = select.getProperty(rt, "source").asObject(rt);
-    auto field = source.getProperty(rt, "field");
-    auto value = select.getProperty(rt, "value");
+    if(object.hasProperty(rt, "data")) {
+      auto data = object.getProperty(rt, "data").asObject(rt);
+      
+      auto select = data.getProperty(rt, "select").asObject(rt);
+      auto source = select.getProperty(rt, "source").asObject(rt);
+      auto field = source.getProperty(rt, "field");
+      auto value = select.getProperty(rt, "value");
 
-    std::stringstream pathStream;
-    if(field.isString()) {
-      pathStream << field.asString(rt).utf8(rt);
-    } else {
-      pathStream << field.asNumber();
-    }
+      std::stringstream pathStream;
+      if (field.isString()) {
+        pathStream << field.asString(rt).utf8(rt);
+      } else {
+        pathStream << field.asNumber();
+      }
 
-    pathStream << "/";
-    if( value.isString()) {
-      pathStream << value.asString(rt).utf8(rt);
+      pathStream << "/";
+      if (value.isString()) {
+        pathStream << value.asString(rt).utf8(rt);
+      } else {
+        pathStream << value.asNumber();
+      }
+      dataPath = pathStream.str();
+      if(data.hasProperty(rt, "path")) {
+        if(!data.getProperty(rt, "path").isUndefined()) {
+          dataPath = data.getProperty(rt, "path").asString(rt).utf8(rt);
+        }
+      }
+      dataShape = std::make_shared<DataShape>(rt, std::move(data));
     } else {
-      pathStream << value.asNumber();
+      dataPath = "";
     }
-    dataPath = pathStream.str();
-    dataShape = std::make_shared<DataShape>(rt, std::move(data));
 
   } catch (const std::exception& e) {
 

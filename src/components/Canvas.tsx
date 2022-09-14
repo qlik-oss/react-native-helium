@@ -7,10 +7,11 @@ export interface CanvasViewProps extends ViewProps {
   style: ViewStyle;
   onReady: () => void;
   onResized: () => void;
-  onBeganSelections?: () => void;
+  onBeganSelections?: (params: any) => void;
   onLongPressBegan?: (params: any) => void;
   onLongPressEnded?: () => void;
   lasso: boolean;
+  disableSelections?: boolean;
 };
 
 export const CanvasView = requireNativeComponent<CanvasViewProps>(
@@ -20,9 +21,11 @@ export const CanvasView = requireNativeComponent<CanvasViewProps>(
 export interface CanvasProps extends ViewProps {
   onCanvas?: (canvas: CanvasApi) => void;
   onResized?: () => void;
-  onBeganSelections?: () => void;
+  onBeganSelections?: (params: any) => void;
   onLongPressBegan?: (params: any) => void;
   onLongPressEnded?: () => void;
+  lasso: boolean;
+  disableSelections?: boolean;
 }
 
 export interface CanvasState {
@@ -36,7 +39,7 @@ export default class Canvas extends React.Component<CanvasProps, CanvasState> {
   canvas: CanvasApi;
   onCanvasCallback?: (canvas: CanvasApi) => void;
   onResized?: () => void;
-  onBeganSelections?: () => void;
+  onBeganSelections?: (params: any) => void;
   onLongPressBegan?: (params: any) => void;
   onLongPressEnded?: () => void;
 
@@ -56,6 +59,7 @@ export default class Canvas extends React.Component<CanvasProps, CanvasState> {
     return (<View style={{flex: 1, overflow: 'hidden'}}>
         <CanvasView nativeID={this.generatedId} style={{flex:1}}
         lasso={this.props.lasso}
+        disableSelections={this.props.disableSelections}
         onReady={() => {
             this.onCanvasCallback?.(this.canvas);
         }}
@@ -64,8 +68,8 @@ export default class Canvas extends React.Component<CanvasProps, CanvasState> {
         }}
         onLongPressBegan={(params: any) => this.onLongPressBegan?.(params)}
         onLongPressEnded={() => this.onLongPressEnded?.()}
-        onBeganSelections={() => {
-          this.onBeganSelections?.();
+        onBeganSelections={(params: any) => {
+          this.onBeganSelections?.(params);
         }}/>
       </View>);
   }

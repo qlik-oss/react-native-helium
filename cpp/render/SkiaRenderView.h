@@ -2,11 +2,11 @@
 #include <include/core/SkCanvas.h>
 #include <include/core/SkMatrix.h>
 #include "Rect.h"
-#include <unordered_map>
+#include <map>
 #include <set>
 #include <vector>
 #include <memory>
-#include "Quadtree.hpp"
+#include "QuadTree.h"
 #include "Shape.h"
 #include "SelectionsEngine.h"
 #include "SelectionBrush.hpp"
@@ -72,7 +72,7 @@ protected:
 
 protected:
   std::vector<std::shared_ptr<Shape>> shapes;
-  std::unordered_map<std::string, std::shared_ptr<SkiaRenderView>> virtualRenders;
+  std::map<std::string, std::shared_ptr<SkiaRenderView>> virtualRenders;
   SkMatrix worldTransform;
   SkRect clipBounds;
   SelectionsEngine selectionsEngine;

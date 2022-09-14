@@ -47,21 +47,14 @@ enum class SyncToCpu : bool {
  */
 enum class BackendApi : unsigned {
     kMetal,
+    kVulkan,
     kMock,
 };
 
 /**
  * Is the texture mipmapped or not
  */
-enum class Mipmapped: bool {
-    kNo = false,
-    kYes = true,
-};
-
-/**
- * Is the data protected on the GPU or not.
- */
-enum class Protected : bool {
+enum class Mipmapped : bool {
     kNo = false,
     kYes = true,
 };
