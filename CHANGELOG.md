@@ -1,3 +1,57 @@
+# [1.1.0](https://github.com/qlik-oss/react-native-helium/compare/v1.0.1...v1.1.0) (2022-09-14)
+
+
+### Bug Fixes
+
+* access to public ([0e58639](https://github.com/qlik-oss/react-native-helium/commit/0e58639266bfe1e823c3dd1e0aba64c1a9622380))
+* add disableSelection Prop ([2f31a87](https://github.com/qlik-oss/react-native-helium/commit/2f31a87ff5be1b944d3bedee813a6f5775c47ae7))
+* add gitconfig ([7b3ae1f](https://github.com/qlik-oss/react-native-helium/commit/7b3ae1fd3b8bc284a2235aa972056f76d3f65adf))
+* add skshaper to cmakelist.txt ([7d47a50](https://github.com/qlik-oss/react-native-helium/commit/7d47a5002c925db5dd10f2fdb901fd2c4e48a168))
+* added ascend/descen for fonts ([cf0202a](https://github.com/qlik-oss/react-native-helium/commit/cf0202ae7294bf59da859a7619cfeee739712019))
+* android build.gradle dependency order ([6c701ac](https://github.com/qlik-oss/react-native-helium/commit/6c701ac69ec134fa52d6fc8b912f9c01bb534849))
+* android long press event ([e2e8c13](https://github.com/qlik-oss/react-native-helium/commit/e2e8c1331ddb92a8c501e69cffecf41646c38250))
+* building and using skparagraph ([b9ddac1](https://github.com/qlik-oss/react-native-helium/commit/b9ddac11058f0cbebe8620e10a142c32a2d7e265))
+* change scope to [@qlik](https://github.com/qlik) ([4c2a2b3](https://github.com/qlik-oss/react-native-helium/commit/4c2a2b3fc9daa3009f6c392bd7fe7e344151f1ee))
+* change selection behaviour ([18b5d2d](https://github.com/qlik-oss/react-native-helium/commit/18b5d2da688535f414435a3a7b0dfbe2f5594bf2))
+* crash on android ([694e0c0](https://github.com/qlik-oss/react-native-helium/commit/694e0c0c8dbd5b73958ea4a9f969c420a7a8ef48))
+* creating bold font by default ([bcc8269](https://github.com/qlik-oss/react-native-helium/commit/bcc8269e9f9a37e985471e12621107cf131e25a8))
+* data race in iOS rendering ([9695058](https://github.com/qlik-oss/react-native-helium/commit/969505868c75410e62f9bdbfec25114df15a1dfc))
+* datarace on deletion ([f3c710a](https://github.com/qlik-oss/react-native-helium/commit/f3c710a3a6fe3fa79fd323c0234a82a458570f10))
+* disabled selections ([7682d3b](https://github.com/qlik-oss/react-native-helium/commit/7682d3b19d288063d146bbefbbb38f68e7ba1b7e))
+* don't call create on get ([5693a43](https://github.com/qlik-oss/react-native-helium/commit/5693a4399be5d3504d0b31d818aec62cc84b85ac))
+* explicit install ([7b357f2](https://github.com/qlik-oss/react-native-helium/commit/7b357f2a3112ecf010567a2e0d16b8345f272afc))
+* font parsing ([aef8e14](https://github.com/qlik-oss/react-native-helium/commit/aef8e144ebad50b7642a582d36a65c90420a1e89))
+* get font metrics ([e187ece](https://github.com/qlik-oss/react-native-helium/commit/e187ecef07ec708204e3fef3609e8968080098c5))
+* handle memory warnings ([9c55fe9](https://github.com/qlik-oss/react-native-helium/commit/9c55fe920cb690264e36fff26e08a89e6637fcd8))
+* handle unicode symbols in android ([01bf141](https://github.com/qlik-oss/react-native-helium/commit/01bf141ef886527a8fe0ec38f81a4ef891b9b3ba))
+* line breaks ([f959f83](https://github.com/qlik-oss/react-native-helium/commit/f959f8323acd05b6de717f6ed5565c08c3a8ab45))
+* match measuretext with both iOS and Android ([b950276](https://github.com/qlik-oss/react-native-helium/commit/b950276158940ff7699c314ec67146de26352685))
+* measure text ([d5e5a3e](https://github.com/qlik-oss/react-native-helium/commit/d5e5a3ea58bf8d608e52ffbda99fb0df9032fab5))
+* measure text returns floating point ([54ce581](https://github.com/qlik-oss/react-native-helium/commit/54ce581a17f29abb453aa12a1d9cfb9369d5b7c9))
+* memory leak ([486fd15](https://github.com/qlik-oss/react-native-helium/commit/486fd15dfd133e15c01cce03487619a6159cad7e))
+* one thread per view ([1744a18](https://github.com/qlik-oss/react-native-helium/commit/1744a185aa1b320c9eb5e8adb086ab39b9eca16e))
+* out of scope iterator ([4b4f00f](https://github.com/qlik-oss/react-native-helium/commit/4b4f00fb30cc858b0f548888264cb5a114d5041b))
+* pacakge.json ([016828b](https://github.com/qlik-oss/react-native-helium/commit/016828bd3f6a4d6ee213db818a5b1f46ef463fa3))
+* proper font fallback ([e4a43e9](https://github.com/qlik-oss/react-native-helium/commit/e4a43e968e39003f170c2c3167b692dd3c197939))
+* release ASAP ([33417c7](https://github.com/qlik-oss/react-native-helium/commit/33417c7fe765ce24c93802e58971f04525b67bf0))
+* remove border debug drawing ([cf94ede](https://github.com/qlik-oss/react-native-helium/commit/cf94ede23e21613e81e52e701598df2842880c3f))
+* remove files ([838a24f](https://github.com/qlik-oss/react-native-helium/commit/838a24fb56c61deb5978c6edb7fcf9cab1042fc5))
+* resolve async draw ([4ba3bad](https://github.com/qlik-oss/react-native-helium/commit/4ba3bad40ea7858409ea62459247adfaabdc8a7e))
+* revert back to box bounds ([b8faac9](https://github.com/qlik-oss/react-native-helium/commit/b8faac9194a7585cbd5feb36479e6f5a1e2e7a55))
+* rtl ([1ba7ef6](https://github.com/qlik-oss/react-native-helium/commit/1ba7ef6bac8c47baa3e29640f97cd92c61c2b603))
+* scan for utf8 ([07c19ee](https://github.com/qlik-oss/react-native-helium/commit/07c19ee1849f6b4bf711860168a4a79ecef39739))
+* slight optmization ([5c8a5b1](https://github.com/qlik-oss/react-native-helium/commit/5c8a5b19f30630516fd44a30c1b5e3658231e9d9))
+* slightly more robust unicode handling ([99cf3c6](https://github.com/qlik-oss/react-native-helium/commit/99cf3c6d5f43fa6f3eae8f1f13e17c3a4f635b70))
+* take path if provided ([095fa56](https://github.com/qlik-oss/react-native-helium/commit/095fa56fadadd99a8be16dc6e09590a5c9a3bbca))
+* text measurement returning bounding height and not font height ([576b540](https://github.com/qlik-oss/react-native-helium/commit/576b540c268f4ca658091ad3a33569d40ca143cb))
+* unlfs ([1ae703a](https://github.com/qlik-oss/react-native-helium/commit/1ae703a81680e8471efec151022256f71cc3aa3c))
+* use property as per canvas2d ([bedf2c7](https://github.com/qlik-oss/react-native-helium/commit/bedf2c761d5e3b0b529bb43b6e58b331cbe719d9))
+
+
+### Features
+
+* parse svg pahts ([cbe978e](https://github.com/qlik-oss/react-native-helium/commit/cbe978e739a727e075f87df64714b7f8e4fa437c))
+
 # [1.1.0-alpha.34](https://github.com/qlik-oss/react-native-helium/compare/v1.1.0-alpha.33...v1.1.0-alpha.34) (2022-09-14)
 
 
