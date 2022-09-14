@@ -1,0 +1,40 @@
+# This is a cross compilation file from OSX Yosemite to iPhone
+# Apple keeps changing the location and names of files so
+# these might not work for you. Use the googels and xcrun.
+
+[constants]
+android_ndk = '/Users/vel/Library/Android/sdk/ndk/21.4.7075529/'
+arch = 'aarch64-linux-android'
+toolchain = '/Users/vel/Library/Android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/darwin-x86_64/bin/'
+api = 29
+ssysroot = android_ndk + 'toolchains/llvm/prebuilt/darwin-x86_64/sysroot/usr/include'
+
+
+[binaries]
+c = '/Users/vel/Library/Android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/darwin-x86_64/bin/aarch64-linux-android29-clang'
+cpp = '/Users/vel/Library/Android/sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/darwin-x86_64/bin/aarch64-linux-android29-clang++'
+objc = c
+objcpp = cpp
+ar = toolchain + 'arm-linux-androideabi-ar'
+strip = toolchain + 'arm-linux-androideabi-strip'
+ld = toolchain + 'arm-linux-androideabi-ld'
+c_ld = toolchain + 'arm-linux-androideabi-ld'
+objcopy = toolchain + 'arm-linux-androideabi-objcopy'
+
+[built-in options]
+c_args = ['-isysroot', ssysroot]
+cpp_args = ['-isysroot', ssysroot]
+c_link_args = ['-isysroot', ssysroot]
+cpp_link_args = ['-isysroot', ssysroot]
+objc_args = ['-isysroot', ssysroot]
+objcpp_args = ['-isysroot', ssysroot]
+
+[properties]
+has_function_printf = true
+has_function_hfkerhisadf = false
+
+[host_machine]
+system = 'darwin'
+cpu_family = 'aarch64'
+cpu = 'aarch64'
+endian = 'little'

@@ -29,20 +29,18 @@ protected:
   std::vector<std::string> lines;
   std::string fontFamily;
   sk_sp<SkTypeface> typeFace;
-  sk_sp<SkFontMgr> fontManager;
   sk_sp<skia::textlayout::FontCollection> fontCollection;
   std::unique_ptr<skia::textlayout::Paragraph> paragraph;
   skia::textlayout::ParagraphStyle paragraphStyle;
-  
+
 public:
   Text(jsi::Runtime& rt, const jsi::Object& object);
   virtual ~Text() = default;
   void draw(SkCanvas* canvas) override;
-  
+
 protected:
   void calcBaseline(const std::string& baseline);
   void calcAnchor(const std::string& anchor);
-  void splitText();
 };
 
 

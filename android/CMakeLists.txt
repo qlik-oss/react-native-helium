@@ -23,6 +23,12 @@ message(STATUS "here i am!!!!!!!!!!! ${LIBRN_DIR}")
 
 find_library(SKIA_LIB skia PATHS "${SKIA_DIR}/arm64" NO_DEFAULT_PATH)
 find_library(SHAPER_LIB skshaper PATHS "${SKIA_DIR}/arm64" NO_DEFAULT_PATH)
+find_library(PARAGRAPH_LIB skparagraph PATHS "${SKIA_DIR}/arm64" NO_DEFAULT_PATH)
+find_library(UNICODE_LIB skunicode PATHS "${SKIA_DIR}/arm64" NO_DEFAULT_PATH)
+find_library(HARFBUZZ_LIB harfbuzz PATHS "${SKIA_DIR}/arm64" NO_DEFAULT_PATH)
+find_library(ICUDATA_LIB icudata PATHS "${SKIA_DIR}/arm64" NO_DEFAULT_PATH)
+find_library(ICUi18N_LIB icui18n PATHS "${SKIA_DIR}/arm64" NO_DEFAULT_PATH)
+find_library(ICUUC_LIB icuuc PATHS "${SKIA_DIR}/arm64" NO_DEFAULT_PATH)
 
 find_library( # Defines the name of the path variable that stores the
         # location of the NDK library.
@@ -93,20 +99,28 @@ include_directories(
 set_target_properties(
         ${PACKAGE_NAME} PROPERTIES
         CXX_STANDARD 17
-        CXX_EXTENSIONS OFF
+        C_STANDARD 17
         POSITION_INDEPENDENT_CODE ON
 )
 
 target_link_libraries(
         ${PACKAGE_NAME}
+        ${android-lib}
         ${FBJNI_LIBRARY}
         ${JSI_LIB}
         ${TURBOMODULES_LIB}
-        ${SKIA_LIB}
+        ${PARAGRAPH_LIB}
+        ${UNICODE_LIB}
         ${SHAPER_LIB}
+        ${SKIA_LIB}
+        ${HARFBUZZ_LIB}
+        ${ICUi18N_LIB}
+        ${ICUUC_LIB}
+        ${ICUDATA_LIB}
         -ljnigraphics
         -lGLESv2
         -lEGL
         ${log-lib}
         ${android-lib}
+
 )

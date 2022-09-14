@@ -80,12 +80,17 @@ extra_cflags=["-DSKIA_C_DLL", "-DHAVE_ARC4RANDOM_BUF", "-target", "arm64-apple-i
 ```
 
 
-### Experimental
-
 ## building harfbuff
 1. git clone it
 2. copy the ios_cross.txt from here into the 
-3. run meson setup --cross-file ios_cross.txt ios64 -Ddefault_library=static
+3. run meson setup --cross-file <crossfile>.txt ios64 -Ddefault_library=static -Dtests="disabled"
+
+### ANROID
+building on mac for android; there's a bug with meson and I was only able to build it using cmake
+
+## build icu
+1. for anroid clone the icu github repo, copy the build_icu_android.sh into the icu/icu4c/android folder(create it) and run it
+2. for iOS i used https://github.com/dbquarrel/icu4c-xcframework
 
 ### Build framework
 ```sh

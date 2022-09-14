@@ -14,6 +14,8 @@
 #include <jsi/jsi.h>
 #include "include/gpu/GrDirectContext.h"
 #include "include/gpu/gl/GrGLInterface.h"
+#include <include/core/SkColorType.h>
+#include <include/core/SkColorSpace.h>
 #include <include/core/SkColor.h>
 #include <include/core/SkCanvas.h>
 #include <include/core/SkSurface.h>
