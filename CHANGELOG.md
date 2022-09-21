@@ -1,3 +1,10 @@
+# [1.1.0-alpha.35](https://github.com/qlik-oss/react-native-helium/compare/v1.1.0-alpha.34...v1.1.0-alpha.35) (2022-09-21)
+
+
+### Bug Fixes
+
+* measure text ([c18c644](https://github.com/qlik-oss/react-native-helium/commit/c18c6449dc65e7d5d9f888502a77e096483fdeea))
+
 # [1.1.0-alpha.34](https://github.com/qlik-oss/react-native-helium/compare/v1.1.0-alpha.33...v1.1.0-alpha.34) (2022-09-14)
 
 
