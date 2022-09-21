@@ -44,45 +44,41 @@ Text::Text(jsi::Runtime &rt, const jsi::Object &object) {
 
   fontCollection.reset(new skia::textlayout::FontCollection());
   fontCollection->setDefaultFontManager(SkFontMgr::RefDefault());
+  
 
   skia::textlayout::TextStyle defaultStyle;
   defaultStyle.setForegroundColor(*brush);
   defaultStyle.setFontSize(fontSize);
   defaultStyle.setTypeface(typeFace);
-  defaultStyle.setTextBaseline(skia::textlayout::TextBaseline::kAlphabetic);
-  paragraphStyle.setTextStyle(defaultStyle);
+  defaultStyle.setTextBaseline(skia::textlayout::TextBaseline::kIdeographic);
+  defaultStyle.setFontFamilies({SkString(fontFamily.c_str())});
+  defaultStyle.getFontMetrics(&fontMetrics);
+
   paragraphStyle.setTextAlign(skia::textlayout::TextAlign::kStart);
 
- 
+  font = SkFont(typeFace, fontSize);
+  calcBaseline(baseline);
+  calcAnchor(anchor);
 
   if(object.hasProperty(rt, "transform")) {
     TransformFactory txFactory;
     transform = txFactory.parse(rt, object);
   }
 
-  transform = SkMatrix::Translate(position.fX, position.fY);
   auto paragraphBuilder = skia::textlayout::ParagraphBuilder::make(paragraphStyle, fontCollection);
+  paragraphBuilder->pushStyle(defaultStyle);
   paragraphBuilder->addText(text.c_str());
+  paragraphBuilder->pop();
   paragraph = paragraphBuilder->Build();
-
-  defaultStyle.getFontMetrics(&fontMetrics);
-  calcBaseline(baseline);
-  calcAnchor(anchor);
-  
+  transform = SkMatrix::Translate(position.fX, position.fY);
 }
 void Text::calcBaseline(const std::string& baseline) {
   SkRect bounds;
-  font.measureText(text.c_str(), text.length(), SkTextEncoding::kUTF8, &bounds);
-  float emHeight = fontMetrics.fDescent - fontMetrics.fAscent;
+  font.measureText(text.c_str(), text.length(), SkTextEncoding::kUTF8, &bounds, brush);
+  font.getMetrics(&fontMetrics);
 
-  if(baseline == "central") {
-    position.fY = position.fY - fontMetrics.fAscent - (emHeight * 0.5f);
-  }
   if(baseline == "text-before-edge") {
-    position.fY = position.fY - bounds.top();
-  }
-  if(baseline == "bottom") {
-    position.fY = position.fY - (bounds.height() + bounds.top());
+    position.fY = position.fY + Helium::toDB(bounds.top());
   }
 
 }
@@ -94,6 +90,7 @@ void Text::draw(SkCanvas *canvas) {
     auto clipBounds = canvas->getLocalClipBounds();
     paragraph->layout(clipBounds.width());
     paragraph->paint(canvas, 0, 0);
+    
   }
   canvas->restore();
 }
