@@ -50,7 +50,7 @@ Text::Text(jsi::Runtime &rt, const jsi::Object &object) {
   defaultStyle.setForegroundColor(*brush);
   defaultStyle.setFontSize(fontSize);
   defaultStyle.setTypeface(typeFace);
-  defaultStyle.setTextBaseline(skia::textlayout::TextBaseline::kIdeographic);
+  defaultStyle.setTextBaseline(skia::textlayout::TextBaseline::kAlphabetic);
   defaultStyle.setFontFamilies({SkString(fontFamily.c_str())});
   defaultStyle.getFontMetrics(&fontMetrics);
 
@@ -72,15 +72,13 @@ Text::Text(jsi::Runtime &rt, const jsi::Object &object) {
   paragraph = paragraphBuilder->Build();
   transform = SkMatrix::Translate(position.fX, position.fY);
 }
+
 void Text::calcBaseline(const std::string& baseline) {
   SkRect bounds;
   font.measureText(text.c_str(), text.length(), SkTextEncoding::kUTF8, &bounds, brush);
   font.getMetrics(&fontMetrics);
-
-  if(baseline == "text-before-edge") {
-    position.fY = position.fY + Helium::toDB(bounds.top());
-  }
-
+  SkScalar fCorrectDescent = fontMetrics.fDescent + fontMetrics.fLeading ;
+  position.fY -= fCorrectDescent;
 }
 
 void Text::draw(SkCanvas *canvas) {
