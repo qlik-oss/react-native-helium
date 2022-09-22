@@ -1,3 +1,10 @@
+# [1.1.0-alpha.36](https://github.com/qlik-oss/react-native-helium/compare/v1.1.0-alpha.35...v1.1.0-alpha.36) (2022-09-22)
+
+
+### Bug Fixes
+
+* alignment issues on text ([aa87aba](https://github.com/qlik-oss/react-native-helium/commit/aa87aba5c941990939a264123003c0862f398dec))
+
 # [1.1.0-alpha.35](https://github.com/qlik-oss/react-native-helium/compare/v1.1.0-alpha.34...v1.1.0-alpha.35) (2022-09-21)
 
 
