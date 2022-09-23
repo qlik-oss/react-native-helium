@@ -44,7 +44,6 @@ Text::Text(jsi::Runtime &rt, const jsi::Object &object) {
 
   fontCollection.reset(new skia::textlayout::FontCollection());
   fontCollection->setDefaultFontManager(SkFontMgr::RefDefault());
-  
 
   skia::textlayout::TextStyle defaultStyle;
   defaultStyle.setForegroundColor(*brush);
@@ -54,9 +53,16 @@ Text::Text(jsi::Runtime &rt, const jsi::Object &object) {
   defaultStyle.setFontFamilies({SkString(fontFamily.c_str())});
   defaultStyle.getFontMetrics(&fontMetrics);
 
-  paragraphStyle.setTextAlign(skia::textlayout::TextAlign::kStart);
-
+  paragraphStyle.setTextAlign(skia::textlayout::TextAlign::kJustify);
+  
   font = SkFont(typeFace, fontSize);
+  
+  auto paragraphBuilder = skia::textlayout::ParagraphBuilder::make(paragraphStyle, fontCollection);
+  paragraphBuilder->pushStyle(defaultStyle);
+  paragraphBuilder->addText(text.c_str());
+  paragraphBuilder->pop();
+  paragraph = paragraphBuilder->Build();
+  
   calcBaseline(baseline);
   calcAnchor(anchor);
 
@@ -64,21 +70,23 @@ Text::Text(jsi::Runtime &rt, const jsi::Object &object) {
     TransformFactory txFactory;
     transform = txFactory.parse(rt, object);
   }
-
-  auto paragraphBuilder = skia::textlayout::ParagraphBuilder::make(paragraphStyle, fontCollection);
-  paragraphBuilder->pushStyle(defaultStyle);
-  paragraphBuilder->addText(text.c_str());
-  paragraphBuilder->pop();
-  paragraph = paragraphBuilder->Build();
+ 
   transform = SkMatrix::Translate(position.fX, position.fY);
 }
 
 void Text::calcBaseline(const std::string& baseline) {
-  SkRect bounds;
-  font.measureText(text.c_str(), text.length(), SkTextEncoding::kUTF8, &bounds, brush);
+  font.measureText(text.c_str(), text.length(), SkTextEncoding::kUTF8, &measuredBounds, brush);
   font.getMetrics(&fontMetrics);
-  SkScalar fCorrectDescent = fontMetrics.fDescent + fontMetrics.fLeading ;
+  SkScalar actualFontSize = fontMetrics.fDescent - fontMetrics.fAscent;
+  SkScalar fontBaseline = actualFontSize - fontMetrics.fDescent;
+  SkScalar fCorrectDescent = fontBaseline - measuredBounds.height() + fontMetrics.fLeading ;
   position.fY -= fCorrectDescent;
+  
+ 
+  // things are from the bottom
+  if(baseline == "text-before-edge") {
+    position.fY -= measuredBounds.bottom();
+  }
 }
 
 void Text::draw(SkCanvas *canvas) {
@@ -88,7 +96,6 @@ void Text::draw(SkCanvas *canvas) {
     auto clipBounds = canvas->getLocalClipBounds();
     paragraph->layout(clipBounds.width());
     paragraph->paint(canvas, 0, 0);
-    
   }
   canvas->restore();
 }
