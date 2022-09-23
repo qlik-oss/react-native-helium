@@ -83,7 +83,8 @@ extra_cflags=["-DSKIA_C_DLL", "-DHAVE_ARC4RANDOM_BUF", "-target", "arm64-apple-i
 ## building harfbuzz
 1. git clone it
 2. copy the ios_cross.txt from here into the 
-3. run meson setup --cross-file <crossfile>.txt ios64 -Ddefault_library=static -Dtests="disabled"
+3. run meson setup --cross-file <<crossfile>>.txt ios<<Platform>> -Ddefault_library=static -Dtests="disabled"
+4. then `run ninja -C ios<<Platform>>`
 
 ### ANROID
 building on mac for android; there's a bug with meson and I was only able to build it using cmake
