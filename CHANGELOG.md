@@ -1,3 +1,10 @@
+# [1.1.0-alpha.37](https://github.com/qlik-oss/react-native-helium/compare/v1.1.0-alpha.36...v1.1.0-alpha.37) (2022-09-23)
+
+
+### Bug Fixes
+
+* skia width calculation ([64b00bc](https://github.com/qlik-oss/react-native-helium/commit/64b00bc8e896308518675fe089dffd2ddf0f8ea2))
+
 # [1.1.0-alpha.36](https://github.com/qlik-oss/react-native-helium/compare/v1.1.0-alpha.35...v1.1.0-alpha.36) (2022-09-22)
 
 
