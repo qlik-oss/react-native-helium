@@ -87,6 +87,9 @@ void Text::calcBaseline(const std::string& baseline) {
   if(baseline == "text-before-edge") {
     position.fY -= measuredBounds.bottom();
   }
+  if(baseline == "center") {
+    position.fY -= measuredBounds.bottom() + measuredBounds.height() ;
+  }
 }
 
 void Text::draw(SkCanvas *canvas) {
