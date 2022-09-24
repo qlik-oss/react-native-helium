@@ -50,41 +50,46 @@ Text::Text(jsi::Runtime &rt, const jsi::Object &object) {
   defaultStyle.setFontSize(fontSize);
   defaultStyle.setTypeface(typeFace);
   defaultStyle.setTextBaseline(skia::textlayout::TextBaseline::kAlphabetic);
-  paragraphStyle.setTextStyle(defaultStyle);
-  paragraphStyle.setTextAlign(skia::textlayout::TextAlign::kStart);
+  defaultStyle.setFontFamilies({SkString(fontFamily.c_str())});
+  defaultStyle.getFontMetrics(&fontMetrics);
 
- 
+  paragraphStyle.setTextAlign(skia::textlayout::TextAlign::kJustify);
+  
+  font = SkFont(typeFace, fontSize);
+  
+  auto paragraphBuilder = skia::textlayout::ParagraphBuilder::make(paragraphStyle, fontCollection);
+  paragraphBuilder->pushStyle(defaultStyle);
+  paragraphBuilder->addText(text.c_str());
+  paragraphBuilder->pop();
+  paragraph = paragraphBuilder->Build();
+  
+  calcBaseline(baseline);
+  calcAnchor(anchor);
 
   if(object.hasProperty(rt, "transform")) {
     TransformFactory txFactory;
     transform = txFactory.parse(rt, object);
   }
-
+ 
   transform = SkMatrix::Translate(position.fX, position.fY);
-  auto paragraphBuilder = skia::textlayout::ParagraphBuilder::make(paragraphStyle, fontCollection);
-  paragraphBuilder->addText(text.c_str());
-  paragraph = paragraphBuilder->Build();
-
-  defaultStyle.getFontMetrics(&fontMetrics);
-  calcBaseline(baseline);
-  calcAnchor(anchor);
-  
 }
+
 void Text::calcBaseline(const std::string& baseline) {
-  SkRect bounds;
-  font.measureText(text.c_str(), text.length(), SkTextEncoding::kUTF8, &bounds);
-  float emHeight = fontMetrics.fDescent - fontMetrics.fAscent;
-
-  if(baseline == "central") {
-    position.fY = position.fY - fontMetrics.fAscent - (emHeight * 0.5f);
-  }
+  font.measureText(text.c_str(), text.length(), SkTextEncoding::kUTF8, &measuredBounds, brush);
+  font.getMetrics(&fontMetrics);
+  SkScalar actualFontSize = fontMetrics.fDescent - fontMetrics.fAscent;
+  SkScalar fontBaseline = actualFontSize - fontMetrics.fDescent;
+  SkScalar fCorrectDescent = fontBaseline - measuredBounds.height() + fontMetrics.fLeading ;
+  position.fY -= fCorrectDescent;
+  
+ 
+  // things are from the bottom
   if(baseline == "text-before-edge") {
-    position.fY = position.fY - bounds.top();
+    position.fY -= measuredBounds.bottom();
   }
-  if(baseline == "bottom") {
-    position.fY = position.fY - (bounds.height() + bounds.top());
+  if(baseline == "center") {
+    position.fY -= measuredBounds.bottom() + measuredBounds.height() ;
   }
-
 }
 
 void Text::draw(SkCanvas *canvas) {
