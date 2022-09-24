@@ -1,3 +1,10 @@
+# [1.1.0-alpha.38](https://github.com/qlik-oss/react-native-helium/compare/v1.1.0-alpha.37...v1.1.0-alpha.38) (2022-09-24)
+
+
+### Bug Fixes
+
+* add central baseline ([a2449a4](https://github.com/qlik-oss/react-native-helium/commit/a2449a443108251b5dafdf2c1d0e35497c967c16))
+
 # [1.1.0-alpha.37](https://github.com/qlik-oss/react-native-helium/compare/v1.1.0-alpha.36...v1.1.0-alpha.37) (2022-09-23)
 
 
