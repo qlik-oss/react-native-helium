@@ -4,6 +4,8 @@
 
 #ifndef HELIUM4_TEXT_H
 #define HELIUM4_TEXT_H
+#define SK_UNICODE_AVAILABLE
+#define SK_SHAPER_HARFBUZZ_AVAILABLE
 #include <jsi/jsi.h>
 #include "Shape.h"
 #include <memory>
@@ -25,6 +27,7 @@ protected:
   SkFont font;
   SkMatrix transform;
   SkFontMetrics fontMetrics{};
+  SkRect measuredBounds;
   std::string text;
   std::vector<std::string> lines;
   std::string fontFamily;

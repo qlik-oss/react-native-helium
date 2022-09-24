@@ -57,6 +57,8 @@ void CanvasApiHost::install(Runtime &runtime) {
     auto metrics = std::get<1>(t);
     result.setProperty(runtime, "width", (rect.width()));
     result.setProperty(runtime, "height", (rect.height()));
+    result.setProperty(runtime, "left", (rect.fLeft));
+    result.setProperty(runtime, "right", (rect.fRight));
     result.setProperty(runtime, "actualBoundingBoxAscent", (rect.top()));
     result.setProperty(runtime, "fontBoundingBoxAscent", Helium::toDB(metrics.fAscent));
     result.setProperty(runtime, "fontBoundingBoxDescent", Helium::toDB(metrics.fDescent));
