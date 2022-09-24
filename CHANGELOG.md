@@ -1,3 +1,10 @@
+## [1.1.1](https://github.com/qlik-oss/react-native-helium/compare/v1.1.0...v1.1.1) (2022-09-24)
+
+
+### Bug Fixes
+
+* text alignment ([a5caee9](https://github.com/qlik-oss/react-native-helium/commit/a5caee980baaa1f89591b40666c167f72d90bef9))
+
 # [1.1.0](https://github.com/qlik-oss/react-native-helium/compare/v1.0.1...v1.1.0) (2022-09-14)
 
 
