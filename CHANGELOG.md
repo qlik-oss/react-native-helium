@@ -1,3 +1,10 @@
+## [1.2.1](https://github.com/qlik-oss/react-native-helium/compare/v1.2.0...v1.2.1) (2022-09-25)
+
+
+### Bug Fixes
+
+* stroke on active brush ([7a5d8ea](https://github.com/qlik-oss/react-native-helium/commit/7a5d8ea29512ea922613eec0e0c26c0bcd10816c))
+
 # [1.2.0](https://github.com/qlik-oss/react-native-helium/compare/v1.1.1...v1.2.0) (2022-09-25)
 
 
