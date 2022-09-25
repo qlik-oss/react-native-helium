@@ -1,3 +1,10 @@
+# [1.2.0](https://github.com/qlik-oss/react-native-helium/compare/v1.1.1...v1.2.0) (2022-09-25)
+
+
+### Features
+
+* add stroked text ([33eaf9e](https://github.com/qlik-oss/react-native-helium/commit/33eaf9e87dc885c9e15e8bafa35e9e3e2967e011))
+
 ## [1.1.1](https://github.com/qlik-oss/react-native-helium/compare/v1.1.0...v1.1.1) (2022-09-24)
 
 
