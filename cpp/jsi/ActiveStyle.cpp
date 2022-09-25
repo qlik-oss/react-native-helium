@@ -16,19 +16,22 @@ ActiveStyle::ActiveStyle(jsi::Runtime& rt, const jsi::Object& obj, const jsi::Ob
     auto strokeWidthObject = strokeWidth.asObject(rt);
     if(strokeWidthObject.isFunction(rt)) {
       auto cc = strokeWidthObject.asFunction(rt);
-      
       jsi::Object d = jsi::Object(rt);
       d.setProperty(rt, "data", data);
       auto sw = cc.call(rt, d);
       if(sw.isNumber()) {
         strokeWidthValue = Helium::toPx(sw.asNumber());
-        if(strokeWidthValue > 0) {
-          activeBrush.setColor(SK_ColorBLACK);
-          activeBrush.setStrokeWidth(strokeWidthValue);
-        } else {
-          activeBrush.setColor(SK_ColorTRANSPARENT);
-        }
       }
     }
+  } else if(strokeWidth.isNumber()) {
+    activeBrush.setStyle(SkPaint::kStroke_Style);
+    strokeWidthValue = Helium::toPx(strokeWidth.asNumber());
+  }
+  
+  if(strokeWidthValue > 0) {
+    activeBrush.setColor(SK_ColorBLACK);
+    activeBrush.setStrokeWidth(strokeWidthValue);
+  } else {
+    activeBrush.setColor(SK_ColorTRANSPARENT);
   }
 }
