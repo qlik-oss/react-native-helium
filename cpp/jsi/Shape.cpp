@@ -70,6 +70,7 @@ void Shape::initFillPaint(jsi::Runtime &rt, const jsi::Object &object) {
     activeBrush.setColor(SK_ColorBLACK);
   }
   brush = &activeBrush;
+  brush->setAntiAlias(true);
 }
 
 void Shape::initStrokePaint(jsi::Runtime &rt, const jsi::Object &object) {
