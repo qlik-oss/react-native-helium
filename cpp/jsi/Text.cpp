@@ -35,6 +35,8 @@ Text::Text(jsi::Runtime &rt, const jsi::Object &object) {
   SkScalar fontSize = static_cast<SkScalar>(Helium::toPx(object.getProperty(rt, "fontSize").asNumber()));
 
   initFillPaint(rt, object);
+  initStrokePaint(rt, object);
+  
   auto baseline = object.getProperty(rt, "baseline").toString(rt).utf8(rt);
   auto anchor = object.getProperty(rt, "anchor").toString(rt).utf8(rt);
   fontFamily = object.getProperty(rt, "fontFamily").toString(rt).utf8(rt);
@@ -98,7 +100,16 @@ void Text::draw(SkCanvas *canvas) {
   if(paragraph) {
     auto clipBounds = canvas->getLocalClipBounds();
     paragraph->layout(clipBounds.width());
-    paragraph->paint(canvas, 0, 0);
+   
+    if(hasStroke) {
+      paragraph->updateForegroundPaint(0, text.size(), strokePaint);
+      paragraph->paint(canvas, 0, 0);
+      
+      paragraph->updateForegroundPaint(0, text.size(), *brush);
+      paragraph->paint(canvas, 0, 0);
+    } else {
+      paragraph->paint(canvas, 0, 0);
+    }
   }
   canvas->restore();
 }
