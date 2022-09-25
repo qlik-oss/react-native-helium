@@ -20,7 +20,7 @@ public:
     return activeBrush;
   }
 protected:
-  int strokeWidthValue;
+  int strokeWidthValue = 0;
   SkPaint activeBrush;
 };
 
