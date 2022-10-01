@@ -48,7 +48,7 @@ Text::Text(jsi::Runtime &rt, const jsi::Object &object) {
   fontCollection->setDefaultFontManager(SkFontMgr::RefDefault());
 
   skia::textlayout::TextStyle defaultStyle;
-  defaultStyle.setForegroundColor(*brush);
+  defaultStyle.setForegroundColor(SkPaint(*brush));
   defaultStyle.setFontSize(fontSize);
   defaultStyle.setTypeface(typeFace);
   defaultStyle.setTextBaseline(skia::textlayout::TextBaseline::kAlphabetic);
@@ -65,6 +65,7 @@ Text::Text(jsi::Runtime &rt, const jsi::Object &object) {
   paragraphBuilder->pop();
   paragraph = paragraphBuilder->Build();
   
+  buildStroke(defaultStyle);
   calcBaseline(baseline);
   calcAnchor(anchor);
 
@@ -72,7 +73,7 @@ Text::Text(jsi::Runtime &rt, const jsi::Object &object) {
     TransformFactory txFactory;
     transform = txFactory.parse(rt, object);
   }
- 
+   
   transform = SkMatrix::Translate(position.fX, position.fY);
 }
 
@@ -83,14 +84,30 @@ void Text::calcBaseline(const std::string& baseline) {
   SkScalar fontBaseline = actualFontSize - fontMetrics.fDescent;
   SkScalar fCorrectDescent = fontBaseline - measuredBounds.height() + fontMetrics.fLeading ;
   position.fY -= fCorrectDescent;
-  
- 
+   
   // things are from the bottom
   if(baseline == "text-before-edge") {
     position.fY -= measuredBounds.bottom();
   }
-  if(baseline == "center") {
-    position.fY -= measuredBounds.bottom() + measuredBounds.height() ;
+  
+  if(baseline == "center" || baseline == "central") {
+    position.fY -= measuredBounds.bottom() + measuredBounds.height() / 2.0 ;
+  }
+}
+
+void Text::buildStroke(skia::textlayout::TextStyle& style) {
+  if(hasStroke) {
+    // theres a bug in skia and metal blending, so have to build a seperate paragraph
+    skia::textlayout::ParagraphStyle strokeParagraphStyle;
+    strokeParagraphStyle.setTextAlign(skia::textlayout::TextAlign::kJustify);
+
+    style.setForegroundColor(SkPaint(strokePaint));
+
+    auto strokeBuilder = skia::textlayout::ParagraphBuilder::make(strokeParagraphStyle, fontCollection);
+    strokeBuilder->pushStyle(style);
+    strokeBuilder->addText(text.c_str());
+    strokeBuilder->pop();
+    strokeParagraph = strokeBuilder->Build();
   }
 }
 
@@ -102,14 +119,10 @@ void Text::draw(SkCanvas *canvas) {
     paragraph->layout(clipBounds.width());
    
     if(hasStroke) {
-      paragraph->updateForegroundPaint(0, text.size(), strokePaint);
-      paragraph->paint(canvas, 0, 0);
-      
-      paragraph->updateForegroundPaint(0, text.size(), *brush);
-      paragraph->paint(canvas, 0, 0);
-    } else {
-      paragraph->paint(canvas, 0, 0);
+      strokeParagraph->layout(clipBounds.width());
+      strokeParagraph->paint(canvas, 0, 0);
     }
+    paragraph->paint(canvas, 0, 0);
   }
   canvas->restore();
 }
