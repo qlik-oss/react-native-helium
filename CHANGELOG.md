@@ -1,3 +1,10 @@
+## [1.2.2](https://github.com/qlik-oss/react-native-helium/compare/v1.2.1...v1.2.2) (2022-10-01)
+
+
+### Bug Fixes
+
+* build seperate stroke paragraph ([94743f8](https://github.com/qlik-oss/react-native-helium/commit/94743f8714f3bdbff1a00f15a5b70adc1feef81f))
+
 ## [1.2.1](https://github.com/qlik-oss/react-native-helium/compare/v1.2.0...v1.2.1) (2022-09-25)
 
 
