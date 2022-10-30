@@ -1,3 +1,10 @@
+## [1.2.3](https://github.com/qlik-oss/react-native-helium/compare/v1.2.2...v1.2.3) (2022-10-30)
+
+
+### Bug Fixes
+
+* remove jcenter ([f5b71d9](https://github.com/qlik-oss/react-native-helium/commit/f5b71d9a0debd4648c9a2ff643639b2465a7bcb6))
+
 ## [1.2.2](https://github.com/qlik-oss/react-native-helium/compare/v1.2.1...v1.2.2) (2022-10-01)
 
 
