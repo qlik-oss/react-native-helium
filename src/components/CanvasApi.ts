@@ -30,6 +30,7 @@ export type HeliumCanvasApiType = {
   resize: (context: CanvasContext, rect: CanvasRect) => void;
   setSelectionBrushes: (context: CanvasContext, brushes: Array<any>) => void;
   confirmSelections: (context: CanvasContext) => void;
+  clearSelections: (context: CanvasContext) => void;
 }
 
 declare let HeliumCanvasApi: HeliumCanvasApiType;
@@ -77,6 +78,10 @@ export default class CanvasApi {
 
   confirmSelections() {
     HeliumCanvasApi.confirmSelections(this.context);
+  }
+
+  clearSelections() {
+    HeliumCanvasApi.clearSelections(this.context);
   }
 
 }

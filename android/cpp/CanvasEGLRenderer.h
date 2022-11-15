@@ -60,6 +60,8 @@ public:
 
   void beginSelections(float x, float y);
 
+  void clearSelections();
+
   void startLasso(float x, float y);
   void updateLasso(float x, float y);
   void endLasso(float x, float y);

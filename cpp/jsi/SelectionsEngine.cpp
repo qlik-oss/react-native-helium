@@ -25,7 +25,12 @@ void SelectionsEngine::resetData(std::vector<std::shared_ptr<Shape>> &shapes) {
 }
 
 void SelectionsEngine::clearSelections() {
-  
+  for(auto&& it : shapeMap) {
+    auto& v = it.second;
+    for(auto&& shape : v) {
+      shape->clearSelection();
+    }
+  }
 }
 
 void SelectionsEngine::beginSelections() {

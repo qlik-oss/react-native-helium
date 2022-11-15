@@ -247,7 +247,7 @@ void CanvasEGLRenderer::surfaceDestroyed(bool releaseWindow) {
         canvasEglContext->glDisplay = EGL_NO_DISPLAY;
       }
       skSurface = nullptr;
-      
+
     }
   });
 }
@@ -333,6 +333,11 @@ void CanvasEGLRenderer::beginSelections(float x, float y) {
     skiaRender->syncBrush();
     draw();
   });
+}
+
+void CanvasEGLRenderer::clearSelections() {
+  skiaRender->clearSelections();
+  draw();
 }
 
 void CanvasEGLRenderer::startLasso(float x, float y) {
