@@ -26,6 +26,7 @@ public:
   virtual void active();
   virtual void activate(SkPaint brush);
   virtual bool toggle();
+  virtual void clearSelection();
   
   std::string getDataPath() const {
     return dataPath;

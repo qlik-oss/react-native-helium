@@ -122,6 +122,15 @@ void CanvasApiHost::install(Runtime &runtime) {
     }
     return Value::undefined();
   };
+  
+  auto clearSelections = [](Runtime& runtime, const Value& thisValue, const Value* args, size_t count) {
+    Helium::VirtualContext virtualContext(runtime, args[0]);
+    auto view = Helium::TheCanvasViewManager::instance()->get(virtualContext.id);
+    if(view) {
+      view->clearSelections();
+    }
+    return Value::undefined();
+  };
   auto module = Object(runtime);
   
   
@@ -175,5 +184,10 @@ void CanvasApiHost::install(Runtime &runtime) {
                                                                                      PropNameID::forAscii(runtime, "confirmSelections"),
                                                                                      1,
                                                                                      confirmSelections));
+ 
+  module.setProperty(runtime, "clearSelections",  Function::createFromHostFunction(runtime,
+                                                                                     PropNameID::forAscii(runtime, "clearSelections"),
+                                                                                     1,
+                                                                                   clearSelections));
   runtime.global().setProperty(runtime, "HeliumCanvasApi", std::move(module));
 }

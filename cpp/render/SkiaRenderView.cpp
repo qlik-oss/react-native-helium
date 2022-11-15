@@ -121,6 +121,14 @@ void SkiaRenderView::startLasso(float x, float y) {
   }
 }
 
+void SkiaRenderView::clearSelections() {
+  // Have you checked the children?
+  for(auto&& child: virtualRenders) {
+    child.second->clearSelections();
+  }
+  selectionsEngine.clearSelections();
+}
+
 void SkiaRenderView::endLasso(float x, float y) {
   if(lassoLayer) {
     lassoLayer->end(x, y);

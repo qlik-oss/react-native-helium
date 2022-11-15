@@ -28,6 +28,7 @@ public:
   void startLasso(float x, float y);
   void endLasso(float x, float y);
   void updateLasso(float x, float y);
+  void clearSelections();
 
   void destroy(const std::string& vid) {
     auto it = virtualRenders.find(vid);
