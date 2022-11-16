@@ -1,3 +1,10 @@
+## [1.2.5](https://github.com/qlik-oss/react-native-helium/compare/v1.2.4...v1.2.5) (2022-11-16)
+
+
+### Bug Fixes
+
+* missing files ([1899183](https://github.com/qlik-oss/react-native-helium/commit/1899183e307bc6397b013326b12cf617d5043608))
+
 ## [1.2.4](https://github.com/qlik-oss/react-native-helium/compare/v1.2.3...v1.2.4) (2022-11-15)
 
 
