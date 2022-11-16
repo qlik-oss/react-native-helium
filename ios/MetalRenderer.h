@@ -37,6 +37,7 @@ public:
   bool inSelections() const;
   void setSelectionBrush(jsi::Runtime& rt, const jsi::Value& brush);
   void confirmSelections();
+  void clearSelections();
   void startLasso(float x, float y);
   void endLasso(float x, float y);
   void updateLasso(float x, float y);
