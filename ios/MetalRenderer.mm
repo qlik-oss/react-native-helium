@@ -127,6 +127,11 @@ void MetalRenderer::confirmSelections() {
   }
 }
 
+void MetalRenderer::clearSelections() {
+  renderView->clearSelections();
+  draw();
+}
+
 void MetalRenderer::startLasso(float x, float y){
   renderView->startLasso(Helium::toPx(x), Helium::toPx(y));
 }
