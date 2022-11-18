@@ -22,6 +22,7 @@ public:
   void remove(std::shared_ptr<Shape>& shape);
   void sync();
   void confirmSelections();
+  void clear();
 protected:
   std::mutex guard;
   std::unordered_set<std::shared_ptr<Shape>> activeShapes;
