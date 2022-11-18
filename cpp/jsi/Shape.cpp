@@ -155,7 +155,9 @@ void Shape::inActive() {
 }
 
 void Shape::clearSelection() {
-  active();
+  inActive();
+  brush = &activeBrush;
+  isActive = false;
   isDecorated = false;
 }
 

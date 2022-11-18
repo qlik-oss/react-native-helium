@@ -30,6 +30,10 @@ void SelectionBrush::remove(std::shared_ptr<Shape> &shape) {
   activeShapes.erase(shape);
 }
 
+void SelectionBrush::clear() {
+  activeShapes.clear();
+}
+
 void SelectionBrush::sync() {
   std::lock_guard<std::mutex> lock(guard);
   try {

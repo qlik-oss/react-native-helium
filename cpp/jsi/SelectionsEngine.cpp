@@ -31,6 +31,13 @@ void SelectionsEngine::clearSelections() {
       shape->clearSelection();
     }
   }
+  if(selectionBrush) {
+    selectionBrush->clear();
+  }
+  inSelections = false;
+  pendingAdd.clear();
+  pendingRemoval.clear();
+
 }
 
 void SelectionsEngine::beginSelections() {
