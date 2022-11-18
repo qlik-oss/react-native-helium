@@ -1,3 +1,10 @@
+## [1.2.6](https://github.com/qlik-oss/react-native-helium/compare/v1.2.5...v1.2.6) (2022-11-18)
+
+
+### Bug Fixes
+
+* clear selections brush ([d7fd4cf](https://github.com/qlik-oss/react-native-helium/commit/d7fd4cf27558398b4e5e4aa4e3aa38e8add6aa78))
+
 ## [1.2.5](https://github.com/qlik-oss/react-native-helium/compare/v1.2.4...v1.2.5) (2022-11-16)
 
 
