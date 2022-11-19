@@ -15,6 +15,7 @@ void CanvasApiHost::install(Runtime &runtime) {
     auto view = Helium::TheCanvasViewManager::instance()->get(virtualContext.id);
     if(view) {
       view->addShapes(virtualContext.vid, runtime, args[1] );
+      view->draw();
     }
     return Value::undefined();
   };
