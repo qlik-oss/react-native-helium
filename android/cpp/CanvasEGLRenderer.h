@@ -65,6 +65,10 @@ public:
   void startLasso(float x, float y);
   void updateLasso(float x, float y);
   void endLasso(float x, float y);
+  
+  void setLongPressHandler(jsi::Runtime& rt, const jsi::Value& fn);
+  
+  void handleLongPress(float x, float y, float rx, float ry);
 
   std::shared_ptr<SkiaRenderView> get() {
     return skiaRender;
@@ -105,6 +109,7 @@ protected:
   int width = -1;
   int height = -1;
   std::shared_ptr<SelectionBrush> selectionBrush;
+  std::shared_ptr<DataShape> jsLongPress;
 };
 
 

@@ -8,7 +8,7 @@
 #include "ActiveStyle.hpp"
 #include "Helium.h"
 
-ActiveStyle::ActiveStyle(jsi::Runtime& rt, const jsi::Object& obj, const jsi::Object& data) {
+ActiveStyle::ActiveStyle(jsi::Runtime& rt, const jsi::Object& obj,  std::shared_ptr<DataShape> data) {
   auto activeStyle = obj.getProperty(rt, "active").asObject(rt);
   auto strokeWidth = activeStyle.getProperty(rt, "strokeWidth");
   if(strokeWidth.isObject()) {
@@ -17,10 +17,13 @@ ActiveStyle::ActiveStyle(jsi::Runtime& rt, const jsi::Object& obj, const jsi::Ob
     if(strokeWidthObject.isFunction(rt)) {
       auto cc = strokeWidthObject.asFunction(rt);
       jsi::Object d = jsi::Object(rt);
-      d.setProperty(rt, "data", data);
-      auto sw = cc.call(rt, d);
-      if(sw.isNumber()) {
-        strokeWidthValue = Helium::toPx(sw.asNumber());
+      if(data) {
+        d.setProperty(rt, "data", data->data);
+        
+        auto sw = cc.call(rt, d);
+        if(sw.isNumber()) {
+          strokeWidthValue = Helium::toPx(sw.asNumber());
+        }
       }
     }
   } else if(strokeWidth.isNumber()) {

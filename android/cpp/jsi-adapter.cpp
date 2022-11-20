@@ -6,6 +6,9 @@
 #include "CanvasViewManger.h"
 #include "CanvasApiHost.h"
 #include "JNICanvasViewService.h"
+#include <jni.h>
+#include <jni.h>
+#include <jni.h>
 
 extern "C"
 JNIEXPORT void JNICALL
@@ -97,7 +100,10 @@ Java_com_qlikossreactnativehelium_ReactNativeHeliumModule_install(JNIEnv *env, j
                                                                   jlong jsi, jfloat scale) {
   using namespace facebook;
   auto jsRuntime = reinterpret_cast<jsi::Runtime *>(jsi);
+  auto platform = std::make_shared<Platform>(*jsRuntime);
+  Helium::TheCanvasViewManager::instance()->platform = platform;
   Helium::TheCanvasViewManager::instance()->scale = scale;
+  
   CanvasApiHost::install(*jsRuntime);
 }
 
@@ -146,4 +152,11 @@ JNIEXPORT void JNICALL
 Java_com_qlikossreactnativehelium_CanvasView_endLasso(JNIEnv *env, jobject thiz, jfloat x,
                                                       jfloat y) {
   Helium::TheCanvasViewManager::instance()->endLasso(x, y);
+}
+
+extern "C"
+JNIEXPORT void JNICALL
+Java_com_qlikossreactnativehelium_CanvasView_handleLongPress(JNIEnv* env, jobject thiz, jfloat x, jfloat y, jfloat rx, jfloat ry
+) {
+  Helium::TheCanvasViewManager::instance()->handleLongPress(x, y, rx, ry);
 }

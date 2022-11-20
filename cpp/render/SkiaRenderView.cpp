@@ -47,18 +47,18 @@ void SkiaRenderView::clear() {
 void SkiaRenderView::draw(SkCanvas* canvas) {
   canvas->save();
   canvas->setMatrix(worldTransform);
-
+  
   canvas->clipRect(clipBounds);
   for(auto&& shape: shapes) {
     shape->draw(canvas);
   }
-
+  
   canvas->restore();
-
+  
   for(auto it : virtualRenders) {
     it.second->draw(canvas);
   }
-
+  
   if( lassoLayer) {
     lassoLayer->render(canvas);
   }
@@ -138,7 +138,7 @@ void SkiaRenderView::endLasso(float x, float y) {
     std::vector<SkPoint> verts(points);
     path.getPoints(&verts[0], static_cast<int>(verts.size()));
     _endLasso(rect, std::move(verts));
-
+    
     if(selectionBrush) {
       Helium::TheCanvasViewManager::instance()->runOnJS([this]{
         selectionBrush->sync();
@@ -158,7 +158,7 @@ void SkiaRenderView::_endLasso(const SkRect &rect,  std::vector<SkPoint>&& verts
       }
     }
   }
-
+  
   // Have you checked the children?
   for(auto&& child: virtualRenders) {
     child.second->_endLasso(rect, std::move(verts));
@@ -183,7 +183,7 @@ void SkiaRenderView::updateLasso(float x, float y, LassoLayer::Line &line, std::
       selectionsEngine.activate(f, pending);
     }
   }
-
+  
   // Have you checked the children?
   for(auto&& child: virtualRenders) {
     child.second->updateLasso(x, y, line, pending);
@@ -195,4 +195,51 @@ inline SkRect SkiaRenderView::getSelectionHitTestRect(float x, float y, const La
   auto pp = SkRect::MakeXYWH(x, y, Helium::toPx(size), Helium::toPx(size));
   pp.offset(-pp.width() / 2, -pp.height()/2);
   return pp;
+}
+
+std::shared_ptr<jsi::Array> SkiaRenderView::handleLongPress(const SkPoint& point) {
+  auto shapes = queryShapes(point);
+  std::vector<std::shared_ptr<Shape>> shapeList;
+  for(auto shape: shapes) {
+    shapeList.push_back(shape);
+  }
+  jsi::Runtime& rt = Helium::TheCanvasViewManager::instance()->platform->rt;
+  std::shared_ptr<jsi::Array> jsArray = std::make_shared<jsi::Array>(rt, shapeList.size());
+  
+  size_t i = 0;
+  for(auto s : shapeList) {
+    auto data = s->getDataShape();
+    jsi::Object o(rt);
+    o.setProperty(rt, "datum", data->data);
+    jsArray->setValueAtIndex(rt, i++, o);
+  }
+  
+  return jsArray;
+}
+
+Quadtree<std::shared_ptr<Shape>>::FoundNodes SkiaRenderView::queryShapes(const SkPoint &point) {
+  Quadtree<std::shared_ptr<Shape>>::FoundNodes filtered;
+  auto x = point.x();
+  auto y = point.y();
+  auto pp = SkRect::MakeXYWH(x, y, Helium::toPx(4), Helium::toPx(4));
+  pp.offset(-pp.width() / 2, -pp.height()/2);
+  Quadtree<std::shared_ptr<Shape>>::FoundNodes found;
+  // broad phase
+  quadTree.query(found, pp);
+  // narrow phase
+  for(auto f : found) {
+    if(f->getAAB()->hitTest(pp)) {
+      if(f->getDataShape()) {
+        filtered.insert(f);
+      }
+    }
+  }
+  
+  
+  // have you checked the children?
+  for(auto&& child: virtualRenders) {
+    auto childShapes = child.second->queryShapes(point);
+    filtered.insert(childShapes.begin(), childShapes.end());
+  }
+  return filtered;
 }
