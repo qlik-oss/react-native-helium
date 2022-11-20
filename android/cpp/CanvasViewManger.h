@@ -13,16 +13,14 @@
 #include <ReactCommon/CallInvoker.h>
 #include "Singleton.h"
 
-#ifdef ANDROID_HELIUM
+#include "CanvasEGLRenderer.h"
+#include "Platform.h"
 
-# include "CanvasEGLRenderer.h"
-
-#else
-# include "MetalRenderer.h"
-#endif
 namespace Helium {
   template<typename T>
   class CanvasViewManagerT {
+  public:
+    std::shared_ptr<Platform> platform;
   public:
     float scale = 1;
     CanvasViewManagerT() {
@@ -66,6 +64,14 @@ namespace Helium {
     void releaseCapture() {
       std::unique_lock<std::mutex> lk(mk);
       capturedView = nullptr;
+    }
+    
+    void handleLongPress(float x, float y, float rx, float ry) {
+      std::unique_lock<std::mutex> lk(mk);
+      if(capturedView) {
+        capturedView->handleLongPress(x, y, rx, ry);
+        capturedView = nullptr;
+      }
     }
 
     void beginSelections(float x, float y) {

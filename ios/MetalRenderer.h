@@ -43,10 +43,13 @@ public:
   void updateLasso(float x, float y);
   void syncBrush();
   void purge();
+  void setLongPressHandler(jsi::Runtime& rt, const jsi::Value& fn);
+  void onLongPress(float x, float y, float rx, float ry);
 
 protected:
   bool tearingDown = false;
   std::mutex drawMutex;
+  std::mutex bridgeMutex;
   ShapeFactory shapeFactory;
   std::string nativeId;
   std::shared_ptr<SkiaRenderView> renderView;
@@ -55,5 +58,6 @@ protected:
   SkRect clipBounds;
   std::shared_ptr<MetalLayer> metallayer;
   std::shared_ptr<SelectionBrush> selectionBrush;
+  std::shared_ptr<DataShape> jsLongPress;
 };
 #endif /* MetalRenderer_hpp */

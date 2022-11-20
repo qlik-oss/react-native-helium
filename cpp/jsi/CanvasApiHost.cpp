@@ -15,6 +15,7 @@ void CanvasApiHost::install(Runtime &runtime) {
     auto view = Helium::TheCanvasViewManager::instance()->get(virtualContext.id);
     if(view) {
       view->addShapes(virtualContext.vid, runtime, args[1] );
+      view->draw();
     }
     return Value::undefined();
   };
@@ -131,6 +132,16 @@ void CanvasApiHost::install(Runtime &runtime) {
     }
     return Value::undefined();
   };
+  
+  auto setLongPressHandler = [](Runtime& runtime, const Value& thisValue, const Value* args, size_t count) {
+    Helium::VirtualContext virtualContext(runtime, args[0]);
+    auto view = Helium::TheCanvasViewManager::instance()->get(virtualContext.id);
+    if(view) {
+      view->setLongPressHandler(runtime, args[1]);
+    }
+    return Value::undefined();
+  };
+  
   auto module = Object(runtime);
   
   
@@ -189,5 +200,11 @@ void CanvasApiHost::install(Runtime &runtime) {
                                                                                      PropNameID::forAscii(runtime, "clearSelections"),
                                                                                      1,
                                                                                    clearSelections));
+  
+  module.setProperty(runtime, "setLongPressHandler",  Function::createFromHostFunction(runtime,
+                                                                                     PropNameID::forAscii(runtime, "setLongPressHandler"),
+                                                                                     1,
+                                                                                    setLongPressHandler));
+
   runtime.global().setProperty(runtime, "HeliumCanvasApi", std::move(module));
 }

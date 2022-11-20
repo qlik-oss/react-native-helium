@@ -10,12 +10,13 @@
 
 #include <jsi/jsi.h>
 #include <include/core/SkPaint.h>
+#include "Shape.h"
 
 using namespace facebook;
 
 class ActiveStyle {
 public:
-  ActiveStyle(jsi::Runtime& rt, const jsi::Object& object, const jsi::Object& data);
+  ActiveStyle(jsi::Runtime& rt, const jsi::Object& object, std::shared_ptr<DataShape> data);
   SkPaint getBrush() const {
     return activeBrush;
   }

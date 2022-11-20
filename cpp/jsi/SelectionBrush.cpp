@@ -22,7 +22,9 @@ SelectionBrush::SelectionBrush(jsi::Runtime& rt, const jsi::Value& value): _rt(&
 
 void SelectionBrush::add(std::shared_ptr<Shape>& shape) {
   std::lock_guard<std::mutex> lock(guard);
-  activeShapes.insert(shape);
+  if(shape->getDataShape()) {
+    activeShapes.insert(shape);
+  }
 }
 
 void SelectionBrush::remove(std::shared_ptr<Shape> &shape) {
@@ -39,8 +41,7 @@ void SelectionBrush::sync() {
   try {
     for(auto&& shape : activeShapes) {
       auto dataShape = shape->getDataShape();
-      auto& data = dataShape->data;
-      ActiveStyle activeStyle(*_rt, *style, data);
+      ActiveStyle activeStyle(*_rt, *style, dataShape);
       shape->activate(activeStyle.getBrush());
     }
   } catch (const std::exception& e) {

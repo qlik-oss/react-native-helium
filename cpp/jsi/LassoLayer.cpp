@@ -54,5 +54,4 @@ void LassoLayer::render(SkCanvas* canvas) {
     canvas->drawCircle(circlePoint, circleRadius, strokePaint);
     canvas->drawPath(linePath, linePaint);
   }
-//  canvas->drawPath(linePath, debugBrush);
 }

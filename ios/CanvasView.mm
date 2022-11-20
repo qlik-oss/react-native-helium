@@ -79,14 +79,8 @@
 - (void) handleLongPress:(UILongPressGestureRecognizer*)recognizer {
   if(recognizer.state == UIGestureRecognizerStateBegan) {
     CGPoint point = [recognizer locationInView:self];
-    if(self.onLongPressBegan) {
-      self.onLongPressBegan(@{@"x": @(point.x), @"y": @(point.y)});
-    }
-  }
-  if(recognizer.state == UIGestureRecognizerStateEnded || recognizer.state == UIGestureRecognizerStateCancelled) {
-    if(self.onLongPressEnded) {
-      self.onLongPressEnded(@{});
-    }
+    CGPoint rawPoint = [recognizer locationInView:nil];
+    renderer->onLongPress(point.x, point.y, rawPoint.x, rawPoint.y);
   }
 }
 

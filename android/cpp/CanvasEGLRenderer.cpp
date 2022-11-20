@@ -362,4 +362,25 @@ void CanvasEGLRenderer::endLasso(float x, float y) {
 }
 
 
+void CanvasEGLRenderer::setLongPressHandler(jsi::Runtime& rt, const jsi::Value& fn) {
+  auto data = fn.asObject(rt);
+  jsLongPress = std::make_shared<DataShape>(rt, std::move(data));
+}
+
+void CanvasEGLRenderer::handleLongPress(float x, float y, float rx, float ry) {
+  if(jsLongPress) {
+    Helium::TheCanvasViewManager::instance()->runOnJS([this, x, y, rx, ry]{
+      auto shapes = skiaRender->handleLongPress(SkPoint::Make(x, y));
+      jsi::Runtime& rt = Helium::TheCanvasViewManager::instance()->platform->rt;
+      jsi::Object object(rt);
+      object.setProperty(rt, "data", *shapes);
+      object.setProperty(rt, "x", rx);
+      object.setProperty(rt, "y", ry);
+      auto fn = jsLongPress->data.asFunction(rt);
+      fn.call(rt, object, 1);
+    });
+  } 
+}
+
+
 

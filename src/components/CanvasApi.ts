@@ -31,6 +31,7 @@ export type HeliumCanvasApiType = {
   setSelectionBrushes: (context: CanvasContext, brushes: Array<any>) => void;
   confirmSelections: (context: CanvasContext) => void;
   clearSelections: (context: CanvasContext) => void;
+  setLongPressHandler: (fn: (data: Array<any>) => void) => void;
 }
 
 declare let HeliumCanvasApi: HeliumCanvasApiType;
@@ -82,6 +83,10 @@ export default class CanvasApi {
 
   clearSelections() {
     HeliumCanvasApi.clearSelections(this.context);
+  }
+
+  setLongPressHandler(fn: (data: Array<any>) => void) {
+    HeliumCanvasApi.setLongPressHandler(this.context, fn);
   }
 
 }

@@ -2,6 +2,7 @@ package com.qlikossreactnativehelium
 
 import android.content.Context
 import android.content.res.Resources
+import android.graphics.Matrix
 import android.graphics.PointF
 import android.graphics.Rect
 import android.graphics.SurfaceTexture
@@ -38,14 +39,14 @@ class CanvasView : TextureView, TextureView.SurfaceTextureListener {
 
     override fun onLongPress(e: MotionEvent?) {
       if(e != null) {
-      
-        val reactContext = context as ReactContext
-        val event = Arguments.createMap()
-        val x =  pxToDp(context, e.x)
-        val y = pxToDp(context, e.y)
-        event.putDouble("x", x.toDouble())
-        event.putDouble("y", y.toDouble())
-        reactContext.getJSModule(RCTEventEmitter::class.java).receiveEvent(id, "onLongPressBegan", event);
+        captureView(nativeId)
+        var rx = pxToDp(context, e.rawX);
+        var ry = pxToDp(context, e.rawY)
+        var x = e.x
+        var y = e.y
+         
+        handleLongPress(x, y, rx, ry)
+       
       }
     }
   }
@@ -130,4 +131,5 @@ class CanvasView : TextureView, TextureView.SurfaceTextureListener {
   external fun startLasso(x: Float, y: Float)
   external fun updateLasso(x: Float, y: Float)
   external fun endLasso(x: Float, y: Float)
+  external fun handleLongPress(x: Float, y: Float, rx: Float, ry: Float)
 }

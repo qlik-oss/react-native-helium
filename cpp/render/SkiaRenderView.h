@@ -29,6 +29,8 @@ public:
   void endLasso(float x, float y);
   void updateLasso(float x, float y);
   void clearSelections();
+  std::shared_ptr<jsi::Array> handleLongPress(const SkPoint& point);
+  Quadtree<std::shared_ptr<Shape>>::FoundNodes queryShapes(const SkPoint& point);
 
   void destroy(const std::string& vid) {
     auto it = virtualRenders.find(vid);
