@@ -1,3 +1,10 @@
+## [1.2.8](https://github.com/qlik-oss/react-native-helium/compare/v1.2.7...v1.2.8) (2022-11-20)
+
+
+### Bug Fixes
+
+* jsi longpress ([3f112b0](https://github.com/qlik-oss/react-native-helium/commit/3f112b0b4ae758d7065191bf253702fcf5b56221))
+
 ## [1.2.7](https://github.com/qlik-oss/react-native-helium/compare/v1.2.6...v1.2.7) (2022-11-19)
 
 
