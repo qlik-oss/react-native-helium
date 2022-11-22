@@ -1,3 +1,10 @@
+## [1.2.9](https://github.com/qlik-oss/react-native-helium/compare/v1.2.8...v1.2.9) (2022-11-22)
+
+
+### Bug Fixes
+
+* remove path when not present from source ([f8b29f6](https://github.com/qlik-oss/react-native-helium/commit/f8b29f617bac4a8675fc4a99b8944b77158c3a25))
+
 ## [1.2.8](https://github.com/qlik-oss/react-native-helium/compare/v1.2.7...v1.2.8) (2022-11-20)
 
 
