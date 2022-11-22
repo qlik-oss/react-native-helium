@@ -124,13 +124,6 @@ void Shape::initDataPath(jsi::Runtime &rt, const jsi::Object &object) {
         pathStream << field.asNumber();
       }
 
-      pathStream << "/";
-      if (value.isString()) {
-        pathStream << value.asString(rt).utf8(rt);
-      } else {
-        pathStream << value.asNumber();
-      }
-      dataPath = pathStream.str();
       if(data.hasProperty(rt, "path")) {
         if(!data.getProperty(rt, "path").isUndefined()) {
           dataPath = data.getProperty(rt, "path").asString(rt).utf8(rt);

@@ -62,7 +62,6 @@ void SelectionBrush::confirmSelections() {
     for(auto&& shape : activeShapes) {
       auto dataShape = shape->getDataShape();
       auto& data = dataShape->data;
-      // fn.addValues([{ key, value }]);
       std::string kv("/qHyperCubeDef/");
       auto select = data.getProperty(*_rt, "select").asObject(*_rt);
       auto source = select.getProperty(*_rt, "source").asObject(*_rt);
