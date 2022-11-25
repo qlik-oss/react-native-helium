@@ -36,12 +36,18 @@ class CanvasView : TextureView, TextureView.SurfaceTextureListener {
       }
       return false;
     }
-
+    
     override fun onLongPress(e: MotionEvent?) {
       if(e != null) {
         captureView(nativeId)
-        var rx = pxToDp(context, e.rawX);
-        var ry = pxToDp(context, e.rawY)
+        val loc = IntArray(2)
+        getLocationInWindow(loc)
+        var ox = loc[0] 
+        var oy = loc[1] 
+        var rx = ox + e.x
+        var ry = oy + e.y
+        rx = pxToDp(context, rx)
+        ry = pxToDp(context, ry)
         var x = e.x
         var y = e.y
          
