@@ -1,3 +1,10 @@
+## [1.2.12](https://github.com/qlik-oss/react-native-helium/compare/v1.2.11...v1.2.12) (2022-11-25)
+
+
+### Bug Fixes
+
+* data race ([fd7eacd](https://github.com/qlik-oss/react-native-helium/commit/fd7eacd1a9c5990c0467de8e079b07d837c42cb5))
+
 ## [1.2.11](https://github.com/qlik-oss/react-native-helium/compare/v1.2.10...v1.2.11) (2022-11-25)
 
 
