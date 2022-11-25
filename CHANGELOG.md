@@ -1,3 +1,10 @@
+## [1.2.10](https://github.com/qlik-oss/react-native-helium/compare/v1.2.9...v1.2.10) (2022-11-25)
+
+
+### Bug Fixes
+
+* android coords ([994e2f8](https://github.com/qlik-oss/react-native-helium/commit/994e2f8b020950838235b88c19a8eb6b6848625b))
+
 ## [1.2.9](https://github.com/qlik-oss/react-native-helium/compare/v1.2.8...v1.2.9) (2022-11-22)
 
 
