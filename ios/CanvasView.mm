@@ -118,22 +118,11 @@
     prev = self.frame;
     self.onReady(@{});
   } else {
-    dispatch_async(dispatch_get_main_queue(), ^{
-      self->renderer->resetBounds(SkRect::MakeWH(Helium::toPx(self.frame.size.width), Helium::toPx(self.frame.size.height)));
+    if(prev.size.width != self.frame.size.width || prev.size.height != self.frame.size.height) {
+      prev = self.frame;
+      renderer->resetBounds(SkRect::MakeWH(Helium::toPx(self.frame.size.width), Helium::toPx(self.frame.size.height)));
       self.onResized(@{});
-      self->renderer->draw();
-    });
-  }
-}
-
--(void)setFrame:(CGRect)frame {
-  [super setFrame:frame];
-  if(ready) {
-    dispatch_async(dispatch_get_main_queue(), ^{
-      self->renderer->resetBounds(SkRect::MakeWH(Helium::toPx(self.frame.size.width), Helium::toPx(self.frame.size.height)));
-      self.onResized(@{});
-      self->renderer->draw();
-    });
+    }
   }
 }
 
