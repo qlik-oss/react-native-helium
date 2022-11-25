@@ -119,7 +119,7 @@
     self.onReady(@{});
   } else {
     dispatch_async(dispatch_get_main_queue(), ^{
-      renderer->resetBounds(SkRect::MakeWH(Helium::toPx(self.frame.size.width), Helium::toPx(self.frame.size.height)));
+      self->renderer->resetBounds(SkRect::MakeWH(Helium::toPx(self.frame.size.width), Helium::toPx(self.frame.size.height)));
       self.onResized(@{});
       self->renderer->draw();
     });
