@@ -1,3 +1,10 @@
+## [1.2.13](https://github.com/qlik-oss/react-native-helium/compare/v1.2.12...v1.2.13) (2022-11-25)
+
+
+### Bug Fixes
+
+* reduce render count ([ee72ad7](https://github.com/qlik-oss/react-native-helium/commit/ee72ad7a05922f3f0f256da5d99e2d5826642aad))
+
 ## [1.2.12](https://github.com/qlik-oss/react-native-helium/compare/v1.2.11...v1.2.12) (2022-11-25)
 
 
