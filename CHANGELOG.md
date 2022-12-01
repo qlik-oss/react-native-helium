@@ -1,3 +1,10 @@
+## [1.2.14](https://github.com/qlik-oss/react-native-helium/compare/v1.2.13...v1.2.14) (2022-12-01)
+
+
+### Bug Fixes
+
+* dispatch async queue ([8266469](https://github.com/qlik-oss/react-native-helium/commit/82664697ec074b09679435fc8b9dfd8bd5b16d1f))
+
 ## [1.2.13](https://github.com/qlik-oss/react-native-helium/compare/v1.2.12...v1.2.13) (2022-11-25)
 
 
