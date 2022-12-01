@@ -119,9 +119,11 @@
     self.onReady(@{});
   } else {
     if(prev.size.width != self.frame.size.width || prev.size.height != self.frame.size.height) {
-      prev = self.frame;
-      renderer->resetBounds(SkRect::MakeWH(Helium::toPx(self.frame.size.width), Helium::toPx(self.frame.size.height)));
-      self.onResized(@{});
+      dispatch_async(dispatch_get_main_queue(), ^{
+        self->prev = self.frame;
+        self->renderer->resetBounds(SkRect::MakeWH(Helium::toPx(self.frame.size.width), Helium::toPx(self.frame.size.height)));
+        self.onResized(@{});
+      });
     }
   }
 }
