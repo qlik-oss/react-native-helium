@@ -126,7 +126,15 @@ void SkiaRenderView::clearSelections() {
   for(auto&& child: virtualRenders) {
     child.second->clearSelections();
   }
+  pendingLassoSelected.clear();
   selectionsEngine.clearSelections();
+  for(auto&& it: shapes) {
+    it->clearSelection();
+  }
+  
+  if(lassoLayer) {
+    lassoLayer->clear();
+  }
 }
 
 void SkiaRenderView::endLasso(float x, float y) {
