@@ -131,10 +131,6 @@ void SkiaRenderView::clearSelections() {
   for(auto&& it: shapes) {
     it->clearSelection();
   }
-  
-  if(lassoLayer) {
-    lassoLayer->clear();
-  }
 }
 
 void SkiaRenderView::endLasso(float x, float y) {
