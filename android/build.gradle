@@ -53,6 +53,7 @@ def prebuiltDir = rootProject.hasProperty("heliumNodeModules") ? "$nodeModules/r
 logger.warn("prebuiltDir/ found at: ${prebuiltDir}");
 
 
+def rnAAR
 android {
   compileSdkVersion getExtOrIntegerDefault('compileSdkVersion')
   buildToolsVersion getExtOrDefault('buildToolsVersion')
@@ -86,6 +87,10 @@ android {
   buildTypes {
     release {
       minifyEnabled false
+      rnAAR = fileTree(dir: "${rootDir}/../node_modules/react-native/android/", include:'**/react-native/**/*release.aar' ).singleFile
+    }
+    debug {
+      rnAAR = fileTree(dir: "${rootDir}/../node_modules/react-native/android/", include:'**/react-native/**/*debug.aar' ).singleFile
     }
   }
   lintOptions {
@@ -106,6 +111,7 @@ android {
     sourceCompatibility JavaVersion.VERSION_11
     targetCompatibility JavaVersion.VERSION_11
   }
+
 }
 
 repositories {
@@ -124,8 +130,6 @@ dependencies {
   extractHeaders 'com.facebook.fbjni:fbjni:0.2.2:headers'
   // If the `.so` files are required for linking.
   extractJNI 'com.facebook.fbjni:fbjni:0.3.0'
-
-  def rnAAR = fileTree("${rootDir}/../node_modules/react-native/android").matching({ it.include "**/**/*.aar" }).singleFile
   extractJNI(files(rnAAR))
 }
 
