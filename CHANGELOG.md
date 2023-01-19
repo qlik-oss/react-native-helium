@@ -1,3 +1,15 @@
+# [2.0.0-alpha.1](https://github.com/qlik-oss/react-native-helium/compare/v1.2.16...v2.0.0-alpha.1) (2023-01-19)
+
+
+### chore
+
+* update react native to 0.69.7 ([998db1b](https://github.com/qlik-oss/react-native-helium/commit/998db1b1ee178fb5c7d8d4b4e966acb2fc74ec10))
+
+
+### BREAKING CHANGES
+
+* not compatible with lower versions of RN
+
 ## [1.2.16](https://github.com/qlik-oss/react-native-helium/compare/v1.2.15...v1.2.16) (2022-12-06)
 
 
