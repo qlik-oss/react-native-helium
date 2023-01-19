@@ -10,13 +10,13 @@
     "lint": "eslint ."
   },
   "dependencies": {
-    "@qlik/react-native-helium": "link:../",
     "@qlik/carbon-core": "1.0.6",
+    "@qlik/react-native-helium": "link:../",
     "extend": "3.0.2",
     "picasso-plugin-q": "1.6.0",
     "picasso.js": "1.6.0",
-    "react": "17.0.2",
-    "react-native": "0.69.1"
+    "react": "18.0.0",
+    "react-native": "0.69.7"
   },
   "devDependencies": {
     "@babel/core": "7.18.6",
