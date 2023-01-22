@@ -4,6 +4,9 @@
 
 Skia base JSI renderer for Picasso and Nebula
 
+## Running
+To build, develop and run, please see https://github.com/qlik-oss/react-native-carbon
+
 ## Building SKIA
 
 1. clone skia
