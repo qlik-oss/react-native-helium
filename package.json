@@ -2,6 +2,12 @@
   "name": "@qlik/react-native-helium",
   "version": "1.2.16",
   "description": "Skia base JSI renderer for Picasso and Nebula",
+  "homepage": "https://github.com/qlik-oss/react-native-helium",
+  "repository": {
+    "url": "https://github.com/qlik-oss/react-native-helium.git"
+  },
+  "license": "MIT",
+  "author": "Qlik",
   "main": "src/index",
   "files": [
     "src",
@@ -20,31 +26,40 @@
     "!logo"
   ],
   "scripts": {
-    "test": "jest",
-    "typescript": "tsc --noEmit",
+    "ci:install": "yarn install --frozen-lockfile",
     "lint": "eslint \"**/*.{js,ts,tsx}\"",
-    "ci:install": "yarn install --frozen-lockfile"
+    "test": "jest",
+    "typescript": "tsc --noEmit"
   },
-  "repository": {
-    "url": "https://github.com/qlik-oss/react-native-helium.git"
-  },
-  "author": "Qlik",
-  "license": "MIT",
-  "homepage": "https://github.com/qlik-oss/react-native-helium",
-  "publishConfig": {
-    "registry": "https://registry.npmjs.org",
-    "access": "public"
+  "prettier": "@qlik/prettier-config",
+  "eslintConfig": {
+    "parserOptions": {
+      "project": [
+        "./tsconfig.json"
+      ]
+    },
+    "extends": [
+      "@qlik/eslint-config",
+      "@qlik/eslint-config/react",
+      "@qlik/eslint-config/jest"
+    ],
+    "rules": {
+      "@typescript-eslint/no-explicit-any": 0,
+      "react/destructuring-assignment": 0,
+      "react/require-default-props": 0
+    },
+    "root": true
   },
   "devDependencies": {
-    "@react-native-community/eslint-config": "3.0.3",
+    "@qlik/eslint-config": "^0.4.17",
+    "@qlik/prettier-config": "^0.3.0",
+    "@qlik/tsconfig": "^0.1.6",
+    "@semantic-release/changelog": "6.0.1",
+    "@semantic-release/git": "10.0.1",
     "@types/jest": "27.5.2",
     "@types/react": "17.0.47",
     "@types/react-native": "0.69.3",
     "eslint": "8.20.0",
-    "@semantic-release/changelog": "6.0.1",
-    "@semantic-release/git": "10.0.1",
-    "eslint-config-prettier": "9.0.0",
-    "eslint-plugin-prettier": "5.0.0",
     "jest": "26.6.3",
     "picasso.js": "1.6.0",
     "prettier": "2.7.1",
@@ -54,8 +69,12 @@
     "typescript": "5.2.2"
   },
   "peerDependencies": {
+    "@qlik/carbon-core": "2.0.0",
     "react": "*",
-    "react-native": "*",
-    "@qlik/carbon-core": "2.0.0"
+    "react-native": "*"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org"
   }
 }

@@ -1,5 +1,4 @@
-
-import uuid from 'react-native-uuid';
+import uuid from "react-native-uuid";
 
 export type CanvasRect = {
   x: number;
@@ -8,17 +7,17 @@ export type CanvasRect = {
   height: number;
   fillColor?: string;
   path?: string;
-}
+};
 
 export type CanvasSize = {
   width: number;
   height: number;
-}
+};
 
 export type CanvasContext = {
   id: string;
   vid: string;
-}
+};
 
 export type HeliumCanvasApiType = {
   paint: (context: CanvasContext) => void;
@@ -31,8 +30,8 @@ export type HeliumCanvasApiType = {
   setSelectionBrushes: (context: CanvasContext, brushes: Array<any>) => void;
   confirmSelections: (context: CanvasContext) => void;
   clearSelections: (context: CanvasContext) => void;
-  setLongPressHandler: (fn: (data: Array<any>) => void) => void;
-}
+  setLongPressHandler: (context: CanvasContext, fn: (data: Array<any>) => void) => void;
+};
 
 declare let HeliumCanvasApi: HeliumCanvasApiType;
 
@@ -40,7 +39,7 @@ export default class CanvasApi {
   context: CanvasContext;
 
   constructor(id: string, vid: string) {
-    this.context = {id, vid};
+    this.context = { id, vid };
   }
 
   resize(rect: CanvasRect) {
@@ -88,5 +87,4 @@ export default class CanvasApi {
   setLongPressHandler(fn: (data: Array<any>) => void) {
     HeliumCanvasApi.setLongPressHandler(this.context, fn);
   }
-
 }
