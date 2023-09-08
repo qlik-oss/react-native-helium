@@ -5,13 +5,32 @@ on:
     branches:
       - master
       - alpha
+  pull_request:
+    branches:
+      - master
+      - alpha
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
 jobs:
+  build:
+    name: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - uses: ./.github/actions/yarn_install
+      - name: lint
+        run: yarn lint
+      - name: typescript
+        run: yarn typescript
+      - name: unit test
+        run: yarn test
+
   release:
     if: github.event.repository.fork == false
     name: Release
+    needs: build
     runs-on: ubuntu-latest
     steps:
       - name: Checkout

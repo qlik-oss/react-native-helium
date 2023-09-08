@@ -1,7 +1,7 @@
-import React from 'react';
-import { requireNativeComponent, ViewProps, ViewStyle, View } from 'react-native';
-import uuid from 'react-native-uuid';
-import CanvasApi from './CanvasApi';
+import React from "react";
+import { requireNativeComponent, View, type ViewProps, type ViewStyle } from "react-native";
+import uuid from "react-native-uuid";
+import CanvasApi from "./CanvasApi";
 
 export interface CanvasViewProps extends ViewProps {
   style: ViewStyle;
@@ -12,11 +12,9 @@ export interface CanvasViewProps extends ViewProps {
   onLongPressEnded?: () => void;
   lasso: boolean;
   disableSelections?: boolean;
-};
+}
 
-export const CanvasView = requireNativeComponent<CanvasViewProps>(
-  'CanvasView'
-);
+export const CanvasView = requireNativeComponent<CanvasViewProps>("CanvasView");
 
 export interface CanvasProps extends ViewProps {
   onCanvas?: (canvas: CanvasApi) => void;
@@ -32,9 +30,8 @@ export interface CanvasState {
   lasso: boolean;
 }
 
-
 export default class Canvas extends React.Component<CanvasProps, CanvasState> {
-  generatedId: string ;
+  generatedId: string;
   vid: string;
   canvas: CanvasApi;
   onCanvasCallback?: (canvas: CanvasApi) => void;
@@ -56,21 +53,26 @@ export default class Canvas extends React.Component<CanvasProps, CanvasState> {
   }
 
   render() {
-    return (<View style={{flex: 1, overflow: 'hidden'}}>
-        <CanvasView nativeID={this.generatedId} style={{flex:1}}
-        lasso={this.props.lasso}
-        disableSelections={this.props.disableSelections}
-        onReady={() => {
+    return (
+      <View style={{ flex: 1, overflow: "hidden" }}>
+        <CanvasView
+          nativeID={this.generatedId}
+          style={{ flex: 1 }}
+          lasso={this.props.lasso}
+          disableSelections={this.props.disableSelections}
+          onReady={() => {
             this.onCanvasCallback?.(this.canvas);
-        }}
-        onResized={() => {
-          this.onResized?.();
-        }}
-        onLongPressBegan={(params: any) => this.onLongPressBegan?.(params)}
-        onLongPressEnded={() => this.onLongPressEnded?.()}
-        onBeganSelections={(params: any) => {
-          this.onBeganSelections?.(params);
-        }}/>
-      </View>);
+          }}
+          onResized={() => {
+            this.onResized?.();
+          }}
+          onLongPressBegan={(params: any) => this.onLongPressBegan?.(params)}
+          onLongPressEnded={() => this.onLongPressEnded?.()}
+          onBeganSelections={(params: any) => {
+            this.onBeganSelections?.(params);
+          }}
+        />
+      </View>
+    );
   }
 }
