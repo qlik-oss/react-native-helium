@@ -27,10 +27,24 @@ jobs:
       - name: unit test
         run: yarn test
 
+  build_android:
+    name: Build android
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - uses: ./.github/actions/yarn_install
+      - name: Assemble debug
+        working-directory: ./android
+        run: ./gradlew assembleDebug
+      - name: Assemble relese
+        working-directory: ./android
+        run: ./gradlew assembleRelease
+
   release:
     if: github.event.repository.fork == false
     name: Release
-    needs: build
+    needs: [build, build_android]
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
