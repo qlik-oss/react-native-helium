@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "@qlik/react-native-helium": "link:../",
-    "@qlik/carbon-core": "1.0.6",
+    "@qlik/carbon-core": "2.0.4",
     "extend": "3.0.2",
     "picasso-plugin-q": "1.6.0",
     "picasso.js": "1.6.0",

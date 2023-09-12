@@ -1293,13 +1293,13 @@
     "@nodelib/fs.scandir" "2.1.5"
     fastq "^1.6.0"
 
-"@qlik/carbon-core@1.0.6":
-  version "1.0.6"
-  resolved "https://registry.yarnpkg.com/@qlik/carbon-core/-/carbon-core-1.0.6.tgz#0e3accd17928623b6fdd7ce0ab84ea2156b781d7"
-  integrity sha512-xfAzXJopa5rQ/VrbBsLkzvjlEIVy1pNdje0SH09sTDJE/+F28TnjFHTI77weMAvbOFlsZoCkuC44APc99P1SlA==
+"@qlik/carbon-core@2.0.4":
+  version "2.0.4"
+  resolved "https://registry.yarnpkg.com/@qlik/carbon-core/-/carbon-core-2.0.4.tgz#b57e10ccde240190c3933772b7a8127f24794b8e"
+  integrity sha512-Ni/96h5/hFQ52v4b/j50OnKIvYOPRpks8CKT8OHgDP7G48y+Bgb5+X22KZ0iPH9n3b5sDgUu15IU8xnoyTUkbw==
 
 "@qlik/react-native-helium@link:..":
-  version "1.2.16"
+  version "2.0.1"
 
 "@react-native-community/cli-clean@^8.0.0":
   version "8.0.0"
