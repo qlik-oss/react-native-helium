@@ -1,3 +1,15 @@
+# [2.0.0](https://github.com/qlik-oss/react-native-helium/compare/v1.2.16...v2.0.0) (2023-09-12)
+
+
+### Features
+
+* set target api to 33 ([0ceb3f2](https://github.com/qlik-oss/react-native-helium/commit/0ceb3f2f23931a60addd375c77b714a728b5d285))
+
+
+### BREAKING CHANGES
+
+* setting minimum api to 30
+
 ## [1.2.16](https://github.com/qlik-oss/react-native-helium/compare/v1.2.15...v1.2.16) (2022-12-06)
 
 
