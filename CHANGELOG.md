@@ -1,3 +1,10 @@
+## [2.0.1](https://github.com/qlik-oss/react-native-helium/compare/v2.0.0...v2.0.1) (2023-09-12)
+
+
+### Bug Fixes
+
+* exclude libturbomodulejsijni.so from package ([#83](https://github.com/qlik-oss/react-native-helium/issues/83)) ([043cbf8](https://github.com/qlik-oss/react-native-helium/commit/043cbf8f8ce6f39d0449606443594c3b72345f9e))
+
 # [2.0.0](https://github.com/qlik-oss/react-native-helium/compare/v1.2.16...v2.0.0) (2023-09-12)
 
 
