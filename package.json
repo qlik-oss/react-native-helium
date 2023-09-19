@@ -1,6 +1,6 @@
 {
   "name": "@qlik/react-native-helium",
-  "version": "1.2.16",
+  "version": "1.3.0",
   "description": "Skia base JSI renderer for Picasso and Nebula",
   "main": "src/index",
   "files": [

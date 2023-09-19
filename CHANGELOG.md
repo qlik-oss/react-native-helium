@@ -1,3 +1,10 @@
+# [1.3.0](https://github.com/qlik-oss/react-native-helium/compare/v1.2.16...v1.3.0) (2023-09-19)
+
+
+### Features
+
+* update react native to 0.69.7 ([e49350a](https://github.com/qlik-oss/react-native-helium/commit/e49350a98a2ec2de4294c07c07287a6f3f51b20c))
+
 ## [1.2.16](https://github.com/qlik-oss/react-native-helium/compare/v1.2.15...v1.2.16) (2022-12-06)
 
 
