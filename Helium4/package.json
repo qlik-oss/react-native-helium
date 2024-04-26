@@ -15,7 +15,7 @@
     "extend": "3.0.2",
     "picasso-plugin-q": "1.6.0",
     "picasso.js": "1.6.0",
-    "react": "17.0.2",
+    "react": "18.3.1",
     "react-native": "0.69.1"
   },
   "devDependencies": {
@@ -27,7 +27,7 @@
     "glob-to-regexp": "0.4.1",
     "jest": "26.6.3",
     "metro-react-native-babel-preset": "0.71.3",
-    "react-test-renderer": "17.0.2"
+    "react-test-renderer": "18.3.1"
   },
   "jest": {
     "preset": "react-native"
