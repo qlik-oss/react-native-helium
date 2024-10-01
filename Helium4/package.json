@@ -13,8 +13,8 @@
     "@qlik/react-native-helium": "link:../",
     "@qlik/carbon-core": "1.0.6",
     "extend": "3.0.2",
-    "picasso-plugin-q": "1.6.0",
-    "picasso.js": "1.6.0",
+    "picasso-plugin-q": "2.3.0",
+    "picasso.js": "2.3.0",
     "react": "17.0.2",
     "react-native": "0.69.1"
   },
