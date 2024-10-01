@@ -1299,7 +1299,7 @@
   integrity sha512-xfAzXJopa5rQ/VrbBsLkzvjlEIVy1pNdje0SH09sTDJE/+F28TnjFHTI77weMAvbOFlsZoCkuC44APc99P1SlA==
 
 "@qlik/react-native-helium@link:..":
-  version "1.2.16"
+  version "2.0.1"
 
 "@react-native-community/cli-clean@^8.0.0":
   version "8.0.0"
@@ -5570,15 +5570,15 @@ path-parse@^1.0.6, path-parse@^1.0.7:
   resolved "https://registry.yarnpkg.com/path-parse/-/path-parse-1.0.7.tgz#fbc114b60ca42b30d9daf5858e4bd68bbedb6735"
   integrity sha512-LDJzPVEEEPR+y48z93A0Ed0yXb8pAByGWo/k5YYdYgpY2/2EsOsksJrq7lOHxryrVOn1ejG6oAp8ahvOIQD8sw==
 
-picasso-plugin-q@1.6.0:
-  version "1.6.0"
-  resolved "https://registry.yarnpkg.com/picasso-plugin-q/-/picasso-plugin-q-1.6.0.tgz#89a67719e031ba1c5e8a6e33250d374a5516ec1a"
-  integrity sha512-fx2lQCRb6+b4eAEPIIQ6Ja/Ah7kHtV1AW2ofFa2hYIFKxxpi6yllO7EyuHoQw9KEOXkQE47nOXMZXQHtQpymiw==
+picasso-plugin-q@2.3.0:
+  version "2.3.0"
+  resolved "https://registry.yarnpkg.com/picasso-plugin-q/-/picasso-plugin-q-2.3.0.tgz#b67098485e9b41945b8056c48477edddb2cd3003"
+  integrity sha512-OXlZ7HlBG/STxwtyhFQZeRtd8q2JEdsYCpCBw9O7R3yXQ3oDw2D2MiwAqJRR79PSAbzedXmUm8eQ2hGRhD7/xQ==
 
-picasso.js@1.6.0:
-  version "1.6.0"
-  resolved "https://registry.yarnpkg.com/picasso.js/-/picasso.js-1.6.0.tgz#861dd14111b60e02a4089851d0581007abc37ac9"
-  integrity sha512-+mCH7i7vDVOFlFYNshF79K+soIAR5uCVsKZIuD+nNgKqLiW9OJrK6VtqXfkoP7zOm6jTFMAiQ/XNFwMISdQSBA==
+picasso.js@2.3.0:
+  version "2.3.0"
+  resolved "https://registry.yarnpkg.com/picasso.js/-/picasso.js-2.3.0.tgz#a308b6703b330b00ec1a4df97dc81dae9447b17a"
+  integrity sha512-mSKG5eg7pqcDHDjPOunTYJwxvctURGxaDUSc9YM76CtK2jxnaXqghwu04yaRLTDhX9eGZxgN0mkrAwQwYRnZeA==
 
 picocolors@^1.0.0:
   version "1.0.0"

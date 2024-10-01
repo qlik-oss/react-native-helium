@@ -6414,10 +6414,10 @@ path-type@^4.0.0:
   resolved "https://registry.yarnpkg.com/path-type/-/path-type-4.0.0.tgz#84ed01c0a7ba380afe09d90a8c180dcd9d03043b"
   integrity sha512-gDKb8aZMDeD/tZWs9P6+q0J9Mwkdl6xMV8TjnGP3qJVJ06bdMgkbBlLU8IdfOsIsFz2BW1rNVT3XuNEl8zPAvw==
 
-picasso.js@1.6.0:
-  version "1.6.0"
-  resolved "https://registry.yarnpkg.com/picasso.js/-/picasso.js-1.6.0.tgz#861dd14111b60e02a4089851d0581007abc37ac9"
-  integrity sha512-+mCH7i7vDVOFlFYNshF79K+soIAR5uCVsKZIuD+nNgKqLiW9OJrK6VtqXfkoP7zOm6jTFMAiQ/XNFwMISdQSBA==
+picasso.js@2.3.0:
+  version "2.3.0"
+  resolved "https://registry.yarnpkg.com/picasso.js/-/picasso.js-2.3.0.tgz#a308b6703b330b00ec1a4df97dc81dae9447b17a"
+  integrity sha512-mSKG5eg7pqcDHDjPOunTYJwxvctURGxaDUSc9YM76CtK2jxnaXqghwu04yaRLTDhX9eGZxgN0mkrAwQwYRnZeA==
 
 picocolors@^1.0.0:
   version "1.0.0"
